@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object type="button"
+	name="replaceButton"
+	size="100%-286 4 100%-258 32"
+	style="iconButton"
+	tooltip_style="sessionToolTip"
+>
+		<translatableAttribute id="tooltip">Replace</translatableAttribute>
+	<!-- TODO make the button less ugly -->
+	<object size="75%-16 10% 75% 10%+16" name="replaceButtonImage" type="image"
+	sprite="iconResetGold" ghost="true"/>
+	<action on="Press">
+		toggleReplace();
+	</action>
+</object>
