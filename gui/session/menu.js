@@ -714,9 +714,9 @@ function openTrade()
 	if (g_ViewedPlayer < 1)
 		return;
 	
-	g_IsTradeOpen = true;
 	showDarkenOverlay(true);
 
+	g_IsTradeOpen = true;
 
 	let proba = Engine.GuiInterfaceCall("GetTradingGoods", g_ViewedPlayer);
 	let button = {};

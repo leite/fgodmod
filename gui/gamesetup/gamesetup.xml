@@ -235,7 +235,7 @@
 				type="text"
 				font="sans-14"
 				textcolor="white"
-				sprite="ModernFade"
+				sprite="BackgroundTranslucent"
 				size="20 100%-56 100%-312 100%-24"
 			/>
 

@@ -5,7 +5,7 @@
 	<script directory="gui/common/"/>
 	<script directory="gui/lobby/"/>
 
-	<object type="image" sprite="ModernFade" name="fadeImage"/>
+	<object type="image" sprite="BackgroundTranslucent" name="fadeImage"/>
 
 	<object type="image" style="ModernWindow" size="0 0 100% 100%" name="lobbyWindow">
 

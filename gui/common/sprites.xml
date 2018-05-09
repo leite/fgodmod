@@ -27,6 +27,11 @@
 	==========================================
 	-->
 
+	<sprite name="BackgroundTranslucent">
+		<image backcolor="0 0 0 150"
+			size="0 0 100% 100%"/>
+	</sprite>
+
 	<sprite name="BackgroundBlack">
 		<image backcolor="black"/>
 	</sprite>

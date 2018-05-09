@@ -24,7 +24,7 @@
 		<action on="Press">continueButton();</action>
 	</object>
 
-	<object type="image" sprite="ModernFade" name="fadeImage"/>
+	<object type="image" sprite="BackgroundTranslucent" name="fadeImage"/>
 
 	<object name="summaryWindow"
 		type="image"
