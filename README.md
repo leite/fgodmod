@@ -1,5 +1,23 @@
 # fgodmod for 0 A. D. version A23
 
+install:
+
+put this folder content into a folder name "fgod" (folder name is important) under path:
+
+	linux:
+		 ~/.local/share/0ad/mods
+
+	windows:
+		vista or newer:
+			C:\Users\JohnDoe\Documents\My Games\0ad\mods
+		XP / 2000:
+			C:\Documents and Settings\JohnDoe\My Documents\My Games\0ad\mods
+
+	OS X:
+		~/Library/Application\ Support/0ad/mods
+
+	or read paths from https://trac.wildfiregames.com/wiki/GameDataPaths.
+
 
 Screenshots:
 
