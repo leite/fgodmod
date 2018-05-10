@@ -1,4 +1,4 @@
-# fgodmod for 0 A. D. version A23
+# fgod GUI/Features for 0 A. D. version A23
 
 Install:
 
