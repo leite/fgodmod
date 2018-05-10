@@ -1,5 +1,13 @@
 # fgodmod for 0 A. D. version A23
 
+
+Screenshots:
+
+
+	https://imgur.com/a/AWysKCC
+
+
+
 Features merged:
 
 	Tribut Stock Information Tooltip when sending resource see your stock and ally stock
@@ -50,4 +58,7 @@ Features merged:
 
 	Set Teams In GameSetup Dropdown
 	Fight Activity Ratio Summary
+
+	Possibility to join games in lobby dialog from within other games and/or start replay from within other games.
+
 
