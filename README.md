@@ -19,6 +19,9 @@ Install:
 
 		or read paths from https://trac.wildfiregames.com/wiki/GameDataPaths.
 
+	Start game, open Settings -> Mod Selection -> Select fgod -> hit Enable Button -> Hit Save Configuration -> Hit Start Mods
+
+	Mod now loading on every game start. You can see mod is active by having new options in options f.e.
 
 Screenshots:
 
