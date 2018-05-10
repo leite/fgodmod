@@ -260,6 +260,7 @@ var g_ServerIP;
 var g_ServerPort;
 var g_UseSTUN;
 var g_HostJID;
+var g_PlayerName;
 
 function init(initData, hotloadData)
 {
@@ -269,11 +270,12 @@ function init(initData, hotloadData)
 		Engine.SwitchGuiPage("page_pregame.xml");
 		return;
 	}
-	
+
 	g_ServerIP = initData.serverIP;
 	g_ServerPort = initData.serverPort;
 	g_UseSTUN = initData.useSTUN;
 	g_HostJID = initData.hostJID;
+	g_PlayerName = initData.playerName;
 
 	// Fallback used by atlas
 	g_PlayerAssignments = initData ? initData.playerAssignments : { "local": { "player": 1 } };

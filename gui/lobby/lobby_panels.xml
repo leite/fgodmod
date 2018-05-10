@@ -308,7 +308,7 @@
 	<object name="moreOptionsBarActionShow" type="image" size="0 100%-20 100% 100%" z="101" />
 
 	<!-- Translucent black background -->
-	<object hidden="true" name="fade" type="image" z="100" sprite="ModernFade"/>
+	<object hidden="true" name="fade" type="image" z="100" sprite="BackgroundTranslucent"/>
 
 	<!-- Leaderboard -->
 	<object hidden="true" name="leaderboard" type="image" style="ModernDialog" size="50%-224 50%-160 50%+224 50%+160" z="101">

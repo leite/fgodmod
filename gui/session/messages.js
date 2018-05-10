@@ -668,6 +668,41 @@ function handleNetStatusMessage(message)
 	let statusMessage = g_StatusMessageTypes[message.status](message);
 	netStatus.caption = statusMessage;
 	netStatus.hidden = !statusMessage;
+	Engine.GetGUIObjectByName("pauseOverlayBackground").hidden = !statusMessage;
+	
+	if (!!g_PlayerName && "reason" in message)
+	{
+		let leaveRejoin = () => {
+			g_PageOnLeaveSettings = [ "page_lobby.xml", {
+				"joinGame": {
+					"multiplayerGameType": "join",
+					"name": g_PlayerName,
+					"ip": g_ServerIP,
+					"port": g_ServerPort,
+					"useSTUN": g_UseSTUN,
+					"hostJID": g_HostJID}
+				} ];
+			leaveGame();
+		};
+		
+		if (message.reason == 0) // Connection lost
+			leaveRejoin();
+		else if (message.reason == 5) // Kick
+			messageBox(
+				400, 200,
+				translate("You have been kicked. Do you want to rejoin?"),
+				translate("Confirmation"),
+				[translate("No"), translate("Yes")],
+				[null, leaveRejoin]
+			);
+		else if (message.reason == 1) // End host (show map/players)
+		{
+			g_ViewedPlayer = -1;
+			Engine.GetGUIObjectByName("viewPlayer").selected = g_ViewedPlayer + 1;
+			toggleChangePerspective(true);
+		}
+	}
+
 
 	let loadingClientsText = Engine.GetGUIObjectByName("loadingClientsText");
 	loadingClientsText.hidden = message.status != "waiting_for_players";
@@ -676,7 +711,7 @@ function handleNetStatusMessage(message)
 	{
 		// Hide the pause overlay, and pause animations.
 		Engine.GetGUIObjectByName("pauseOverlay").hidden = true;
-		Engine.SetPaused(true, false);
+		// Engine.SetPaused(true, false);
 
 		g_Disconnected = true;
 		updateCinemaPath();

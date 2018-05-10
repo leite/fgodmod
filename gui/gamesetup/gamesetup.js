@@ -243,6 +243,9 @@ var g_IsTutorial;
 var g_ServerName;
 var g_ServerIP;
 var g_ServerPort;
+var g_PlayerName;
+var g_UseSTUN;
+var g_HostJID;
 
 /**
  * IP address and port of the STUN endpoint.
@@ -1119,6 +1122,10 @@ function init(attribs)
 	g_ServerIP = attribs.serverIP;
 	g_ServerPort = attribs.serverPort;
 	g_StunEndpoint = attribs.stunEndpoint;
+	g_PlayerName = attribs.playerName;
+	g_UseSTUN = attribs.useSTUN;
+	g_HostJID = attribs.hostJID;
+	
 
 	setLobbyButtonIcon(false);
 	if (Engine.HasXmppClient())
@@ -1622,6 +1629,9 @@ function handleGamestartMessage(message)
 		"attribs": g_GameAttributes,
 		"serverIP" : g_ServerIP,
 		"serverPort" : g_ServerPort,
+		"playerName": g_PlayerName,
+		"useSTUN": g_UseSTUN,
+		"hostJID": g_HostJID,
 		"playerAssignments": g_PlayerAssignments
 	});
 }
