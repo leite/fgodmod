@@ -1,5 +1,27 @@
-# fgodmod for 0 A. D. version A23
+# fgod mod for 0 A. D. version A23
 
+Install:
+
+	Put this folder content into a folder name "fgod" (folder name is important) under path:
+
+		Linux:
+			 ~/.local/share/0ad/mods
+
+		Windows:
+			Vista or Newer:
+				C:\Users\JohnDoe\Documents\My Games\0ad\mods
+
+			XP / 2000:
+				C:\Documents and Settings\JohnDoe\My Documents\My Games\0ad\mods
+
+		OS X:
+			~/Library/Application\ Support/0ad/mods
+
+		or read paths from https://trac.wildfiregames.com/wiki/GameDataPaths.
+
+	Start game, open Settings -> Mod Selection -> Select fgod -> hit Enable Button -> Hit Save Configuration -> Hit Start Mods
+
+	Mod now loading on every game start. You can see mod is active by having new options in options f.e.
 
 Screenshots:
 
