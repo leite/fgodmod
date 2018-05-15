@@ -94,29 +94,6 @@ var g_AutoAwayStates = [
 			"minute": translatePlural("minute", "minutes", g_AutoAway.timeMinutes)
 		}),
 		"func": () => setPlayerPresence("available", true, false, false)
-	},
-	{
-		"name": "available_awaybackground",
-		"desc": () => translate("Away when in background"),
-		"func": () => setPlayerPresence("available", false, true, false)
-	},
-	{
-		"name": "available_awaytimeorbackground",
-		"desc": () => sprintf(translate("Away after %(minutes)s %(minute)s or in background"),
-		{
-			"minutes": g_AutoAway.timeMinutes,
-			"minute": translatePlural("minute", "minutes", g_AutoAway.timeMinutes)
-		}),
-		"func": () => setPlayerPresence("available", true, true, false)
-	},
-	{
-		"name": "available_awaytimeandbackground",
-		"desc": () => sprintf(translate("Away after %(minutes)s %(minute)s in background"),
-		{
-			"minutes": g_AutoAway.timeMinutes,
-			"minute": translatePlural("minute", "minutes", g_AutoAway.timeMinutes)
-		}),
-		"func": () => setPlayerPresence("available", true, true, true)
 	}
 ];
 
