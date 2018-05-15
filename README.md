@@ -32,6 +32,16 @@ Screenshots:
 
 Features merged:
 
+v1.3:
+
+	Auto rejoin on lost connection in network multiplayer game.
+
+	Observer view for clients on multiplayer host end.
+
+	Rejoin question on kick in network multiplayer game.
+
+v1-1.2:
+
 	Show stock information from user player and allies when hovering tribut resource in diplomacy window.
 
 	Go back to previous GUI with Shift+Esc.
@@ -89,9 +99,3 @@ Features merged:
 	Fight activity ratio summary.
 
 	Possibility to join games in lobby dialog from within other games and/or start replay from within other games.
-
-	Auto rejoin on lost connection in network multiplayer game.
-
-	Observer view for clients on multiplayer host end.
-
-	Rejoin question on kick in network multiplayer game.
