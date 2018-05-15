@@ -32,55 +32,66 @@ Screenshots:
 
 Features merged:
 
-	Tribut Stock Information Tooltip when sending resource see your stock and ally stock
+	Show stock information from user player and allies when hovering tribut resource in diplomacy window.
 
-	Go Back GUI Key Shift + Esc key
+	Go back to previous GUI with Shift+Esc.
 
-	Start Into Lobby on game start option
-	Tab More Names can continue hitting tab when on multiple possible name tabbings want other name to tab
-	Color Names In Game Chat
+	Start Into Lobby on game start (option).
 
-	pause overlay smaller so you can still click game entities and set commands to queue for after unpause.
+	Continue cycle through possible names on tab.
 
-	More Darken Fades when dialog windows opened
+	Color names in game's chat text.
 
-	unselect game in lobby when player not in a game
+	Pause overlay smaller so you can still click game entities and set commands to queue for after unpause.
 
-	axis summary
+	More darken fades when dialog windows opened.
 
-	Team Total In Top Panel Tooltip and for observer having summed stats and tooltips available when not player selected.
+	Unselect game in lobby when selected player is not in a game.
 
-	Auto Complete Commands In Any Chat
-	See Last Summary In Lobby Hotkey (Ctrl+Tab)
+	Axis unit in summary.
 
+	Team total in top panel tooltip and for observer having summed stats and tooltips available when not player selected.
 
-	Ping Hint In Game from lobby
+	Auto complete commands in chats.
 
-	Highlight Buddies option In Lobby
+	See last summary in lobby hotkey (Ctrl+Tab).
 
-	Replace Player In Game feature button for observer
+	Ping Hint Into Game from lobby (sign on menu button and ping sound if enabled user notification enabled in options).
 
-	Change Name In Game in options multiplayer name will be applied when joining game from lobby.
+	Show buddy players and games in different color in lobby (option).
 
-	Sort Save in Lobby lists
+	Button for replacing player in game for observers.
 
-	Hide Profile in Lobby with Esc hit
+	Different player name for in game (in options multiplayer name). It will be applied when joining to a game.
 
-	Next Previous Button In Summary Replay menu
+	Sort save and multi column sort support in Lobby lists. Player user priored in sorted players and games list when same data in field.
 
-	Auto Away Lobby Feature
-	Numbers Player and Games In Lobby header on top of the list
-	Lobby More Buttons Start Replay InGame
-	Summary Civ Icon Click
-	Remember Option Page ingame
+	Hide profile panel in lobby, when no player is selected, to get a longer player list. (Clear selection with Esc).
 
-	Filter fgod mod out of incompatible games because it doesn't change any simulation so all games can be joined/hosted/saved/loaded/replay
+	Show next-, previous-button in replay menu summaries to go through summaries to search.
+
+	Configurable auto away in lobby after time inactive.
+
+	Numbers player and games in lobby header on top of the list.
+
+	Give more buttons in lobby to show options/civilizations tree/replay menu. Also starting replays or joining other game from lobby/lobby dialog possible.
+
+	Summary civ icons can be clicked to see structure tree in summary when needed.
+
+	Remember opened option page ingame when reopen.
+
+	Filter fgod mod out of incompatible games. (All hosts without the mod can be joined and all players without the mod can join the mod host.)
 
 	Allow scroll for tab switch between the buttons in options/summary/credits/..
 
-	Set Teams In GameSetup Dropdown
-	Fight Activity Ratio Summary
+	Set teams configuration in gamesetup dropdown.
+
+	Fight activity ratio summary.
 
 	Possibility to join games in lobby dialog from within other games and/or start replay from within other games.
 
+	Auto rejoin on lost connection in network multiplayer game.
 
+	Observer view for clients on multiplayer host end.
+
+	Rejoin question on kick in network multiplayer game.
