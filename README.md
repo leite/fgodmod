@@ -1,4 +1,4 @@
-# fgod mod v. 1.3 for 0 A. D. version A23
+# fgod mod v1.3 for 0 A. D. version A23
 
 Install:
 
