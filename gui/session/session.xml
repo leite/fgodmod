@@ -45,7 +45,7 @@
 	</object>
 
 	<!-- Network status -->
-	<object name="netStatus" type="text" style="netStatus" z="0" hidden="true">
+	<object name="netStatus" type="text" size="0 0 100% 25%" style="netStatus" z="0" hidden="true">
 		<object type="button"
 			name="disconnectedExitButton"
 			style="StoneButton"

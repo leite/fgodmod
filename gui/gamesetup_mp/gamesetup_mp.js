@@ -20,6 +20,7 @@ var g_ServerPort;
 var g_ServerIP;
 var g_UseSTUN;
 var g_HostJID;
+var g_PlayerName;
 
 var g_IsRejoining = false;
 var g_GameAttributes; // used when rejoining
@@ -38,6 +39,7 @@ function init(attribs)
 	g_ServerIP = attribs.ip;
 	g_UseSTUN = attribs.useSTUN;
 	g_HostJID = attribs.hostJID;
+	g_PlayerName = attribs.name + (g_UserRating ? " (" + g_UserRating + ")" : "");
 
 	switch (attribs.multiplayerGameType)
 	{
@@ -205,6 +207,7 @@ function pollAndHandleNetworkClient()
 				}
 				Engine.SwitchGuiPage("page_loading.xml", {
 					"attribs": g_GameAttributes,
+					"playerName": g_PlayerName,
 					"serverIP": g_ServerIP,
 					"serverPort": g_ServerPort,
 					"isRejoining": g_IsRejoining,
@@ -247,7 +250,10 @@ function pollAndHandleNetworkClient()
 						"serverName": g_ServerName,
 						"serverIP": g_ServerIP,
 						"serverPort": g_ServerPort,
-						"stunEndpoint": g_StunEndpoint
+						"stunEndpoint": g_StunEndpoint,
+						"useSTUN": g_UseSTUN,
+						"hostJID": g_HostJID,
+						"playerName": g_PlayerName
 					});
 					return; // don't process any more messages - leave them for the game GUI loop
 
@@ -358,7 +364,13 @@ function startJoin(playername, ip, port, useSTUN, hostJID = "")
 {
 	try
 	{
-		Engine.StartNetworkJoin(playername + (g_UserRating ? " (" + g_UserRating + ")" : ""), ip, port, useSTUN, hostJID);
+		
+		Engine.StartNetworkJoin(
+			playername + (g_UserRating ? " (" + g_UserRating + ")" : ""),
+		 ip,
+		  port,
+		   useSTUN,
+		    hostJID);
 	}
 	catch (e)
 	{
