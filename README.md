@@ -30,7 +30,7 @@ Screenshots:
 
 
 
-Features merged:
+Features:
 
 v1.3:
 
