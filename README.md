@@ -32,11 +32,13 @@ Screenshots:
 
 
 
-Updates (Features, ...):
+Updates (Features)
 
 v1.3.1:
 
-	Readme Features Text updated.
+	Readme:
+		
+		Features Text updated.
 
 v1.3:
 
