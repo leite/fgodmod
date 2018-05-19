@@ -19,9 +19,11 @@ Install:
 
 		or read paths from https://trac.wildfiregames.com/wiki/GameDataPaths.
 
-	Start game, open Settings -> Mod Selection -> Select fgod -> hit Enable Button -> Hit Save Configuration -> Hit Start Mods
+	Start game, open Settings -> Mod Selection -> Select fgod -> hit Enable Button -> Hit
+	Save Configuration -> Hit Start Mods
 
-	Mod now loading on every game start. You can see mod is active by having new options in options f.e.
+	Mod now loading on every game start. You can see mod is active by having new options in
+	options f.e.
 
 Screenshots:
 
@@ -34,68 +36,94 @@ Features:
 
 v1.3:
 
-	Auto rejoin on lost connection in network multiplayer game.
+	In-Game:
 
-	Observer view for clients on multiplayer host end.
+		Auto rejoin on lost connection in network multiplayer game.
 
-	Rejoin question on kick in network multiplayer game.
+		Getting observer view for clients on multiplayer if the host ends.
+
+		Rejoin question when been kicked in a network multiplayer game.
 
 v1-1.2:
 
-	Show stock information from user player and allies when hovering tribut resource in diplomacy window.
+	General:
 
-	Go back to previous GUI with Shift+Esc.
+		Go back to previous GUI with Shift + Esc.
 
-	Start Into Lobby on game start (option).
+		More darken fades when dialog windows are opened.
 
-	Continue cycle through possible names on tab.
+		Allow scroll for tab switch between the buttons in options/summary/credits/..
 
-	Color names in game's chat text.
+		Set team configuration in gamesetup with preconfigured dropdown.
 
-	Pause overlay smaller so you can still click game entities and set commands to queue for after unpause.
+		Possibility to join games in lobby dialog from within other games and/or start replay from within other games.
 
-	More darken fades when dialog windows opened.
+		Filter fgod mod out of incompatible games. (All hosts without the mod can be joined and all players
+		without the mod can join the mod host.)
 
-	Unselect game in lobby when selected player is not in a game.
+	Chats:
 
-	Axis unit in summary.
+		Continue cycle through more possible names on tabbing names in chat.
 
-	Team total in top panel tooltip and for observer having summed stats and tooltips available when not player selected.
+		Also tabbing commands for auto completion in chats.
 
-	Auto complete commands in chats.
+		Coloring names in game's chat texts.
 
-	See last summary in lobby hotkey (Ctrl+Tab).
+	In-Game:
 
-	Ping Hint Into Game from lobby (sign on menu button and ping sound if enabled user notification enabled in options).
+		Show stock information from user player and allies when hovering tribut resource in diplomacy
+		window.
 
-	Show buddy players and games in different color in lobby (option).
+		Pause overlay smaller so you can still click and act on game entities and set commands to
+		queue for after unpause.
 
-	Button for replacing player in game for observers.
+		Team totals in top panel resources and population tooltips and for observer having summed
+		resource stats and population available when no player selected.
 
-	Different player name for in game (in options multiplayer name). It will be applied when joining to a game.
+		Ping Hint (nick notification) into game from lobby (you get >Star Sign< on Menu Button and
+		ping sound if enabled user notification in sound options).
 
-	Sort save and multi column sort support in Lobby lists. Player user priored in sorted players and games list when same data in field.
+		Button for replacing player in game for observers ingame by selecting player via dropdown
+		and hit the replace button next besides.
+		(Only works when no authentication prevention is enabled in a multiplayer host.)
 
-	Hide profile panel in lobby, when no player is selected, to get a longer player list. (Clear selection with Esc).
+		Change player name for in-game (in options multiplayer name). It will be applied when joining
+		to a game.
+		(Only works when no authentication prevention is enabled in a multiplayer host.)
 
-	Show next-, previous-button in replay menu summaries to go through summaries to search.
+		Remember opened option page ingame when reopen.
 
-	Configurable auto away in lobby after time inactive.
+	Lobby:
 
-	Numbers player and games in lobby header on top of the list.
+		Start Into Lobby on game start (option).
 
-	Give more buttons in lobby to show options/civilizations tree/replay menu. Also starting replays or joining other game from lobby/lobby dialog possible.
+		Unselect game in lobby when selected player is not in a game.
 
-	Summary civ icons can be clicked to see structure tree in summary when needed.
+		See last game summary again in lobby with hotkey Ctrl+Tab.
 
-	Remember opened option page ingame when reopen.
+		Show buddy players and games in different color in lobby (option).
 
-	Filter fgod mod out of incompatible games. (All hosts without the mod can be joined and all players without the mod can join the mod host.)
+		Sort save and multi column sort support in Lobby lists. Player user priored in sorted players
+		and games list when same data in field.
 
-	Allow scroll for tab switch between the buttons in options/summary/credits/..
+		Hide profile panel in lobby, when no player is selected, to get a longer player list. (Clear
+		selection with Esc).
 
-	Set teams configuration in gamesetup dropdown.
+		Configurable auto away in lobby after time inactive.
 
-	Fight activity ratio summary.
+		Numbers player and games in lobby header on top of the list.
 
-	Possibility to join games in lobby dialog from within other games and/or start replay from within other games.
+		Give more buttons in lobby to show options/civilizations tree/replay menu. Also starting
+		replays or joining other game from lobby/lobby-dialog possible.
+
+	Summary page:
+
+		Axis units in the summary.
+
+		Civilation icons in summaries can be clicked to see structure tree directly when needed.
+
+		Give fight activity ratio number in general panel in summary page.
+
+		Show next-, previous-button in replay menu summaries to go through summaries to search.
+
+
