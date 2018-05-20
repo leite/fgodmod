@@ -38,12 +38,14 @@ function setDefaultUserConfs()
 		},"lobby.statuscolors.games": {
 		init: "0 219 0",
 		waiting: "255 127 0",
-		running: "219 0 0" 
+		running: "219 0 0",
+		incompatible: "128 128 128"
 
 		},"lobby.statuscolors.games.buddy": {
 		init: "80 219 219",
 		waiting: "255 127 255",
-		running: "230 80 230"
+		running: "230 80 230",
+		incompatible: "160 160 160"
 
 		},"lobby.statuscolors.players": {
 		available: "0 219 0",

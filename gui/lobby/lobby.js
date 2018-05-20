@@ -37,7 +37,7 @@ var g_GameColors = {
 	"init":    { "style": {}, "buddyStyle": {} },
 	"waiting": { "style": {}, "buddyStyle": {} },
 	"running": { "style": {}, "buddyStyle": {} },
-	"incompatible": { "style": { "color": "gray" }, "buddyStyle": { "color": "gray" } }
+	"incompatible": { "style": { "color": "128 128 128" }, "buddyStyle": { "color": "160 160 160" } }
 };
 
 /**
@@ -1404,7 +1404,7 @@ function updateGameList()
 				Math.round(playerRatings.reduce((sum, current) => sum + current) / playerRatings.length) :
 				g_DefaultLobbyRating;
 
-		if (!hasSameMods(JSON.parse(game.mods), g_EngineInfo.mods.filter(mod => mod[0] != "fgod")))
+		if (!hasSameMods(JSON.parse(game.mods), g_EngineInfo.mods))
 			game.state = "incompatible";
 
 		return game;
@@ -1419,10 +1419,13 @@ function updateGameList()
 				continue;
 
 			let ret = cmpObjs(a, b, sort.name, {
-				'buddy': obj => String(b.hasBuddies) + g_GameStatusOrder.indexOf(obj.state) + obj.name.toLowerCase(),
+				'buddy': obj => String(obj.hasBuddies),
 				'name': obj => g_GameStatusOrder.indexOf(obj.state) + obj.name.toLowerCase(),
 				'mapName': obj => translate(obj.niceMapName),
-				'nPlayers':	obj => obj.maxnbp
+				'nPlayers':	obj => obj.maxnbp,
+				'mapSize': obj => obj.mapSize,
+				'mapType': obj => obj.mapType,
+				'gameRating': obj => obj.gameRating
 			}, sort.order);
 
 			if (ret)

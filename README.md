@@ -1,4 +1,4 @@
-# fgod mod v1.5 for 0 A. D. version A23
+# fgod mod v1.6 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -54,6 +54,20 @@ Screenshots:
 
 
 Updates (Features)
+
+v1.6 BUGFIX
+
+	General:
+
+		When fgod mod folder not named only "fgod" but "fgodmod-master" or something
+		
+		its ok for mods compability anyway.
+
+
+	Lobby:
+
+		Bug fix for errors obj in gamelist update.
+	
 
 v1.5
 

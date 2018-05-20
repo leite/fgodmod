@@ -33,8 +33,8 @@ var g_LastAutoComplete = {
 
 function hasSameMods(modsA, modsB)
 {
-    let mods1 = modsA.filter(mod => mod != "fgod");
-    let mods2 = modsB.filter(mod => mod != "fgod");
+    let mods1 = modsA.filter(mod => !mod.startsWith("fgod"));
+    let mods2 = modsB.filter(mod => !mod.startsWith("fgod"));
 
 	if (!mods1 || !mods2 || mods1.length != mods2.length)
 		return false;
@@ -337,7 +337,7 @@ function changeGUIListSort(guiListObj, sorts, config)
  */
 function cmpObjs(objA, objB, attribute, attributeTranslation, order)
 {
-	let cmp = attributeTranslation[attribute] ? obj => attributeTranslation[attribute](obj) : obj[attribute] || 0;
+	let cmp = attribute in attributeTranslation ? obj => attributeTranslation[attribute](obj) : obj[attribute] || 0;
 
 	let cmpA = cmp(objA);
 	let cmpB = cmp(objB);
