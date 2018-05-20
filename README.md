@@ -15,6 +15,11 @@ Install:
 
 	and click download as zip.
 
+	or copy this link into browser adress bar for direct download:
+		
+		https://github.com/fraizy22/fgodmod/archive/master.zip
+
+
 	Put the content files of the zip into a folder name "fgod" under path:
 
 		Linux:
