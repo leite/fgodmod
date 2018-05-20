@@ -11,8 +11,11 @@ Report Feedback/Bugs:
 
 Install:
 
-	Put the content of the zip into a folder name "fgod" (folder name is important) (so you
-	have mods/fgod/mod.json f.e.) under path:
+	Click Green Button "Clone or download" on top page of https://github.com/fraizy22/fgodmod
+
+	and click download as zip.
+
+	Put the content files of the zip into a folder name "fgod" under path:
 
 		Linux:
 			 ~/.local/share/0ad/mods
@@ -28,6 +31,8 @@ Install:
 			~/Library/Application\ Support/0ad/mods
 
 		or read paths from https://trac.wildfiregames.com/wiki/GameDataPaths.
+
+	So you have path on linux f.e. ~/.local/share/0ad/mods/fgod/mod.json.
 
 	Start game, open Settings -> Mod Selection -> Select fgod -> hit Enable Button -> Hit
 	Save Configuration -> Hit Start Mods
