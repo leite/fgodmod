@@ -32,7 +32,8 @@ function setDefaultUserConfs()
 			},"lobby": {
 		highlightbuddies: false     ,       
 		autoawaytime: "5"               ,   
-		presenceselection: "available_awaytime" 
+		presenceselection: "available_awaytime" ,
+		secureauth: "false"
 
 		},"lobby.statuscolors.games": {
 		init: "0 219 0",
@@ -66,7 +67,7 @@ function setDefaultUserConfs()
 
 		},"replay": {
 		sort: "months:-1,players:1,mapName:1,mapSize:1,popCapacity:1,duration:1"
-			}
+		}
 	};
 	
 	Object.keys(values).forEach(key => {

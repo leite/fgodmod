@@ -10,6 +10,9 @@ const g_StartingResources = prepareForDropdown(g_Settings && g_Settings.Starting
 const g_VictoryDurations = prepareForDropdown(g_Settings && g_Settings.VictoryDurations);
 const g_VictoryConditions = g_Settings && g_Settings.VictoryConditions;
 
+
+const g_EngineInfo = Engine.GetEngineInfo();
+
 var g_GameSpeeds = getGameSpeedChoices(false);
 
 /**
@@ -1122,10 +1125,9 @@ function init(attribs)
 	g_ServerIP = attribs.serverIP;
 	g_ServerPort = attribs.serverPort;
 	g_StunEndpoint = attribs.stunEndpoint;
-	g_PlayerName = attribs.playerName;
+	g_PlayerName = !!attribs.playerName ? attribs.playerName : "";
 	g_UseSTUN = attribs.useSTUN;
 	g_HostJID = attribs.hostJID;
-	
 
 	setLobbyButtonIcon(false);
 	if (Engine.HasXmppClient())
@@ -1952,8 +1954,8 @@ function loadPersistMatchSettings()
 	if (!data || !data.attributes || !data.attributes.settings)
 		return;
 
-	if (data.engine_info.engine_version != Engine.GetEngineInfo().engine_version ||
-	    !hasSameMods(data.engine_info.mods, Engine.GetEngineInfo().mods.filter(mod => mod[0] != "fgod")))
+	if (data.engine_info.engine_version != g_EngineInfo.engine_version ||
+	    !hasSameMods(data.engine_info.mods, g_EngineInfo.mods.filter(mod => mod[0] != "fgod")))
 		return;
 
 	g_IsInGuiUpdate = true;
@@ -2012,7 +2014,7 @@ function savePersistMatchSettings()
 				Engine.ConfigDB_GetValue("user", "persistmatchsettings") == "true" ?
 					g_GameAttributes :
 					{},
-			"engine_info": Engine.GetEngineInfo()
+			"engine_info": g_EngineInfo
 		});
 }
 
@@ -2804,7 +2806,7 @@ function sendRegisterGameStanzaImmediate()
 		"players": clients.list,
 		"stunIP": g_StunEndpoint ? g_StunEndpoint.ip : "",
 		"stunPort": g_StunEndpoint ? g_StunEndpoint.port : "",
-		"mods": JSON.stringify(Engine.GetEngineInfo().mods.filter(mod => mod[0] != "fgod")),
+		"mods": JSON.stringify(g_EngineInfo.mods.filter(mod => mod[0] != "fgod")),
 	};
 
 	// Only send the stanza if the relevant settings actually changed

@@ -39,7 +39,7 @@ function init(attribs)
 	g_ServerIP = attribs.ip;
 	g_UseSTUN = attribs.useSTUN;
 	g_HostJID = attribs.hostJID;
-	g_PlayerName = attribs.name + (g_UserRating ? " (" + g_UserRating + ")" : "");
+	g_PlayerName = !!attribs.name ? attribs.name + (g_UserRating ? " (" + g_UserRating + ")" : "") : "";
 
 	switch (attribs.multiplayerGameType)
 	{
@@ -108,6 +108,7 @@ function confirmSetup()
 	if (!Engine.GetGUIObjectByName("pageJoin").hidden)
 	{
 		let joinPlayerName = Engine.GetGUIObjectByName("joinPlayerName").caption;
+		g_PlayerName = joinPlayerName;
 		let joinServer = Engine.GetGUIObjectByName("joinServer").caption;
 		g_ServerIP = joinServer;
 		let joinPort = Engine.GetGUIObjectByName("joinPort").caption;
@@ -119,6 +120,7 @@ function confirmSetup()
 	else if (!Engine.GetGUIObjectByName("pageHost").hidden)
 	{
 		let hostPlayerName = Engine.GetGUIObjectByName("hostPlayerName").caption;
+		g_PlayerName = hostPlayerName;
 		let hostServerName = Engine.GetGUIObjectByName("hostServerName").caption;
 		let hostPort = Engine.GetGUIObjectByName("hostPort").caption;
 

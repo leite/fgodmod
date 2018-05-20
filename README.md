@@ -1,8 +1,9 @@
-# fgod mod v1.3 for 0 A. D. version A23
+# fgod mod v1.4 for 0 A. D. version A23
 
 Install:
 
-	Put this folder content into a folder name "fgod" (folder name is important) under path:
+	Put the content of the zip into a folder name "fgod" (folder name is important) (so you
+	have mods/fgod/mod.json f.e.) under path:
 
 		Linux:
 			 ~/.local/share/0ad/mods
@@ -33,6 +34,16 @@ Screenshots:
 
 
 Updates (Features)
+
+v1.4:
+
+	Lobby:
+
+		0 A. D. v0.0.23 lobby lag fixed.
+
+		Lobby dialog icon in gamesetup (especially for Mac OS, and all OS) fixed.
+
+		Lobby game authentification default disabled to have replacement functionality in host.
 
 v1.3.1:
 

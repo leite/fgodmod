@@ -275,7 +275,7 @@ function init(initData, hotloadData)
 	g_ServerPort = initData.serverPort;
 	g_UseSTUN = initData.useSTUN;
 	g_HostJID = initData.hostJID;
-	g_PlayerName = initData.playerName;
+	g_PlayerName = !!initData.playerName ? initData.playerName : "";
 
 	// Fallback used by atlas
 	g_PlayerAssignments = initData ? initData.playerAssignments : { "local": { "player": 1 } };
@@ -1578,7 +1578,7 @@ function toggleReplace()
 
 	messageBox(
 		400, 200,
-		translate("Do you want to replace \"" + player.name + "\" in the game?"),
+		translate("Sure that you want to replace \"" + player.name + "\" in the game?"),
 		translate("Confirmation"),
 		[translate("No"), translate("Yes")],
 		[null, () => toggleReplaceReally(player.name)]

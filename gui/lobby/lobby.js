@@ -18,6 +18,8 @@ const g_CivData = loadCivData(false, false);
  */
 var g_ModeratorPrefix = "@";
 
+const g_EngineInfo = Engine.GetEngineInfo();
+
 /**
  * Current username. Cannot contain whitespace.
  */
@@ -1402,7 +1404,7 @@ function updateGameList()
 				Math.round(playerRatings.reduce((sum, current) => sum + current) / playerRatings.length) :
 				g_DefaultLobbyRating;
 
-		if (!hasSameMods(JSON.parse(game.mods), Engine.GetEngineInfo().mods.filter(mod => mod[0] != "fgod")))
+		if (!hasSameMods(JSON.parse(game.mods), g_EngineInfo.mods.filter(mod => mod[0] != "fgod")))
 			game.state = "incompatible";
 
 		return game;
@@ -1562,7 +1564,7 @@ function joinButton()
 		messageBox(
 			400, 200,
 			translate("Your active mods do not match the mods of this game.") + "\n\n" +
-				comparedModsString(JSON.parse(game.mods), Engine.GetEngineInfo().mods.filter(mod => mod[0] != "fgod")) + "\n\n" +
+				comparedModsString(JSON.parse(game.mods), g_EngineInfo.mods.filter(mod => mod[0] != "fgod")) + "\n\n" +
 				translate("Do you want to switch to the mod selection page?"),
 			translate("Incompatible mods"),
 			[translate("No"), translate("Yes")],
