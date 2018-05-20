@@ -2,7 +2,9 @@
 
 Report Feedback/Bugs:
 
-	In 0ad wildfire games forums under game modification subforum thread fgod mod
+	In 0ad wildfire games forums under game modification thread fgod mod
+
+	or simply search fgod mod in forum
 
 		https://wildfiregames.com/forum/index.php?/topic/24318-fgod-mod-for-0-a-d-a23/
 
