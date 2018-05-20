@@ -106,12 +106,19 @@ v1-1.2:
 
 		Allow scroll for tab switch between the buttons in options/summary/credits/..
 
-		Set team configuration in gamesetup with preconfigured dropdown.
-
-		Possibility to join games in lobby dialog from within other games and/or start replay from within other games.
+		Possibility to join games in lobby dialog from within other games and/or start replay from
+		within other games.
 
 		Filter fgod mod out of incompatible games. (All hosts without the mod can be joined and all players
 		without the mod can join the mod host.)
+
+
+	Gamesetup:
+
+		Set team configuration in gamesetup with preconfigured dropdown.
+
+		Ping hint notification from lobby when lobby dialog is closed the lobby dialog icon turns white
+		and notification message appear at bottom screen.
 
 
 	Chats:
