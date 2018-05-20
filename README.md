@@ -1,5 +1,12 @@
 # fgod mod v1.4 for 0 A. D. version A23
 
+Report Feedback/Bugs:
+
+	In 0ad wildfire games forums under game modification subforum thread fgod mod
+
+	https://wildfiregames.com/forum/index.php?/topic/24318-fgod-mod-for-0-a-d-a23/
+
+
 Install:
 
 	Put the content of the zip into a folder name "fgod" (folder name is important) (so you
@@ -25,6 +32,7 @@ Install:
 
 	Mod now loading on every game start. You can see mod is active by having new options in
 	options f.e.
+
 
 Screenshots:
 
