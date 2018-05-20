@@ -1,4 +1,4 @@
-# fgod mod v1.4 for 0 A. D. version A23
+# fgod mod v1.5 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -44,6 +44,13 @@ Screenshots:
 
 
 Updates (Features)
+
+v1.5
+
+	In-Game:
+
+		Experience bar added below health bar on top of unit (hit tab key to enable status bars).
+
 
 v1.4:
 
