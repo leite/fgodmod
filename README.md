@@ -45,15 +45,18 @@ v1.4:
 
 		Lobby game authentification default disabled to have replacement functionality in host.
 
+
 	Host/Join by IP:
 
 		Fixed bug.
+
 
 v1.3.1:
 
 	Readme:
 		
 		Features Text updated.
+
 
 v1.3:
 
@@ -64,6 +67,7 @@ v1.3:
 		Getting observer view for clients on multiplayer if the host ends.
 
 		Rejoin question when been kicked in a network multiplayer game.
+
 
 v1-1.2:
 
@@ -82,6 +86,7 @@ v1-1.2:
 		Filter fgod mod out of incompatible games. (All hosts without the mod can be joined and all players
 		without the mod can join the mod host.)
 
+
 	Chats:
 
 		Continue cycle through more possible names on tabbing names in chat.
@@ -89,6 +94,7 @@ v1-1.2:
 		Also tabbing commands for auto completion in chats.
 
 		Coloring names in game's chat texts.
+
 
 	In-Game:
 
@@ -114,6 +120,7 @@ v1-1.2:
 
 		Remember opened option page ingame when reopen.
 
+
 	Lobby:
 
 		Start Into Lobby on game start (option).
@@ -136,6 +143,7 @@ v1-1.2:
 
 		Give more buttons in lobby to show options/civilizations tree/replay menu. Also starting
 		replays or joining other game from lobby/lobby-dialog possible.
+
 
 	Summary page:
 
