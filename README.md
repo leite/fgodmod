@@ -45,6 +45,10 @@ v1.4:
 
 		Lobby game authentification default disabled to have replacement functionality in host.
 
+	Host/Join by IP:
+
+		Fixed bug.
+
 v1.3.1:
 
 	Readme:
