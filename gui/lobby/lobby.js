@@ -210,8 +210,7 @@ var g_InGame = false;
  */
 let g_CancelHotkey = [
 	() => setLeaderboardVisibility(false),
-	() => setUserProfileVisibility(false),
-	() => setListBoxesUnselected()
+	() => setUserProfileVisibility(false)
 ];
 
 var g_OptionsPage = "Lobby";
@@ -501,6 +500,21 @@ var g_ChatCommands = {
 	}
 };
 
+function clearPlayerSelectionTooltip(show)
+{
+	Engine.GetGUIObjectByName("playerList").tooltip =
+		show ? 'Hit ' + setStringTags(escapeText("[Escape]"), { "color": "yellow" }) + " to clear player/game selection."
+		: "";
+}
+
+function clearGameSelectionTooltip(show)
+{
+	Engine.GetGUIObjectByName("gameList").tooltip =
+		show ? 'Hit ' + setStringTags(escapeText("[Escape]"), { "color": "yellow" }) + " to clear player/game selection."
+		: "";
+}
+
+
 /**
  * Called after the XmppConnection succeeded and when returning from a game.
  *
@@ -516,6 +530,7 @@ function init(attribs = {})
 		leaveLobby();
 		return;
 	}
+	clearPlayerSelectionTooltip(false);
 
 	g_CallbackSet = !!attribs.callback;
 	readConfigStatusColors();
@@ -1115,6 +1130,7 @@ function selectGameFromPlayername()
 				selected = i;
 		}
 	gameList.selected = selected;
+	clearGameSelectionTooltip(true);
 }
 
 function onPlayerListSelection()
@@ -1122,6 +1138,9 @@ function onPlayerListSelection()
 	let playerList = Engine.GetGUIObjectByName("playerList");
 	if (playerList.selected == playerList.list.indexOf(g_SelectedPlayer))
 		return;
+
+	if (!g_SelectedPlayer)
+		g_CancelHotkey.splice(2, 0, setPlayerListBoxUnselected);
 
 	g_SelectedPlayer = playerList.list[playerList.selected];
 
@@ -1132,6 +1151,7 @@ function onPlayerListSelection()
 	// lookupSelectedUserProfile("playersBox");
 	updateToggleBuddy();
 	selectGameFromPlayername();
+	clearPlayerSelectionTooltip(true);
 }
 
 function setLeaderboardVisibility(visible)
@@ -1170,14 +1190,29 @@ function setLeftPanelExpanded(expanded)
 	Engine.GetGUIObjectByName("leftPanel").size = "20 " +(g_Dialog ? "18" : "40") + " 20% 100%-105" + (expanded ? "" : "-205");
 }
  
-function setListBoxesUnselected()
+function setGameListBoxUnselected(cancelHotkeyFunctionIndex)
 {
-	if (Engine.GetGUIObjectByName("gameList").selected == -1 &&
-		Engine.GetGUIObjectByName("playerList").selected == -1)
+	if (Engine.GetGUIObjectByName("gameList").selected == -1)
 		return false;
 	Engine.GetGUIObjectByName("gameList").selected = -1;
+	g_SelectedGameIP = "";
+	g_SelectedGamePort = "";
+	clearGameSelectionTooltip(false);
+
+	g_CancelHotkey.splice(cancelHotkeyFunctionIndex, 1);
+	return true;
+}
+
+function setPlayerListBoxUnselected(cancelHotkeyFunctionIndex)
+{
+	if (Engine.GetGUIObjectByName("playerList").selected == -1)
+		return false;
 	Engine.GetGUIObjectByName("playerList").selected = -1;
+	g_SelectedPlayer = null;
 	setLeftPanelExpanded(true);
+	clearPlayerSelectionTooltip(false);
+
+	g_CancelHotkey.splice(cancelHotkeyFunctionIndex, 1);
 	return true;
 }
 
@@ -1392,11 +1427,13 @@ function updateGameList()
 			if (player.Team != "observer")
 				playerRatings.push(playerNickRating.rating || g_DefaultLobbyRating);
 
+			game.hasUser = game.hasUser || multiplayerName(g_Username) == playerNickRating.nick || playerNickRating.nick == g_Username;
+
+			if (game.hasUser)
+				game.hasBuddies = 3;
 			// Sort games with playing buddies above games with spectating buddies
 			if (game.hasBuddies < 2 && g_Buddies.indexOf(playerNickRating.nick) != -1)
 				game.hasBuddies = player.Team == "observer" ? 1 : 2;
-
-			game.hasUser = game.hasUser || playerNickRating.nick == g_Username;
 		}
 
 		game.gameRating =
@@ -1411,15 +1448,11 @@ function updateGameList()
 	}).filter(game => !filterGame(game)).sort((a, b) => {
 		for (let sort of g_GamesSort)
 		{
-			// keep user games priored first/last
-			if (a.hasUser) return -sort.order;
-			if (b.hasUser) return +sort.order;
-
 			if (gamesBox["hidden_" + sort.name])
 				continue;
-
+				// (obj.hasBuddies || obj.hasUser == g_Username ? 1 : 2),
 			let ret = cmpObjs(a, b, sort.name, {
-				'buddy': obj => String(obj.hasBuddies),
+				'buddy': obj => obj.hasBuddies,
 				'name': obj => g_GameStatusOrder.indexOf(obj.state) + obj.name.toLowerCase(),
 				'mapName': obj => translate(obj.niceMapName),
 				'nPlayers':	obj => obj.maxnbp
@@ -1458,7 +1491,7 @@ function updateGameList()
 			g_GameColors[game.state].style)
 			: "");
 
-		list_name.push(setStringTags(gameName, highlightedBuddy && game.hasUser ? g_UserStyle :
+		list_name.push(setStringTags(gameName, fgod ? { "color": "yellow" } : highlightedBuddy && game.hasUser ? g_UserStyle :
 			highlightedBuddy && game.hasBuddies ? g_GameColors[game.state].buddyStyle : g_GameColors[game.state].style));
 		list_mapName.push(translateMapTitle(game.niceMapName));
 		list_mapSize.push(translateMapSize(game.mapSize));
@@ -1537,6 +1570,11 @@ function updateGameSelection()
 	Engine.GetGUIObjectByName("sgMapDescription").caption = mapData.description;
 
 	setMapPreviewImage("sgMapPreview", mapData.preview);
+	clearGameSelectionTooltip(true);
+
+	if (!g_SelectedGameIP)
+		g_CancelHotkey.splice(2, 0, setGameListBoxUnselected)
+	g_SelectedGameIP = "1";
 }
 
 function selectedGame()

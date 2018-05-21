@@ -1,4 +1,4 @@
-# fgod mod v1.6.3 for 0 A. D. version A23
+# fgod mod v1.6.4 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -75,7 +75,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 - 1.6.3 BUGFIX
+v1.6 - 1.6.4 BUGFIX
 
 	General:
 
@@ -90,6 +90,9 @@ v1.6 - 1.6.3 BUGFIX
 
 		Ask connecting to host with real account when multiplayer name is different
 		and lobby authentification is enabled on host.
+
+		Better deselection support of player and game list, by having tooltip showing
+		escape hotkey and seperate deseletion when hitting escape.
 
 
 	In-Game:
