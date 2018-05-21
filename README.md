@@ -1,4 +1,4 @@
-# fgod mod v1.6 for 0 A. D. version A23
+# fgod mod v1.6.1 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -55,7 +55,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 BUGFIX
+v1.6 - 1.6.1 BUGFIX
 
 	General:
 
