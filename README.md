@@ -11,7 +11,14 @@ Report Feedback/Bugs:
 
 Install:
 
-	Click Green Button "Clone or download" on top page of https://github.com/fraizy22/fgodmod
+	For fast updates and easy install get a git tool to clone that repository for your OS:
+
+		Linux:
+			cd  ~/.local/share/0ad/mods && git clone https://github.com/fraizy22/fgodmod fgod
+		and update
+			cd  ~/.local/share/0ad/mods/fgod && git pull			
+
+	Or click Green Button "Clone or download" on top page of https://github.com/fraizy22/fgodmod
 
 	and click download as zip.
 
@@ -20,7 +27,7 @@ Install:
 		https://github.com/fraizy22/fgodmod/archive/master.zip
 
 
-	Put the content files of the zip into a folder name "fgod" under path:
+	Unzip the content files of the zip into a folder name "fgod" or clone the git into "fgod" under path:
 
 		Linux:
 			 ~/.local/share/0ad/mods
@@ -37,7 +44,7 @@ Install:
 
 		or read paths from https://trac.wildfiregames.com/wiki/GameDataPaths.
 
-	So you have path on linux f.e. ~/.local/share/0ad/mods/fgod/mod.json.
+	So you have files like 0ad/mods/fgod/mod.json ....
 
 	Start game, open Settings -> Mod Selection -> Select fgod -> hit Enable Button -> Hit
 	Save Configuration -> Hit Start Mods
