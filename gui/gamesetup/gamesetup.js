@@ -1955,7 +1955,7 @@ function loadPersistMatchSettings()
 		return;
 
 	if (data.engine_info.engine_version != g_EngineInfo.engine_version ||
-	    !hasSameMods(data.engine_info.mods, g_EngineInfo.mods.filter(mod => mod[0] != "fgod")))
+	    !hasSameMods(data.engine_info.mods, g_EngineInfo.mods))
 		return;
 
 	g_IsInGuiUpdate = true;
@@ -2806,7 +2806,7 @@ function sendRegisterGameStanzaImmediate()
 		"players": clients.list,
 		"stunIP": g_StunEndpoint ? g_StunEndpoint.ip : "",
 		"stunPort": g_StunEndpoint ? g_StunEndpoint.port : "",
-		"mods": JSON.stringify(g_EngineInfo.mods.filter(mod => mod[0] != "fgod")),
+		"mods": JSON.stringify(g_EngineInfo.mods),
 	};
 
 	// Only send the stanza if the relevant settings actually changed

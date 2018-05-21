@@ -33,8 +33,8 @@ var g_LastAutoComplete = {
 
 function hasSameMods(modsA, modsB)
 {
-    let mods1 = modsA.filter(mod => !mod.startsWith("fgod"));
-    let mods2 = modsB.filter(mod => !mod.startsWith("fgod"));
+    let mods1 = modsA.filter(mod => !mod[0].startsWith("fgod"));
+    let mods2 = modsB.filter(mod => !mod[0].startsWith("fgod"));
 
 	if (!mods1 || !mods2 || mods1.length != mods2.length)
 		return false;
@@ -337,14 +337,14 @@ function changeGUIListSort(guiListObj, sorts, config)
  */
 function cmpObjs(objA, objB, attribute, attributeTranslation, order)
 {
-	let cmp = attribute in attributeTranslation ? obj => attributeTranslation[attribute](obj) : obj[attribute] || 0;
+	let cmp = attribute in attributeTranslation ? obj => attributeTranslation[attribute](obj) : obj => obj[attribute] || 0;
 
 	let cmpA = cmp(objA);
 	let cmpB = cmp(objB);
 
 	if (typeof cmpA == "string" && typeof cmpB == "string")
 		return order * cmpA.localeCompare(cmpB, g_Localization);
-		// warn(cmpA + " " + objA.name + "|" + cmpB + " " + objB.name)
+
 	if (cmpA < cmpB)
 		return -order;
 

@@ -1,8 +1,8 @@
 
 function hasSameMods(modsA, modsB)
 {
-    let mods1 = modsA.filter(mod => mod[0] != "fgod");
-    let mods2 = modsB.filter(mod => mod[0] != "fgod");
+    let mods1 = modsA.filter(mod =>!mod[0].startsWith("fgod"));
+    let mods2 = modsB.filter(mod =>!mod[0].startsWith("fgod"));
 
 	if (!mods1 || !mods2 || mods1.length != mods2.length)
 		return false;

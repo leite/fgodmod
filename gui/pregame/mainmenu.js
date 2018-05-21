@@ -14,6 +14,8 @@ var g_BackgroundLayerset;
 
 var g_T0 = Date.now();
 var g_LastTickTime = Date.now();
+const g_EngineInfo = Engine.GetEngineInfo();
+warn("2" + uneval(g_EngineInfo.mods.filter(mod => !mod[0].startsWith("fgod"))))
 
 
 function setDefaultUserConfs()

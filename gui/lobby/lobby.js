@@ -1422,10 +1422,7 @@ function updateGameList()
 				'buddy': obj => String(obj.hasBuddies),
 				'name': obj => g_GameStatusOrder.indexOf(obj.state) + obj.name.toLowerCase(),
 				'mapName': obj => translate(obj.niceMapName),
-				'nPlayers':	obj => obj.maxnbp,
-				'mapSize': obj => obj.mapSize,
-				'mapType': obj => obj.mapType,
-				'gameRating': obj => obj.gameRating
+				'nPlayers':	obj => obj.maxnbp
 			}, sort.order);
 
 			if (ret)
@@ -1567,7 +1564,7 @@ function joinButton()
 		messageBox(
 			400, 200,
 			translate("Your active mods do not match the mods of this game.") + "\n\n" +
-				comparedModsString(JSON.parse(game.mods), g_EngineInfo.mods.filter(mod => mod[0] != "fgod")) + "\n\n" +
+				comparedModsString(JSON.parse(game.mods), g_EngineInfo.mods) + "\n\n" +
 				translate("Do you want to switch to the mod selection page?"),
 			translate("Incompatible mods"),
 			[translate("No"), translate("Yes")],

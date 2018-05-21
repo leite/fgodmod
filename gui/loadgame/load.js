@@ -108,7 +108,7 @@ function selectionChanged()
 	Engine.GetGUIObjectByName("savedVictory").caption = metadata.initAttributes.settings.VictoryConditions.map(victoryConditionName => translateVictoryCondition(victoryConditionName)).join(translate(", "));
 
 	let caption = sprintf(translate("Mods: %(mods)s"), { "mods": modsToString(metadata.mods) });
-	if (!hasSameMods(metadata.mods, Engine.GetEngineInfo().mods.filter(mod => mod[0] != "fgod")))
+	if (!hasSameMods(metadata.mods, Engine.GetEngineInfo().mods))
 		caption = coloredText(caption, "orange");
 	Engine.GetGUIObjectByName("savedMods").caption = caption;
 
