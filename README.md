@@ -1,4 +1,4 @@
-# fgod mod v1.6.2 for 0 A. D. version A23
+# fgod mod v1.6.3 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -66,7 +66,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 - 1.6.2 BUGFIX
+v1.6 - 1.6.3 BUGFIX
 
 	General:
 
@@ -78,6 +78,9 @@ v1.6 - 1.6.2 BUGFIX
 	Lobby:
 
 		Bug fix for errors obj in gamelist update.
+
+		Ask connecting to host with real account when multiplayer name is different
+		and lobby authentification is enabled on host.
 
 
 	In-Game:

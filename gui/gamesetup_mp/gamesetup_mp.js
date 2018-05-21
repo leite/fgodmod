@@ -181,8 +181,7 @@ function pollAndHandleNetworkClient()
 				switch (message.status)
 				{
 				case "disconnected":
-					cancelSetup();
-					reportDisconnect(message.reason, false);
+					reconnectWithAccountName(message);
 					return;
 
 				default:
@@ -260,8 +259,7 @@ function pollAndHandleNetworkClient()
 					return; // don't process any more messages - leave them for the game GUI loop
 
 				case "disconnected":
-					cancelSetup();
-					reportDisconnect(message.reason, false);
+					reconnectWithAccountName(message);
 					return;
 
 				default:
@@ -404,4 +402,38 @@ function getDefaultGameName()
 	return sprintf(translate("%(playername)s's game"), {
 		"playername": multiplayerName()
 	});
+}
+
+function reconnectWithAccountName(message)
+{
+	let disconnect = () => {
+		cancelSetup();
+		reportDisconnect(message.reason, false);
+	};
+
+	let join = () => {
+		if (g_IsConnecting)
+			Engine.DisconnectNetworkGame();
+		g_IsConnecting= false;
+		if (startJoin(g_PlayerName, g_ServerIP, getValidPort(g_ServerPort), g_UseSTUN, g_HostJID))
+			switchSetupPage("pageConnecting");
+		else
+			disconnect();
+	}
+
+	if (message.reason == 9 && Engine.HasXmppClient() && g_PlayerName != Engine.LobbyGetNick())
+	{
+		g_PlayerName = Engine.LobbyGetNick();
+
+		messageBox(
+			400, 200,
+			translate("Secure lobby authentication failed, do you want to join with your real account name \""+ g_PlayerName+"\"?"),
+			translate("Confirmation"),
+			[translate("No"), translate("Yes")],
+			[disconnect, join]
+		);
+
+	}
+	else 
+		disconnect();
 }
