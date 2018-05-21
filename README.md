@@ -11,6 +11,15 @@ Report Feedback/Bugs:
 
 Install:
 
+	You only need fgod.pyromod file:
+		https://github.com/fraizy22/fgodmod/raw/master/fgod.pyromod
+
+	Drag & Drop this file over 0ad start icon or start. It will start the mod. Hit Save 		and Start mods.
+
+	Or run 0ad fgod.pyromod from terminal within Download folder.
+
+	If fgod mod does not show up in the modlist go manually:
+
 	For fast updates and easy install get a git tool to clone that repository for your OS:
 
 		Linux:
