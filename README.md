@@ -34,10 +34,10 @@ Install:
 
 		Windows:
 			Vista or Newer:
-				C:\Users\JohnDoe\Documents\My Games\0ad\mods
+				C:\Users\username\Documents\My Games\0ad\mods
 
 			XP / 2000:
-				C:\Documents and Settings\JohnDoe\My Documents\My Games\0ad\mods
+				C:\Documents and Settings\username\My Documents\My Games\0ad\mods
 
 		OS X:
 			~/Library/Application\ Support/0ad/mods
