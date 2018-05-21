@@ -26,8 +26,12 @@ Install:
 		
 		https://github.com/fraizy22/fgodmod/archive/master.zip
 
+	Try unzip file fgod.pyromod and drag it onto 0ad icon, so that 0ad start. Then go Settings ->
+	Mod Selection and look if fgod mod appear.
 
-	Unzip the content files of the zip into a folder name "fgod" or clone the git into "fgod" under path:
+	If not working go:
+
+	Unzip all the content files of the zip into a folder name "fgod" or clone the git into "fgod" under path:
 
 		Linux:
 			 ~/.local/share/0ad/mods
