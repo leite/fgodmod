@@ -686,7 +686,13 @@ function handleNetStatusMessage(message)
 		};
 		
 		if (message.reason == 0) // Connection lost
-			leaveRejoin();
+			messageBox(
+				400, 200,
+				translate("You have lost the connection to server, reconnect?"),
+				translate("Confirmation"),
+				[translate("No"), translate("Yes")],
+				[null, leaveRejoin]
+			);
 		else if (message.reason == 5) // Kick
 			messageBox(
 				400, 200,
