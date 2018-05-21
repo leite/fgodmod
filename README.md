@@ -1,4 +1,4 @@
-# fgod mod v1.6.1 for 0 A. D. version A23
+# fgod mod v1.6.2 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -62,7 +62,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 - 1.6.1 BUGFIX
+v1.6 - 1.6.2 BUGFIX
 
 	General:
 
@@ -74,6 +74,11 @@ v1.6 - 1.6.1 BUGFIX
 	Lobby:
 
 		Bug fix for errors obj in gamelist update.
+
+
+	In-Game:
+
+		Ask to reconnect on connection lost to server in multiplayer game.
 	
 
 v1.5
