@@ -23,7 +23,7 @@ var g_LobbyNetMessageTypeNotification = {
 	"chat": {
         "subject": msg => true,
         "role": msg => true,
-        "room-message": msg => msg.text.toLowerCase().indexOf(Engine.LobbyGetNick().toLowerCase()) != -1,
+        "room-message": msg => msg.text.toLowerCase().search(matchPlayerName(g_Username.toLowerCase())) != -1,
         "kicked": msg => msg.nick == Engine.LobbyGetNick(),
         "banned": msg => msg.nick == Engine.LobbyGetNick(),
         "private-message": msg => true
@@ -38,7 +38,10 @@ function handleNetLobbyMessagesInBackground()
         if (msg && g_LobbyNetMessageTypeNotification[msg.type] &&
             g_LobbyNetMessageTypeNotification[msg.type][msg.level] &&
             g_LobbyNetMessageTypeNotification[msg.type][msg.level](msg))
+        {
             g_UpdateLobbyNotification(true);
+            soundNotification("nick");
+        }
     }
 }
 

@@ -214,7 +214,13 @@ function escapeRegExp(string) {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 
+function matchPlayerName(name)
+{
+	let escapeRegExp2 = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+	return new RegExp('(^|\\W)(' + escapeRegExp2(name) + ')\(?=\\W|$\)', "g");
+}
+
 function colorizeNameInText(text, name, color)
 {
-	return text.replace(new RegExp('(^|\\W)(' + escapeRegExp(name) + ')\(?=\\W|$\)', "g"), "\$1" + coloredText("\$2", color));
+	return text.replace(matchPlayerName(name), "\$1" + coloredText("\$2", color));
 }
