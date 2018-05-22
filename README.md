@@ -1,4 +1,4 @@
-# fgod mod v1.6.5 for 0 A. D. version A23
+# fgod mod v1.6.6 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -98,6 +98,8 @@ v1.6 - 1.6.5 BUGFIX
 		escape hotkey and seperate deseletion when hitting escape.
 
 		Better show rating column from players, better viewable (also in dialog).
+
+		compa fix.
 
 
 	In-Game:
