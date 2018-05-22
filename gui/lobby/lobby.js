@@ -1491,6 +1491,7 @@ function updateGameList()
 			g_GameColors[game.state].style)
 			: "");
 
+		let fgod = JSON.parse(game.mods).some(mod => mod[0].startsWith("fgod"));
 		list_name.push(setStringTags(gameName, fgod ? { "color": "yellow" } : highlightedBuddy && game.hasUser ? g_UserStyle :
 			highlightedBuddy && game.hasBuddies ? g_GameColors[game.state].buddyStyle : g_GameColors[game.state].style));
 		list_mapName.push(translateMapTitle(game.niceMapName));

@@ -1,4 +1,4 @@
-# fgod mod v1.6.4 for 0 A. D. version A23
+# fgod mod v1.6.5 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -78,7 +78,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 - 1.6.4 BUGFIX
+v1.6 - 1.6.5 BUGFIX
 
 	General:
 
@@ -96,6 +96,8 @@ v1.6 - 1.6.4 BUGFIX
 
 		Better deselection support of player and game list, by having tooltip showing
 		escape hotkey and seperate deseletion when hitting escape.
+
+		Better show rating column from players, better viewable (also in dialog).
 
 
 	In-Game:
