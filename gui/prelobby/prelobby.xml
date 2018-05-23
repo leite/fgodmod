@@ -12,6 +12,10 @@
 		</action>
 	</object>
 
+	<object hotkey="focustextinput">
+		<action on="Press">cycleFocus();</action>
+	</object>
+
 	<!-- Add a translucent black background to fade out the menu page -->
 	<object type="image" z="0" sprite="BackgroundTranslucent"/>
 
@@ -46,6 +50,9 @@
 				<action on="Load">
 					this.caption = Engine.ConfigDB_GetValue("user", "lobby.login");
 				</action>
+				<action on="Tab">
+					cycleFocus();
+				</action>
 			</object>
 			<object name="connectPasswordLabel" type="text" size="20 80 50% 110" style="ModernRightLabelText">
 				<translatableAttribute id="caption">Password:</translatableAttribute>
@@ -57,6 +64,9 @@
 				</action>
 				<action on="Press">
 					lobbyStartConnect();
+				</action>
+				<action on="Tab">
+					cycleFocus();
 				</action>
 			</object>
 			<object name="rememberPassword" type="checkbox" size="50%-19 115 50% 135" style="ModernTickBox">

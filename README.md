@@ -121,6 +121,8 @@ v1.6 - 1.6.11 BUGFIX
 
 		Remember hosting game name.
 
+		Tab support text input in lobby login.
+
 
 	In-Game:
 

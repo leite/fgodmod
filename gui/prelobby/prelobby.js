@@ -5,6 +5,11 @@ var g_TermsOfServiceRead = false;
 var g_TermsOfUseRead = false;
 var g_DisplayingSystemMessage = false;
 
+var textInputFocus = {
+	id: 0,
+	list: ["connectUsername", "connectPassword"]
+}
+
 function init(initData)
 {
 	Engine.GetGUIObjectByName("rememberPassword").checked =
@@ -261,6 +266,12 @@ function switchPage(page)
 		Engine.GetGUIObjectByName("continue").hidden = false;
 		break;
 	}
+}
+
+function cycleFocus()
+{
+	textInputFocus.id = (textInputFocus.id + 1 + textInputFocus.list.length) % textInputFocus.list.length;
+	Engine.GetGUIObjectByName(textInputFocus.list[textInputFocus.id]).focus();
 }
 function openTermsOfService()
 {
