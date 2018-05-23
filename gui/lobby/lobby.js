@@ -1438,8 +1438,9 @@ function updateGameList()
 
 	if (gamesBox.selected > -1)
 	{
-		g_SelectedGameIP = game.stunIP ? g_GameList[gamesBox.selected].stunIP : g_GameList[gamesBox.selected].ip;
-		g_SelectedGamePort = game.stunIP ? g_GameList[gamesBox.selected].stunPort : g_GameList[gamesBox.selected].port;
+		let game = g_GameList[gamesBox.selected];
+		g_SelectedGameIP = game.stunIP ? game.stunIP : game.ip;
+		g_SelectedGamePort = game.stunPort ? game.stunPort : game.port;
 	}
 
 	g_GameList = Engine.GetGameList().map(game => {

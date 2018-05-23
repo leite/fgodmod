@@ -121,6 +121,7 @@ function confirmSetup()
 	{
 		let hostPlayerName = Engine.GetGUIObjectByName("hostPlayerName").caption;
 		g_PlayerName = hostPlayerName;
+
 		let hostServerName = Engine.GetGUIObjectByName("hostServerName").caption;
 
 		let hostPort = Engine.GetGUIObjectByName("hostPort").caption;
@@ -312,7 +313,7 @@ function startHost(playername, servername, port)
 	saveSettingAndWriteToUserConfig("multiplayerhosting.port", port);
 
 	if (servername)
-	saveSettingAndWriteToUserConfig("host.gamename", servername);
+		saveSettingAndWriteToUserConfig("host.gamename", servername);
 
 	let hostFeedback = Engine.GetGUIObjectByName("hostFeedback");
 
@@ -337,6 +338,9 @@ function startHost(playername, servername, port)
 	}
 
 	let useLobbyAuth = Engine.HasXmppClient() && Engine.GetGUIObjectByName("useLobbyAuth").checked;
+	if (useLobbyAuth)
+		playername = Engine.LobbyGetNick();
+
 	try
 	{
 		Engine.StartNetworkHost(playername + (g_UserRating ? " (" + g_UserRating + ")" : ""), port, playername, useLobbyAuth);
