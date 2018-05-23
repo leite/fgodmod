@@ -72,6 +72,7 @@
 			style="StoneButtonFancy"
 			size="0 160 100% 188"
 			tooltip_style="sessionToolTip"
+			hotkey="options"
 		>
 			<translatableAttribute id="caption">Options</translatableAttribute>
 			<action on="Press">optionsMenuButton();</action>

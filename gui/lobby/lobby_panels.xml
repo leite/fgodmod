@@ -16,6 +16,14 @@
 		<action on="Press">showLastGameSummary();</action>
 	</object>
 
+	<object hotkey="structree">
+		<action on="Press">Engine.PushGuiPage("page_structree.xml");</action>
+	</object>
+
+	<object hotkey="options">
+		<action on="Press">openGameOptions();</action>
+	</object>
+
 	<object hotkey="focustextinput">
 		<action on="Press">Engine.GetGUIObjectByName("chatInput").focus();</action>
 	</object>

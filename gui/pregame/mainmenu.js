@@ -22,6 +22,7 @@ function setDefaultUserConfs()
 	let values = {
 		"hotkey": { 
 			close: "Shift+Escape",
+			options: "Alt+O",
 			focustextinput: "tab" },
 		"gui": {
 		startintolobby: false 

@@ -8,6 +8,10 @@
 	<!-- Add a translucent black background to fade out the menu page -->
 	<object type="image" sprite="BackgroundTranslucent"/>
 
+	<object hotkey="options">
+		<action on="Press">closePage();</action>
+	</object>
+
 	<!-- Settings Window -->
 	<object name="options" type="image" style="ModernDialog" size="50%-350 50%-332 50%+350 50%+332">
 

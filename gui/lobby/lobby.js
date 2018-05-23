@@ -189,6 +189,7 @@ var g_SelectedGameIP = "";
  * Used to restore the selection after updating the gamelist.
  */
 var g_SelectedGamePort = "";
+var g_SelectedGameName = "";
 
 /**
  * Whether the current user has been kicked or banned.
@@ -220,13 +221,18 @@ var g_OptionsPage = "Lobby";
  */
 var g_MoreButtonsBarFuncs = {
 	"Replays": () => Engine.PushGuiPage("page_replaymenu.xml", { "ingame": g_InGame, "dialog": true, "callback": "startReplay" }),
-	"Last Summary": () => showLastGameSummary(),
-	"Civilizations": () => Engine.PushGuiPage("page_structree.xml"),
-	"Options": () => Engine.PushGuiPage("page_options.xml", {
+	"Last Summary": { "func": showLastGameSummary, "tooltip": "Show complete last " + setStringTags("summary", { "color": "yellow" }) + " (if not disconnected during game)." },
+	"Civilizations": { "func": () => Engine.PushGuiPage("page_structree.xml"), "tooltip": colorizeHotkey("Press %(hotkey)s to open structure tree.", "structree") },
+	"Options": { "func": openGameOptions, "tooltip": colorizeHotkey("Press %(hotkey)s to open options.", "options") }
+};
+
+function openGameOptions()
+{
+	Engine.PushGuiPage("page_options.xml", {
 		"selectedCategory": g_OptionsPage || "Lobby",
 		"callback": "initUserConfigurables"
 	})
-};
+}
 
 /**
  * Processing of notifications sent by XmppClient.cpp.
@@ -524,6 +530,11 @@ function init(attribs = {})
 {
 	g_Dialog = !!attribs.dialog;
 	g_InGame = !!attribs.ingame;
+	g_SelectedGameIP = !!attribs.game_ip ? attribs.game_ip : "";
+	g_SelectedGamePort = !!attribs.game_port ? attribs.game_port : "";
+	g_SelectedGameName = !!attribs.game_name ? attribs.game_name : "";
+	if (g_SelectedGameIP || g_SelectedGameName)
+		g_CancelHotkey.splice(2, 0, setGameListBoxUnselected)
 
 	if (!g_Settings)
 	{
@@ -704,8 +715,10 @@ function initGUIMoreButtonsBar()
 		// Let gap "+2" between buttons and calculate size to fit space
 		button.size = j * buttonWidthPercentton + "%" + (j > 0 ? "+2" : "") + " 100%-25 " +
 			((j + 1) * buttonWidthPercentton) + "%" + " 100%";
+
 		button.caption = i;
-		button.onpress = g_MoreButtonsBarFuncs[i];
+		button.onpress = g_MoreButtonsBarFuncs[i].func || g_MoreButtonsBarFuncs[i];
+		button.tooltip = g_MoreButtonsBarFuncs[i].tooltip || "";
 	}
 }
 
@@ -1476,15 +1489,18 @@ function updateGameList()
 	let list = [];
 	let list_data = [];
 	let selectedGameIndex = -1;
-
+	
 	for (let i in g_GameList)
 	{
 		let game = g_GameList[i];
 		let gameName = escapeText(game.name);
 		let mapTypeIdx = g_MapTypes.Name.indexOf(game.mapType);
 
-		if (game.ip == g_SelectedGameIP && game.port == g_SelectedGamePort)
+		if ((g_SelectedGameName && game.name == g_SelectedGameName) || (game.stunIP && (game.stunIP == g_SelectedGameIP && game.stunPort == g_SelectedGamePort)) || (!game.stunIP && (game.ip == g_SelectedGameIP && game.port == g_SelectedGamePort)))
+		{
 			selectedGameIndex = +i;
+			g_SelectedGameName = "";
+		}
 
 		list_buddy.push(game.hasBuddies || game.hasUser ? setStringTags(
 			game.hasUser ? g_UserSymbol : g_BuddySymbol,

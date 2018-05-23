@@ -164,6 +164,14 @@ function init(data)
 	initGUIButtons();
 
 	selectPanel(Engine.GetGUIObjectByName(g_SelectedPanel));
+	
+	Engine.GetGUIObjectByName("summaryWindow").tooltip = sprintf(translate("Use %(hotkey_next1)s / %(hotkey_next2)s to move to next tab.\n"), {
+		"hotkey_next1":  setStringTags("\\[MouseWheelUp]", g_HotkeyTags),
+		"hotkey_next2": colorizeHotkey("%(hotkey)s", "tab.next") }) +
+			sprintf(
+			translate("Use %(hotkey_next1)s / %(hotkey_next2)s to move to previous tab."), {
+			"hotkey_next1": setStringTags("\\[MouseWheelDown]", g_HotkeyTags),
+			"hotkey_next2": colorizeHotkey("%(hotkey)s", "tab.prev") });
 	for (let button of g_PanelButtons.concat(["summaryWindow"]))
 	{
 		let tab = Engine.GetGUIObjectByName(button);

@@ -1049,7 +1049,7 @@ var g_MiscControls = {
 
 			setLobbyButtonIcon(false);
 			g_LobbyDialogOpened = true;
-			Engine.PushGuiPage("page_lobby.xml", { "dialog": true, "ingame": true, "callback": "lobbyDialogClosed" });
+			Engine.PushGuiPage("page_lobby.xml", { "game_ip": g_ServerIP, "game_port": g_ServerPort, "game_name": g_ServerName, "dialog": true, "ingame": true, "callback": "lobbyDialogClosed" });
 		},
 		"hidden": () => !Engine.HasXmppClient()
 	},
@@ -2366,6 +2366,7 @@ function launchGame()
 
 	// Used for identifying rated game reports for the lobby
 	g_GameAttributes.matchID = Engine.GetMatchID();
+	g_GameAttributes.gameName = g_ServerName || "";
 
 	if (g_IsNetworked)
 	{

@@ -80,7 +80,7 @@ var g_SummarySelectedData;
 var g_FlushTributing = function() {};
 
 // Remember last options page
-var g_OptionsPage;
+var g_OptionsPage = "In-Game";
 
 function initMenu()
 {
@@ -103,7 +103,7 @@ function setLobbyButtonIcon(notify)
 	if (notify)
 	{
 		menuButton.caption = sprintf(translate("%(menuButtonCaption)s%(notificationSign)s"), { "menuButtonCaption": menuButton.caption, "notificationSign": g_NofiticationSign });
-		menuButton.tooltip = translate("You have notifications.");
+		menuButton.tooltip = translate("You have " + setStringTags("lobby notifications", { "color": "yellow" }) + ".");
 		lobbyButton.caption = sprintf(translate("%(lobbyButtonCaption)s*"), { "lobbyButtonCaption": lobbyButton.caption, "notificationSign": g_NofiticationSign });
 	}
 }
@@ -158,7 +158,7 @@ function lobbyDialogButton()
 	closeOpenDialogs();
 	setLobbyButtonIcon(false);
 	g_LobbyDialogOpened = true;
-	Engine.PushGuiPage("page_lobby.xml", { "ingame": true, "dialog": true, "callback": "lobbyDialogClosed" });
+	Engine.PushGuiPage("page_lobby.xml", { "game_ip": g_ServerIP, "game_port": g_ServerPort, "game_name": g_ServerName, "ingame": true, "dialog": true, "callback": "lobbyDialogClosed" });
 }
 
 function lobbyDialogClosed(data)

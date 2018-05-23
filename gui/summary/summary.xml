@@ -7,7 +7,7 @@
 
 	<object hotkey="cancel">
 		<action on="Press">
-		if (g_GameData.gui.isInGame)
+		if (g_GameData.gui.isInGame || g_GameData.gui.dialog)
 			continueButton();
 		</action>
 	</object>

@@ -261,6 +261,7 @@ var g_ServerPort;
 var g_UseSTUN;
 var g_HostJID;
 var g_PlayerName;
+var g_ServerName = "";
 
 function init(initData, hotloadData)
 {
@@ -270,11 +271,14 @@ function init(initData, hotloadData)
 		Engine.SwitchGuiPage("page_pregame.xml");
 		return;
 	}
-
+	Engine.GetGUIObjectByName("optionsButton").tooltip = colorizeHotkey("Press %(hotkey)s to open options.", "options");
+	Engine.GetGUIObjectByName("lobbyButton").tooltip = colorizeHotkey("Press %(hotkey)s to open lobby.", "lobby");
+	
 	g_ServerIP = initData.serverIP;
 	g_ServerPort = initData.serverPort;
 	g_UseSTUN = initData.useSTUN;
 	g_HostJID = initData.hostJID;
+	g_ServerName = !!initData.attribs && !!initData.attribs.gameName && initData.attribs.gameName;
 	g_PlayerName = !!initData.playerName ? initData.playerName : "";
 
 	// Fallback used by atlas
