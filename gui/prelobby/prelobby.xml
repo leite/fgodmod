@@ -50,6 +50,9 @@
 				<action on="Load">
 					this.caption = Engine.ConfigDB_GetValue("user", "lobby.login");
 				</action>
+				<action on="Press">
+					lobbyStartConnect();
+				</action>
 				<action on="Tab">
 					cycleFocus();
 				</action>
