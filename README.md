@@ -78,7 +78,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 - 1.6.8 BUGFIX
+v1.6 - 1.6.9 BUGFIX
 
 	General:
 
