@@ -21,6 +21,7 @@ function init(initData)
 		if (initData && initData.connect)
 			lobbyStartConnect();
 	}
+	cycleFocus();
 }
 
 function lobbyStop()
@@ -270,8 +271,8 @@ function switchPage(page)
 
 function cycleFocus()
 {
-	textInputFocus.id = (textInputFocus.id + 1 + textInputFocus.list.length) % textInputFocus.list.length;
 	Engine.GetGUIObjectByName(textInputFocus.list[textInputFocus.id]).focus();
+	textInputFocus.id = (textInputFocus.id + 1 + textInputFocus.list.length) % textInputFocus.list.length;
 }
 function openTermsOfService()
 {
