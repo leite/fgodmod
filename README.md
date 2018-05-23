@@ -1,4 +1,4 @@
-# fgod mod v1.6.10 for 0 A. D. version A23
+# fgod mod v1.6.11 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -78,7 +78,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 - 1.6.10 BUGFIX
+v1.6 - 1.6.11 BUGFIX
 
 	General:
 
@@ -118,6 +118,8 @@ v1.6 - 1.6.10 BUGFIX
 		Hotkey structure tree in lobby morebuttons.
 
 		Select game when in lobby dialog.
+
+		Remember hosting game name.
 
 
 	In-Game:

@@ -362,8 +362,10 @@
 				<object
 					style="StoneButtonFancy"
 					type="button"
+					name="optionsButton"
 					size="0 0 100% 28"
 					tooltip_style="pgToolTip"
+					hotkey="options"
 				>
 					<translatableAttribute id="caption">Options</translatableAttribute>
 					<translatableAttribute id="tooltip">Adjust game settings.</translatableAttribute>

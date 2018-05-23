@@ -20,6 +20,9 @@ const g_EngineInfo = Engine.GetEngineInfo();
 function setDefaultUserConfs()
 {
 	let values = {
+		"host": { 
+			gamename: ""
+		},
 		"hotkey": { 
 			close: "Shift+Escape",
 			options: "Alt+O",
@@ -128,6 +131,9 @@ function init(initData, hotloadData)
 	Engine.GetGUIObjectByName("lobbyButton").tooltip = colorizeHotkey(
 		translate("%(hotkey)s: Launch the multiplayer lobby to join and host publicly visible games and chat with other players."),
 		"lobby");
+	Engine.GetGUIObjectByName("optionsButton").tooltip = colorizeHotkey(
+		translate("%(hotkey)s: Adjust game settings."),
+		"options");
 
 	if (initData && initData.isStartup && Engine.ConfigDB_GetValue("user", "gui.startintolobby") === "true")
 		Engine.PushGuiPage("page_prelobby.xml", { "connect" : true });

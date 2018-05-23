@@ -58,11 +58,11 @@ function init(attribs)
 	{
 		Engine.GetGUIObjectByName("hostSTUNWrapper").hidden = !Engine.HasXmppClient();
 		Engine.GetGUIObjectByName("hostLobbyAuthWrapper").hidden = !Engine.HasXmppClient();
+		Engine.GetGUIObjectByName("hostServerName").caption = Engine.ConfigDB_GetValue("user", "host.gamename") ||
+			sprintf(translate("%(name)s's game"), { "name": attribs.name });
 		if (Engine.HasXmppClient())
 		{
 			Engine.GetGUIObjectByName("hostPlayerName").caption = multiplayerName(attribs.name);
-			Engine.GetGUIObjectByName("hostServerName").caption =
-				sprintf(translate("%(name)s's game"), { "name": attribs.name });
 
 			Engine.GetGUIObjectByName("useSTUN").checked = Engine.ConfigDB_GetValue("user", "lobby.stun.enabled") == "true";
 			Engine.GetGUIObjectByName("useLobbyAuth").checked = Engine.ConfigDB_GetValue("user", "lobby.secureauth") == "true";
@@ -122,6 +122,7 @@ function confirmSetup()
 		let hostPlayerName = Engine.GetGUIObjectByName("hostPlayerName").caption;
 		g_PlayerName = hostPlayerName;
 		let hostServerName = Engine.GetGUIObjectByName("hostServerName").caption;
+
 		let hostPort = Engine.GetGUIObjectByName("hostPort").caption;
 
 		if (!hostServerName)
@@ -309,6 +310,9 @@ function startHost(playername, servername, port)
 	// saveSettingAndWriteToUserConfig("playername.multiplayer", playername);
 
 	saveSettingAndWriteToUserConfig("multiplayerhosting.port", port);
+
+	if (servername)
+	saveSettingAndWriteToUserConfig("host.gamename", servername);
 
 	let hostFeedback = Engine.GetGUIObjectByName("hostFeedback");
 

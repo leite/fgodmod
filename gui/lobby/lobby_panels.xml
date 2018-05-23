@@ -17,7 +17,7 @@
 	</object>
 
 	<object hotkey="structree">
-		<action on="Press">Engine.PushGuiPage("page_structree.xml");</action>
+		<action on="Press">openCivInfo();</action>
 	</object>
 
 	<object hotkey="options">

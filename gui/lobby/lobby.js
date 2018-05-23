@@ -217,14 +217,27 @@ let g_CancelHotkey = [
 var g_OptionsPage = "Lobby";
 
 /**
+ * Store civilization code and page (structree or history) opened in civilization info.
+ */
+var g_CivInfo = {
+	"code": "",
+	"page": "page_civinfo.xml"
+};
+
+/**
  * List of more buttons bar below the chat input.
  */
 var g_MoreButtonsBarFuncs = {
 	"Replays": () => Engine.PushGuiPage("page_replaymenu.xml", { "ingame": g_InGame, "dialog": true, "callback": "startReplay" }),
 	"Last Summary": { "func": showLastGameSummary, "tooltip": "Show complete last " + setStringTags("summary", { "color": "yellow" }) + " (if not disconnected during game)." },
-	"Civilizations": { "func": () => Engine.PushGuiPage("page_structree.xml"), "tooltip": colorizeHotkey("Press %(hotkey)s to open structure tree.", "structree") },
+	"Civilizations": { "func": openCivInfo, "tooltip": colorizeHotkey("Press %(hotkey)s to open structure tree.", "structree") },
 	"Options": { "func": openGameOptions, "tooltip": colorizeHotkey("Press %(hotkey)s to open options.", "options") }
 };
+
+function openCivInfo()
+{
+	Engine.PushGuiPage(g_CivInfo.page, { "civ": g_CivInfo.code, "callback": "storeCivInfoPage" });
+}
 
 function openGameOptions()
 {
@@ -2092,4 +2105,11 @@ function showLastGameSummary()
 			"dialog": true },
 		"callback": "startReplay"
 	});
+}
+
+
+function storeCivInfoPage(data)
+{
+	g_CivInfo.code = data.civ;
+	g_CivInfo.page = data.page;
 }

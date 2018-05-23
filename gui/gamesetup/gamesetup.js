@@ -1162,8 +1162,9 @@ function setLobbyButtonIcon(notify)
 	Engine.GetGUIObjectByName("lobbyButton").sprite = notify ? "iconBubbleWhite" : "iconBubbleGold";
 
 	Engine.GetGUIObjectByName("lobbyButton").tooltip =
-		sprintf(translate("Show the multiplayer lobby in a dialog window. %(notification)s"), {
-			"notification": notify ? translate("(You have new lobby notifications.)") : ""
+		sprintf(translate("%(hotkey)s: Show the multiplayer lobby in a dialog window. %(notification)s"), {
+			"notification": notify ? sprintf(translate("(You have new lobby %(notification)s.)"), { "notification": setStringTags("notifications", { "color": "yellow"}) }) : "",
+			"hotkey": colorizeHotkey("%(hotkey)s", "lobby")
 	});
 
 	if (notify)
