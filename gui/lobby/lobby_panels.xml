@@ -15,6 +15,10 @@
 	<object hotkey="summary">
 		<action on="Press">showLastGameSummary();</action>
 	</object>
+
+	<object hotkey="focustextinput">
+		<action on="Press">Engine.GetGUIObjectByName("chatInput").focus();</action>
+	</object>
 	
 	<object hotkey="cancel">
 		<action on="Press">

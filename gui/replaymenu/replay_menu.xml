@@ -9,6 +9,10 @@
 
 	<object name="cancelHotkey" hotkey="cancel"/>
 
+	<object hotkey="focustextinput">
+		<action on="Press">Engine.GetGUIObjectByName("playersFilter").focus();</action>
+	</object>
+
 	<!-- Everything displayed in the replay menu. -->
 	<object type="image" style="ModernWindow" name="replayWindow">
 

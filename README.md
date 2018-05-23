@@ -1,4 +1,4 @@
-# fgod mod v1.6.8 for 0 A. D. version A23
+# fgod mod v1.6.9 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -88,6 +88,8 @@ v1.6 - 1.6.8 BUGFIX
 
 		Ping sound when in game and in gamesetup.
 
+		On hotkey "tab" focus text input in replay_menu/lobby.
+
 
 	Lobby:
 
@@ -104,6 +106,8 @@ v1.6 - 1.6.8 BUGFIX
 		compa fix.
 
 		Default sort update for lobby.
+
+		Default focus chat input in lobby dialog and on tab in normal lobby focus chat input.
 
 
 	In-Game:

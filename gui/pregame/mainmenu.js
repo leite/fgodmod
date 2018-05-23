@@ -20,7 +20,9 @@ const g_EngineInfo = Engine.GetEngineInfo();
 function setDefaultUserConfs()
 {
 	let values = {
-		"hotkey": { close: "Shift+Escape" },
+		"hotkey": { 
+			close: "Shift+Escape",
+			focustextinput: "tab" },
 		"gui": {
 		startintolobby: false 
 

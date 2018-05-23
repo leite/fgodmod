@@ -552,7 +552,7 @@ function init(attribs = {})
 	initUserConfigurables();
 
 	updateToggleBuddy();
-	Engine.GetGUIObjectByName("chatInput").tooltip = colorizeAutocompleteHotkey();
+	Engine.GetGUIObjectByName("chatInput").tooltip = colorizeAutocompleteHotkey("Press %(hotkey)s to focus chat input or cycle autocomplete playernames.");
 
 	// Get all messages since the login
 	for (let msg of Engine.LobbyGuiPollHistoricMessages())
@@ -624,6 +624,8 @@ function initDialogStyle()
 	{
 		Engine.GetGUIObjectByName("lobbyDialogToggle").onPress = leaveLobby;
 		g_CancelHotkey.push(leaveLobby);
+
+		Engine.GetGUIObjectByName("chatInput").focus();
 	}
 }
 
@@ -1029,7 +1031,7 @@ function updatePlayerList()
 
 			if (ret)
 				return ret																									;
-			// warn(a.name == g_Username ? g_Username : "");
+
 			// Keep user player on same sort data priored.
 			if (a.name == g_Username)
 				return -sort.order;
@@ -1038,7 +1040,7 @@ function updatePlayerList()
 		}
 		return 0;
 	});
-	print(uneval(g_PlayersSort) + "\n\n")
+
 	// Colorize list entries
 	for (let player of g_PlayerList)
 	{
