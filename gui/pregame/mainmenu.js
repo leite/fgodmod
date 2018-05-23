@@ -38,10 +38,11 @@ function setDefaultUserConfs()
 		gamessort: "date:-1,mapName:1,mapType:1,description:1"
 
 			},"lobby": {
-		highlightbuddies: "false",       
+		highlightbuddies: "true",       
 		autoawaytime: "5"               ,   
 		presenceselection: "available_awaytime" ,
-		secureauth: "false"
+		secureauth: "false",
+		history: "20"
 
 		},"lobby.statuscolors.games": {
 		init: "0 219 0",
@@ -107,7 +108,10 @@ function init(initData, hotloadData)
 
 	// If no default settings setted assume we can once set secureauth to false
 	if (oneNotFound)
+	{
 		saveSettingAndWriteToUserConfig("lobby.secureauth", "false");
+		saveSettingAndWriteToUserConfig("lobby.history", "20");
+	}
 
 	global.music.setState(global.music.states.MENU);
 
