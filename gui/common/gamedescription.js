@@ -30,7 +30,7 @@ function splitRatingFromNick(playerName)
  */
 function multiplayerName(username)
 {
-	let multiplayerName = Engine.ConfigDB_GetValue("user", "playername.multiplayer");
+	let multiplayerName = Engine.ConfigDB_GetValue("user", "playername.multiplayer") || Engine.GetSystemUsername();
 	return !username ? multiplayerName : multiplayerName != username ? multiplayerName + " (" + username + ")" : username;
 }
 

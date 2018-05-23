@@ -58,8 +58,8 @@ function init(attribs)
 	{
 		Engine.GetGUIObjectByName("hostSTUNWrapper").hidden = !Engine.HasXmppClient();
 		Engine.GetGUIObjectByName("hostLobbyAuthWrapper").hidden = !Engine.HasXmppClient();
-		Engine.GetGUIObjectByName("hostServerName").caption = Engine.ConfigDB_GetValue("user", "host.gamename") ||
-			sprintf(translate("%(name)s's game"), { "name": attribs.name });
+		let gamename = Engine.ConfigDB_GetValue("user", "host.gamename")|| sprintf(translate("%(name)s's game"), { "name": attribs.name });
+		Engine.GetGUIObjectByName("hostServerName").caption =  gamename ;
 		if (Engine.HasXmppClient())
 		{
 			Engine.GetGUIObjectByName("hostPlayerName").caption = multiplayerName(attribs.name);

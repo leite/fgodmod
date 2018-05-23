@@ -15,14 +15,12 @@ var g_BackgroundLayerset;
 var g_T0 = Date.now();
 var g_LastTickTime = Date.now();
 const g_EngineInfo = Engine.GetEngineInfo();
-
+var oneNotFound = false;
 
 function setDefaultUserConfs()
 {
 	let values = {
-		"host": { 
-			gamename: ""
-		},
+
 		"hotkey": { 
 			close: "Shift+Escape",
 			options: "Alt+O",
@@ -85,6 +83,7 @@ function setDefaultUserConfs()
 			{
 				// warn("Setting default value for user config " + key + "." + key2 + " = " + uneval(values[key][key2]));
 				saveSettingAndWriteToUserConfig(key + "." + key2, values[key][key2]);
+				oneNotFound = true;
 			}
 		})
 	});
@@ -102,6 +101,10 @@ function init(initData, hotloadData)
 	}
 
 	setDefaultUserConfs();
+
+	// If no default settings setted assume we can once set secureauth to false
+	if (oneNotFound)
+		saveSettingAndWriteToUserConfig("lobby.secureauth", "false");
 
 	global.music.setState(global.music.states.MENU);
 

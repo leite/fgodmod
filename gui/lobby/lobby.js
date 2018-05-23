@@ -1708,6 +1708,7 @@ function joinSelectedGameReally()
 	}
 
 	let nameToConnect = multiplayerName(g_Username);
+
 	for (let player of stringifiedTeamListToPlayerData(game.players))
 	{
 		let playerNickRating = splitRatingFromNick(player.Name);

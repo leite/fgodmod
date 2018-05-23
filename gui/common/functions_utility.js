@@ -148,6 +148,7 @@ function singleplayerName()
 
 function multiplayerName()
 {
+	warn("ok")
 	return Engine.ConfigDB_GetValue("user", "playername.multiplayer") || Engine.GetSystemUsername();
 }
 
