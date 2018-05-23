@@ -1021,15 +1021,15 @@ function updatePlayerList()
 		for (let sort of g_PlayersSort)
 		{
 			let ret = cmpObjs(a, b, sort.name, {
-					'buddy': obj => (obj.isBuddy || obj.name == g_Username ? 1 : 2),
+					'buddy': obj => (obj.name == g_Username ? 3 : obj.isBuddy ? 2 : 1),
 					'rating': obj => +obj.rating,
 					'status': obj => status(obj),
 					'name': obj => obj.name.toLowerCase()
 				}, sort.order);
 
 			if (ret)
-				return ret;
-
+				return ret																									;
+			// warn(a.name == g_Username ? g_Username : "");
 			// Keep user player on same sort data priored.
 			if (a.name == g_Username)
 				return -sort.order;
@@ -1038,7 +1038,7 @@ function updatePlayerList()
 		}
 		return 0;
 	});
-
+	print(uneval(g_PlayersSort) + "\n\n")
 	// Colorize list entries
 	for (let player of g_PlayerList)
 	{

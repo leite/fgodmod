@@ -1,4 +1,4 @@
-# fgod mod v1.6.7 for 0 A. D. version A23
+# fgod mod v1.6.8 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -78,7 +78,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 - 1.6.7 BUGFIX
+v1.6 - 1.6.8 BUGFIX
 
 	General:
 
@@ -102,6 +102,8 @@ v1.6 - 1.6.7 BUGFIX
 		Better show rating column from players, better viewable (also in dialog).
 
 		compa fix.
+
+		Default sort update for lobby.
 
 
 	In-Game:

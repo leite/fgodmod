@@ -65,8 +65,8 @@ function setDefaultUserConfs()
 		color: "102 103 255"
 
 		},"lobby.sort": {
-		players: "buddy:1,status:1,name:1,rating:-1",
-		games: "buddy:1,name:1,mapType:1,mapSize:1,gameRating:-1,mapName:1,nPlayers:-1"
+		players: "buddy:-1,status:1,name:1,rating:-1",
+		games: "buddy:-1,name:1,mapType:1,mapSize:1,gameRating:-1,mapName:1,nPlayers:-1"
 
 		},"replay": {
 		sort: "months:-1,players:1,mapName:1,mapSize:1,popCapacity:1,duration:1"
