@@ -26,7 +26,7 @@ function setDefaultUserConfs()
 			options: "Alt+O",
 			focustextinput: "tab" },
 		"gui": {
-		startintolobby: false 
+		startintolobby: "false"
 
 		},"gui.lobby": {
 		morebuttonsbar: "hiding"
@@ -35,7 +35,7 @@ function setDefaultUserConfs()
 		gamessort: "date:-1,mapName:1,mapType:1,description:1"
 
 			},"lobby": {
-		highlightbuddies: false     ,       
+		highlightbuddies: "false",       
 		autoawaytime: "5"               ,   
 		presenceselection: "available_awaytime" ,
 		secureauth: "false"
