@@ -21,7 +21,6 @@ function init(initData)
 		if (initData && initData.connect)
 			lobbyStartConnect();
 	}
-	cycleFocus();
 }
 
 function lobbyStop()
