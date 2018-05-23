@@ -417,6 +417,52 @@
 						});
 					</action>
 				</object>
+
+				<!-- GET INVOLVED -->
+				<object type="button"
+					style="StoneButton"
+					name="fgodupdate"
+					hotkey="fgodupdate"
+					tooltip_style="pgToolTip"
+					size="0 128 100% 156"
+				>
+					<translatableAttribute id="caption">Fgod mod Update</translatableAttribute>
+					<translatableAttribute id="tooltip">Click to download and update fgod mod zip.</translatableAttribute>
+					<action on="Press">
+						openURL("https://github.com/fraizy22/fgodmod/archive/master.zip");
+					</action>
+				</object>
+
+				<!-- GET INVOLVED -->
+				<object type="button"
+					name="fgodwebsite"
+					style="StoneButton"
+					tooltip_style="pgToolTip"
+					hotkey="fgodwebsite"
+					size="0 160 100% 188"
+				>
+					<translatableAttribute id="caption">Fgod mod Website</translatableAttribute>
+					<translatableAttribute id="tooltip">Click to open fgod mod web site in your web browser.</translatableAttribute>
+					<action on="Press">
+						openURL("https://github.com/fraizy22/fgodmod");
+					</action>
+				</object>
+
+				<!-- GET INVOLVED -->
+				<object type="button"
+					name="fgodforum"
+					style="StoneButton"
+					hotkey="fgodforum"
+					tooltip_style="pgToolTip"
+					size="0 192 100% 220"
+				>
+					<translatableAttribute id="caption">Fgod mod Forum</translatableAttribute>
+					<translatableAttribute id="tooltip">Give feed back to fgod mod in forum in your web browser.</translatableAttribute>
+					<action on="Press">
+						openURL("https://wildfiregames.com/forum/index.php?/topic/24318-fgod-mod-for-0-a-d-a23/");
+					</action>
+				</object>
+
 			</object>
 		</object>
 
@@ -514,7 +560,7 @@
 					<translatableAttribute id="tooltip">Game options and mod selection.</translatableAttribute>
 					<action on="Press">
 						closeMenu();
-						openMenu("submenuOptions", this.parent.size.top + this.size.top, this.size.bottom - this.size.top, 4);
+						openMenu("submenuOptions", this.parent.size.top + this.size.top, this.size.bottom - this.size.top, 7);
 					</action>
 				</object>
 

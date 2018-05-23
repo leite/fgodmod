@@ -1,4 +1,4 @@
-# fgod mod v1.6.11 for 0 A. D. version A23
+# fgod mod v1.6.12 for 0 A. D. version A23
 
 Report Feedback/Bugs:
 
@@ -78,7 +78,7 @@ Screenshots:
 
 Updates (Features)
 
-v1.6 - 1.6.11 BUGFIX
+v1.6 - 1.6.12 BUGFIX
 
 	General:
 
@@ -91,6 +91,10 @@ v1.6 - 1.6.11 BUGFIX
 		On hotkey "tab" focus text input in replay_menu/lobby.
 
 		Mouse wheel for tab change in summary/options/gamesetup/credits.
+	
+		Fgod links in mainmenu -> Settings.
+
+		And Hotkeys for it Alt+W Website, Alt+U Update, Alt+F Forum.
 
 
 	Lobby:

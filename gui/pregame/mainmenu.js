@@ -23,6 +23,9 @@ function setDefaultUserConfs()
 
 		"hotkey": { 
 			close: "Shift+Escape",
+			fgodupdate: "Alt+U",
+			fgodwebsite: "Alt+W",
+			fgodforum: "Alt+F",
 			options: "Alt+O",
 			focustextinput: "tab" },
 		"gui": {
@@ -137,6 +140,15 @@ function init(initData, hotloadData)
 	Engine.GetGUIObjectByName("optionsButton").tooltip = colorizeHotkey(
 		translate("%(hotkey)s: Adjust game settings."),
 		"options");
+	Engine.GetGUIObjectByName("fgodwebsite").tooltip = colorizeHotkey(
+		translate("%(hotkey)s: Click to open fgod mod web site in your web browser."),
+		"fgodwebsite");
+	Engine.GetGUIObjectByName("fgodupdate").tooltip = colorizeHotkey(
+		translate("%(hotkey)s: Click to download or update fgod mod zip."),
+		"fgodupdate");
+	Engine.GetGUIObjectByName("fgodforum").tooltip = colorizeHotkey(
+		translate("%(hotkey)s: Give feed back to fgod mod in forum in your web browser."),
+		"fgodforum");
 
 	if (initData && initData.isStartup && Engine.ConfigDB_GetValue("user", "gui.startintolobby") === "true")
 		Engine.PushGuiPage("page_prelobby.xml", { "connect" : true });
