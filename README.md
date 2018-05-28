@@ -2,7 +2,7 @@
 
 If you like the work of fgod mod (and me fpre in general) you can donate me here:
 
-	fpre - IBAN: DE24 1004 0000 0640 9684 00 IBan - BIC: COBA DEFF XXX
+	fpre - IBAN: DE24 1004 0000 0640 9684 00 - BIC: COBA DEFF XXX
 
 Report Feedback/Bugs:
 
