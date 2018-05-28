@@ -1,5 +1,7 @@
 # fgod mod v1.6.12 for 0 A. D. version A23
 
+If you like the work of fgod mod (and me fpre in general) you can donate me here: fpre, DE24 1004 0000 0640 9684 00 IBan, COBA DEFF XXX Bic
+
 Report Feedback/Bugs:
 
 	In 0ad wildfire games forums under game modification thread fgod mod
