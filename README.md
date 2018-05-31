@@ -1,8 +1,8 @@
 # fgod mod v1.6.12 for 0 A. D. version A23
 
-If you like the work of fgod mod (and me fpre in general) you can donate me here:
+If you like the work of fgod mod (and me fpre in general) i can give donation information per mail from:
 
-	fpre - IBAN: DE24 1004 0000 0640 9684 00 - BIC: COBA DEFF XXX
+    fraizy@gmx.de
 
 Report Feedback/Bugs:
 
