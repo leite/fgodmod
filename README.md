@@ -1,8 +1,10 @@
 # fgod mod v1.6.12 for 0 A. D. version A23
 
-If you like the work of fgod mod (and me fpre in general) i can give you donation information per mail from:
+If you like the work of fgod mod (and me fpre in general) you can donate me, just email me:
 
     fraizy@gmx.de
+    
+and I give you information.
 
 Report Feedback/Bugs:
 
