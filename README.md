@@ -100,7 +100,12 @@ v1.6.13
         
         Background lobby notification fixed and showing yellow menu button.
         
-        End game graphics overlay fixed.
+        End game graphics overlay fixed. Gamesetup:
+        
+
+    Gamesetup:
+
+        Blinking lobby dialog icon on lobby notification and message appear in tooltip bar
         
         
     Lobby:
