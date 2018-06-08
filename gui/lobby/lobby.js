@@ -1538,7 +1538,7 @@ function updateGameList()
 		list_gameRating.push(game.gameRating);
 		list.push(gameName);
 		list_data.push(i);
-		list_time.push(game.time + " min");
+		list_time.push(game.time + "m");
 	}
 
 	gamesBox.list_buddy = list_buddy;

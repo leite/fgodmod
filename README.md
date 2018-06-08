@@ -1,4 +1,4 @@
-# fgod mod v1.6.12 for 0 A. D. version A23
+# fgod mod for 0 A. D. version A23
 
 If you like the work of fgod mod (and me fpre in general) and want further work on improvement
 or want support email me
@@ -83,6 +83,30 @@ Screenshots:
 
 
 Updates (Features)
+
+
+v1.6.13
+
+    Main Menu:
+        
+        Fgod readme accessible in manual page.
+        
+        Fgod showing active state by a fgod sign on bottom of main menu page.
+        
+        
+    In Game:
+    
+        Fgod readme accessible.
+        
+        Background lobby notification fixed and showing yellow menu button.
+        
+        End game graphics overlay fixed.
+        
+        
+    Lobby:
+    
+        Added game running time to game list.
+
 
 v1.6 - 1.6.12 BUGFIX
 
