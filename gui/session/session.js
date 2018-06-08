@@ -273,7 +273,7 @@ function init(initData, hotloadData)
 	}
 	Engine.GetGUIObjectByName("optionsButton").tooltip = colorizeHotkey("Press %(hotkey)s to open options.", "options");
 	Engine.GetGUIObjectByName("lobbyButton").tooltip = colorizeHotkey("Press %(hotkey)s to open lobby.", "lobby");
-	
+
 	g_ServerIP = initData.serverIP;
 	g_ServerPort = initData.serverPort;
 	g_UseSTUN = initData.useSTUN;

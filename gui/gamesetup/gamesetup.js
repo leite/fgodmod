@@ -1157,18 +1157,40 @@ function init(attribs)
 	});
 }
 
+var g_LobbyNotifyTimer = 0;
+
 function setLobbyButtonIcon(notify)
 {
-	Engine.GetGUIObjectByName("lobbyButton").sprite = notify ? "iconBubbleWhite" : "iconBubbleGold";
+	Engine.GetGUIObjectByName("lobbyButton").sprite = notify ? "iconBubbleYellow" : "iconBubbleGold";
 
-	Engine.GetGUIObjectByName("lobbyButton").tooltip =
-		sprintf(translate("%(hotkey)s: Show the multiplayer lobby in a dialog window. %(notification)s"), {
+	let tp = sprintf(translate("%(hotkey)s: Show the multiplayer lobby in a dialog window. %(notification)s"), {
 			"notification": notify ? sprintf(translate("(You have new lobby %(notification)s.)"), { "notification": setStringTags("notifications", { "color": "yellow"}) }) : "",
 			"hotkey": colorizeHotkey("%(hotkey)s", "lobby")
 	});
+	Engine.GetGUIObjectByName("lobbyButton").tooltip = tp;
 
+	if (g_LobbyNotifyTimer)
+	{
+		clearTimeout(g_LobbyNotifyTimer);
+		g_LobbyNotifyTimer = 0;
+	}
+ 
 	if (notify)
-		Engine.GetGUIObjectByName("onscreenToolTip").caption = translate("You have new lobby notifications. (Click the lobby icon button.)");
+	{
+		Engine.GetGUIObjectByName("onscreenToolTip").caption = sprintf(translate("Press %(hotkey)s or the lobby dialog icon to show the lobby. %(notification)s"), {
+				"notification": notify ? sprintf(translate("You have new %(notification)s."), { "notification": setStringTags("lobby notifications", { "color": "yellow"}) }) : "",
+				"hotkey": colorizeHotkey("%(hotkey)s", "lobby")
+		});
+		Engine.GetGUIObjectByName("onscreenToolTip").hidden = false;
+
+		g_LobbyNotifyTimer = setTimeout(() => blinkLobbyIcon(false), 1000);
+	}
+}
+
+function blinkLobbyIcon(on)
+{
+	Engine.GetGUIObjectByName("lobbyButton").sprite = on ? "iconBubbleYellow" : "iconBubbleGold";
+	g_LobbyNotifyTimer = setTimeout(() => blinkLobbyIcon(!on), 1000);
 }
 
 function lobbyDialogClosed(data)

@@ -93,16 +93,18 @@ function setDefaultUserConfs()
 	});
 
 }
-
+// var g_FgodModVersion = "v1.6.12"
 
 function init(initData, hotloadData)
 {
 	initMusic();
-	
+
 	if (!Engine.GetEngineInfo() || !("engine_version" in Engine.GetEngineInfo()) || Engine.GetEngineInfo().engine_version != "0.0.23")
 	{
 		warn("Wrong 0 A.D. Version. Fgod mod only made for 0 A.D. version 0.0.23. You may experience inappropriate behaviour.");
 	}
+
+	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("Fgod mod", { "font": "sans-bold-16" });
 
 	setDefaultUserConfs();
 

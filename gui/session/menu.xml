@@ -14,7 +14,7 @@
 			size="0 0 100% 28"
 			tooltip_style="sessionToolTip"
 		>
-			<translatableAttribute id="caption">Manual</translatableAttribute>
+			<translatableAttribute id="caption">Fgod / Manual</translatableAttribute>
 			<action on="Press">openManual();</action>
 		</object>
 

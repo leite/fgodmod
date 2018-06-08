@@ -44,21 +44,6 @@
 		</action>
 	</object>
 
-	<!-- Network status -->
-	<object name="netStatus" type="text" size="0 0 100% 25%" style="netStatus" z="0" hidden="true">
-		<object type="button"
-			name="disconnectedExitButton"
-			style="StoneButton"
-			size="50%-84 50%+128 50%+84 50%+160"
-			tooltip_style="sessionToolTip"
-			z="0"
-		>
-			<translatableAttribute id="caption">Exit</translatableAttribute>
-			<action on="Press">leaveGame();</action>
-		</object>
-		<object name="loadingClientsText" size="50%-300 50%+60 50%+300 50%+110" type="text" style="netStatusPlayersText" hidden="true" z="0"/>
-	</object>
-
 	<object size="0 0 100% 100%" name="sessionOverlayBackground" type="image" sprite="sessionOverlayBackground" ghost="true" hidden="true" z="0"/>
 	<object size="0 0 100% 25%" name="pauseOverlayBackground" type="image" sprite="sessionOverlayBackground" ghost="true" hidden="true" z="0"/>
 	
@@ -72,6 +57,20 @@
 		</object>
 		<object name="pausedByText" size="30% 40%+50 70% 100%" type="text" style="netStatusPlayersText" ghost="true" hidden="true" z="0"/>
 		<action on="Press">togglePause();</action>
+	</object>
+
+	<!-- Network status -->
+	<object name="netStatus" type="text" size="0 0 100% 25%" style="netStatus" hidden="true">
+		<object type="button"
+			name="disconnectedExitButton"
+			style="StoneButton"
+			size="50%-84 50%+128 50%+84 50%+160"
+			tooltip_style="sessionToolTip"
+		>
+			<translatableAttribute id="caption">Exit</translatableAttribute>
+			<action on="Press">leaveGame();</action>
+		</object>
+		<object name="loadingClientsText" size="30% 40%+50 70% 100%" type="text" ghost="true" style="netStatusPlayersText" hidden="true" z="2"/>
 	</object>
 
 	<!-- Notification Area -->

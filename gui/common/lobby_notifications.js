@@ -21,8 +21,8 @@ var g_LobbyNetMessageTypeNotification = {
 		"disconnected": msg => true
 	},
 	"chat": {
-        "subject": msg => true,
-        "role": msg => true,
+        // "subject": msg => true,
+        "role": msg => msg.nick == Engine.LobbyGetNick(),
         "room-message": msg => msg.text.toLowerCase().search(matchPlayerName(Engine.LobbyGetNick().toLowerCase())) != -1,
         "kicked": msg => msg.nick == Engine.LobbyGetNick(),
         "banned": msg => msg.nick == Engine.LobbyGetNick(),

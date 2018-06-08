@@ -38,6 +38,15 @@
 			ghost="true"
 		/>
 
+		<object
+				type="text"
+				name="fgodmod"
+				style="userReportText"
+				size="50%-100 100%-50 50%+100 100%"
+				text_align="center"
+			>
+		</object>
+
 		<!--
 		==========================================
 		- MAIN MENU - USER REPORT
@@ -143,8 +152,8 @@
 					size="0 0 100% 28"
 					tooltip_style="pgToolTip"
 				>
-					<translatableAttribute id="caption">Manual</translatableAttribute>
-					<translatableAttribute id="tooltip">Open the 0 A.D. Game Manual.</translatableAttribute>
+					<translatableAttribute id="caption">FGod / Manual</translatableAttribute>
+					<translatableAttribute id="tooltip">Open the 0 A.D. Game Manual or Fgod mod Readme file.</translatableAttribute>
 					<action on="Press">
 						closeMenu();
 						Engine.PushGuiPage("page_manual.xml", {
@@ -426,7 +435,7 @@
 					tooltip_style="pgToolTip"
 					size="0 128 100% 156"
 				>
-					<translatableAttribute id="caption">Fgod mod Update</translatableAttribute>
+					<translatableAttribute id="caption">Fgod mod update</translatableAttribute>
 					<translatableAttribute id="tooltip">Click to download and update fgod mod zip.</translatableAttribute>
 					<action on="Press">
 						openURL("https://github.com/fraizy22/fgodmod/archive/master.zip");
@@ -441,7 +450,7 @@
 					hotkey="fgodwebsite"
 					size="0 160 100% 188"
 				>
-					<translatableAttribute id="caption">Fgod mod Website</translatableAttribute>
+					<translatableAttribute id="caption">Fgod mod website</translatableAttribute>
 					<translatableAttribute id="tooltip">Click to open fgod mod web site in your web browser.</translatableAttribute>
 					<action on="Press">
 						openURL("https://github.com/fraizy22/fgodmod");
@@ -456,7 +465,7 @@
 					tooltip_style="pgToolTip"
 					size="0 192 100% 220"
 				>
-					<translatableAttribute id="caption">Fgod mod Forum</translatableAttribute>
+					<translatableAttribute id="caption">Fgod mod on forum</translatableAttribute>
 					<translatableAttribute id="tooltip">Give feed back to fgod mod in forum in your web browser.</translatableAttribute>
 					<action on="Press">
 						openURL("https://wildfiregames.com/forum/index.php?/topic/24318-fgod-mod-for-0-a-d-a23/");

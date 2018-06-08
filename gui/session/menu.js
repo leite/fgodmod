@@ -102,9 +102,9 @@ function setLobbyButtonIcon(notify)
 	lobbyButton.caption = translate("Lobby Dialog");
 	if (notify)
 	{
-		menuButton.caption = sprintf(translate("%(menuButtonCaption)s%(notificationSign)s"), { "menuButtonCaption": menuButton.caption, "notificationSign": g_NofiticationSign });
+		menuButton.caption = setStringTags(sprintf(translate("%(menuButtonCaption)s%(notificationSign)s"), { "menuButtonCaption": menuButton.caption, "notificationSign": g_NofiticationSign }), { "color": "255 255 60" });
 		menuButton.tooltip = translate("You have " + setStringTags("lobby notifications", { "color": "yellow" }) + ".");
-		lobbyButton.caption = sprintf(translate("%(lobbyButtonCaption)s*"), { "lobbyButtonCaption": lobbyButton.caption, "notificationSign": g_NofiticationSign });
+		lobbyButton.caption = setStringTags(sprintf(translate("%(lobbyButtonCaption)s*"), { "lobbyButtonCaption": lobbyButton.caption, "notificationSign": g_NofiticationSign }), { "color": "255 255 60" });
 	}
 }
 
@@ -1298,6 +1298,8 @@ function updatePauseOverlay()
 	Engine.GetGUIObjectByName("pauseOverlay").onPress = g_Paused ? togglePause : function() {};
 }
 
+var g_ManualPage = "manual";
+
 function openManual()
 {
 	closeOpenDialogs();
@@ -1305,10 +1307,18 @@ function openManual()
 
 	Engine.PushGuiPage("page_manual.xml", {
 		"page": "manual/intro",
+		"openPage": g_ManualPage,
 		"title": translate("Manual"),
 		"url": "http://trac.wildfiregames.com/wiki/0adManual",
-		"callback": "resumeGame"
+		"callback": "manualClosed"
 	});
+}
+
+function manualClosed(page)
+{
+	if (page)
+		g_ManualPage = page;
+	resumeGame();
 }
 
 function toggleDeveloperOverlay()

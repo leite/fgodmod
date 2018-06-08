@@ -576,7 +576,7 @@ function init(attribs = {})
 	initUserConfigurables();
 
 	updateToggleBuddy();
-	Engine.GetGUIObjectByName("chatInput").tooltip = colorizeAutocompleteHotkey("Press %(hotkey)s to focus chat input or cycle autocomplete playernames.");
+	Engine.GetGUIObjectByName("chatInput").tooltip = colorizeAutocompleteHotkey("Press %(hotkey)s to focus chat input and keep pressing %(hotkey)s to cycle through all autocompleting playernames.");
 
 	// Get all messages since the login
 	for (let msg of Engine.LobbyGuiPollHistoricMessages())
@@ -1465,6 +1465,10 @@ function updateGameList()
 				game.hasBuddies = player.Team == "observer" ? 1 : 2;
 		}
 
+		game.time = 0;
+		if (game.startTime)
+			game.time = Math.round((Date.now() - game.startTime*1000)/(1000*60));
+
 		game.gameRating =
 			playerRatings.length ?
 				Math.round(playerRatings.reduce((sum, current) => sum + current) / playerRatings.length) :
@@ -1500,6 +1504,7 @@ function updateGameList()
 	let list_mapType = [];
 	let list_nPlayers = [];
 	let list_gameRating = [];
+	let list_time = [];
 	let list = [];
 	let list_data = [];
 	let selectedGameIndex = -1;
@@ -1533,6 +1538,7 @@ function updateGameList()
 		list_gameRating.push(game.gameRating);
 		list.push(gameName);
 		list_data.push(i);
+		list_time.push(game.time + " min");
 	}
 
 	gamesBox.list_buddy = list_buddy;
@@ -1542,7 +1548,8 @@ function updateGameList()
 	gamesBox.list_mapType = list_mapType;
 	gamesBox.list_nPlayers = list_nPlayers;
 	gamesBox.list_gameRating = list_gameRating;
-
+	gamesBox.list_time = list_time;
+	
 	// Change these last, otherwise crash
 	gamesBox.list = list;
 	gamesBox.list_data = list_data;

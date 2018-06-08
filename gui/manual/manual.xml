@@ -17,6 +17,11 @@
 			<object name="mainText" type="text" style="ModernTextPanel"/>
 		</object>
 
+		<object type="button" name="pageSwitchButton" style="ModernButtonRed" tooltip_style="snToolTip" size="24 100%-52 214+24 100%-24">
+			<translatableAttribute id="caption">Fgod Readme</translatableAttribute>
+			<action on="Press"><![CDATA[showPage("fgod");]]></action>
+		</object>
+
 		<object type="button" style="ModernButtonRed" tooltip_style="snToolTip" size="100%-408 100%-52 100%-218 100%-24" hotkey="cancel">
 			<translatableAttribute id="caption">Close</translatableAttribute>
 			<action on="Press"><![CDATA[closeManual();]]></action>
