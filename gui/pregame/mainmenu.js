@@ -17,10 +17,10 @@ var g_LastTickTime = Date.now();
 const g_EngineInfo = Engine.GetEngineInfo();
 var oneNotFound = false;
 
+
 function setDefaultUserConfs()
 {
 	let values = {
-
 		"hotkey": { 
 			close: "Shift+Escape",
 			fgodupdate: "Alt+U",
@@ -93,7 +93,8 @@ function setDefaultUserConfs()
 	});
 
 }
-// var g_FgodModVersion = "v1.6.12"
+
+var g_FgodModVersion = "1.6.13"
 
 function init(initData, hotloadData)
 {
@@ -104,9 +105,22 @@ function init(initData, hotloadData)
 		warn("Wrong 0 A.D. Version. Fgod mod only made for 0 A.D. version 0.0.23. You may experience inappropriate behaviour.");
 	}
 
-	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("Fgod mod", { "font": "sans-bold-16" });
+	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("Fgod mod v" + g_FgodModVersion, { "font": "sans-bold-16" });
 
 	setDefaultUserConfs();
+	let ver = +Engine.ConfigDB_GetValue("user", "fgod.version") || 0;
+	let verNum = +g_FgodModVersion.replace(/\./g, "");
+	if (ver < verNum)
+	{
+		saveSettingAndWriteToUserConfig("fgod.version", verNum);
+
+		Engine.PushGuiPage("page_manual.xml", {
+			"page": "manual/intro",
+			"openPage": "fgod",
+			"title": translate("Manual"),
+			"url": "http://trac.wildfiregames.com/wiki/0adManual"
+		});
+	}
 
 	// If no default settings setted assume we can once set secureauth to false
 	if (oneNotFound)

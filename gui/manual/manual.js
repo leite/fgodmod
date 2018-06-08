@@ -31,8 +31,8 @@ function showPage(page)
 	g_OpenPage = page;
 	Engine.GetGUIObjectByName("mainText").caption = page == "fgod" ? Engine.TranslateLines(Engine.ReadFile("gui/manual/README.md")) :
 		Engine.TranslateLines(Engine.ReadFile("gui/" + g_Page + ".txt"));
-	Engine.GetGUIObjectByName("title").caption = page == "fgod" ? "Fgod Readme" : g_Title;
-	Engine.GetGUIObjectByName("pageSwitchButton").caption = page == "fgod" ? g_Title : "Fgod Readme";
+	Engine.GetGUIObjectByName("title").caption = page == "fgod" ? "Fgod mod Readme" : g_Title;
+	Engine.GetGUIObjectByName("pageSwitchButton").caption = page == "fgod" ? g_Title : "Fgod mod Readme";
 	Engine.GetGUIObjectByName("pageSwitchButton").onPress = () => showPage(page == "fgod" ? "manual" : "fgod");
 }
 
