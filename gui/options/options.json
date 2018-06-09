@@ -416,7 +416,8 @@
 				"config": "gui.lobby.morebuttonsbar",
 				"list": [
 					{ "value": "disabled", "label": "Disabled" },
-					{ "value": "hiding", "label": "Auto-Hiding" }
+					{ "value": "hiding", "label": "Auto-Hiding" },
+					{ "value": "visible", "label": "Always visible" }
 				]
 			}
 		]

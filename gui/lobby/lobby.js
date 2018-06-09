@@ -709,11 +709,11 @@ function initGUIMoreButtonsBar()
 	let showConfig = Engine.ConfigDB_GetValue("user", "gui.lobby.morebuttonsbar");
 
 	Engine.GetGUIObjectByName("moreOptionsBarActionHide").onmouseenter =
-		showConfig == "hiding" ? () => setMoreButtonsBarVisibility(false) : () => true;
+		showConfig == "hiding" ? () => setMoreButtonsBarVisibility(false, true) : () => true;
 	Engine.GetGUIObjectByName("moreOptionsBarActionShow").onmouseenter =
-		showConfig == "hiding" ? () => setMoreButtonsBarVisibility(true) : () => true;
+		showConfig == "hiding" ? () => setMoreButtonsBarVisibility(true, true) : () => true;
 
-	setMoreButtonsBarVisibility(showConfig == "visible");
+	setMoreButtonsBarVisibility(showConfig == "visible", showConfig == "hiding");
 
 	if (showConfig == "disabled")
 		return;
@@ -735,9 +735,9 @@ function initGUIMoreButtonsBar()
 	}
 }
 
-function setMoreButtonsBarVisibility(show)
+function setMoreButtonsBarVisibility(show, autoHideAble)
 {
-	Engine.GetGUIObjectByName("moreOptionsBarActionHide").hidden = !show;
+	Engine.GetGUIObjectByName("moreOptionsBarActionHide").hidden = !(autoHideAble && show);
 	Engine.GetGUIObjectByName("chatPanel").size = show ? "0 49% 100% 100%-29" : "0 49% 100% 100%"
 	Engine.GetGUIObjectByName("moreButtons").hidden = !show;
 }
@@ -1029,7 +1029,7 @@ function updateToggleBuddy()
 /**
  * Do a full update of the player listing, including ratings from cached C++ information.
  */
-function updatePlayerList()
+function updatePlayerList(autoScroll = false)
 {
 	let playersBox = Engine.GetGUIObjectByName("playerList");
 	let highlightedBuddy = Engine.ConfigDB_GetValue("user", "lobby.highlightbuddies") == "true";
@@ -1095,6 +1095,7 @@ function updatePlayerList()
 	playersBox.list_rating = ratingList;
 	playersBox.list = nickList;
 
+	playersBox.auto_scroll = autoScroll;
 	playersBox.selected = playersBox.list.indexOf(g_SelectedPlayer);
 	updatePlayerGamesNumber();
 }
@@ -1120,8 +1121,8 @@ function toggleBuddy()
 
 	saveSettingAndWriteToUserConfig("lobby.buddies", g_Buddies.filter(nick => nick).join(g_BuddyListDelimiter) || g_BuddyListDelimiter);
 
-	updatePlayerList();
-	updateGameList();
+	updatePlayerList(true);
+	updateGameList(true);
 }
 
 /**
@@ -1173,6 +1174,10 @@ function onPlayerListSelection()
 	g_SelectedPlayer = playerList.list[playerList.selected];
 
 	lookupSelectedUserProfile("playerList");
+
+	// Keep selected player in view when profile panel get expanded firstly.
+	updatePlayerList(true);
+
 	// if (!g_SelectedPlayer)
 	// 	return;
 
@@ -1430,7 +1435,7 @@ function updatePlayerGamesNumber()
 /**
  * Update the game listing from data cached in C++.
  */
-function updateGameList()
+function updateGameList(autoScroll = false)
 {
 	let gamesBox = Engine.GetGUIObjectByName("gameList");
 	let highlightedBuddy = Engine.ConfigDB_GetValue("user", "lobby.highlightbuddies") == "true";
@@ -1554,7 +1559,7 @@ function updateGameList()
 	gamesBox.list = list;
 	gamesBox.list_data = list_data;
 
-	gamesBox.auto_scroll = false;
+	gamesBox.auto_scroll = autoScroll;
 	gamesBox.selected = selectedGameIndex;
 
 	updateGameSelection();
