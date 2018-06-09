@@ -75,12 +75,8 @@ function init(data)
 	g_InGame = data && !!data.ingame;
 	g_Dialog = data && !!data.dialog;
 
-// <<<<<<< HEAD
 	g_ColumnOrder = initGUIListSort("replaySelection", "replay.sort");
 	loadReplays(data && data.replaySelectionData || null, false);
-// =======
-// 	loadReplays(data && data.replaySelectionData || null, false);
-// >>>>>>> @{-1}
 
 	if (!g_Replays)
 	{
@@ -98,6 +94,18 @@ function init(data)
 	
 	if (data && !!data.showNextSummary)
 		showSummary(data.showNextSummary);
+	
+	forumButton();
+}
+
+function forumButton()
+{
+	Engine.GetGUIObjectByName("forumButton").tooltip = 
+		setStringTags("Download", { "color": "yellow"}) + " and " + 
+		setStringTags("upload", { "color": "yellow"}) + " zipped game replays on Wildfire Games Replays Forum.\n\n" +
+		setStringTags("Tip:", { "color": "yellow"}) + " Watch the path shown at bottom of this page when selecting a replay" +
+		" in the list. Go to the path in your file manager and zip the folder and upload to the forum.\n\n" +
+		"Or download and extract a zipped replay folder into a new folder in the replays 0.0.23 directory and reload cache.";
 }
 
 function callbackSummary(data)

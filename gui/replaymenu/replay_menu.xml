@@ -232,25 +232,34 @@
 		<object name="bottomPanel" size="25 100%-55 100%-5 100%-25" >
 
 			<!-- Main Menu Button -->
-			<object name="closeButton" type="button" style="StoneButton" size="25 0 17%+25 100%" hotkey="close">
+			<object name="closeButton" type="button" style="StoneButton" size="25 0 17%+10 100%" hotkey="close">
 				<action on="Press">close();</action>
 			</object>
 
 			<!-- Delete Button -->
-			<object name="deleteReplayButton" type="button" style="StoneButton" size="20%+25 0 37%+25 100%" hotkey="session.savedgames.delete">
+			<object name="deleteReplayButton" type="button" style="StoneButton" size="17%+15 0 30%+25 100%" hotkey="session.savedgames.delete">
 				<translatableAttribute id="caption">Delete</translatableAttribute>
 				<action on="Press">deleteReplayButtonPressed();</action>
 			</object>
 
+			<!-- Forum Button -->
+			<object name="forumButton" type="button" style="StoneButton" size="30%+30 0 51%-30 100%">
+				<translatableAttribute id="caption">Forum</translatableAttribute>
+				<translatableAttribute id="tooltip">Download and Upload Game Replays on Wildfire Games Replays Forum.</translatableAttribute>
+				<action on="Press">
+					openURL("https://wildfiregames.com/forum/index.php?/forum/468-alpha-23/");
+				</action>
+			</object>
+
 			<!-- Reload Cache Button -->
-			<object type="button" style="StoneButton" size="40%+25 0 57%+25 100%">
+			<object type="button" style="StoneButton" size="51%-25 0 66%-35 100%">
 				<translatableAttribute id="caption">Reload Cache</translatableAttribute>
 				<translatableAttribute id="tooltip">Rebuild the replay cache from scratch. Potentially slow!</translatableAttribute>
 				<action on="Press">reloadCache();</action>
 			</object>
 
 			<!-- Summary Button -->
-			<object name="summaryButton" type="button" style="StoneButton" size="65%-50 0 82%-50 100%" hotkey="summary">
+			<object name="summaryButton" type="button" style="StoneButton" size="66%-30 0 83%-30 100%" hotkey="summary">
 				<translatableAttribute id="caption">Summary</translatableAttribute>
 				<action on="Press">showReplaySummary();</action>
 			</object>

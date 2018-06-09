@@ -110,7 +110,7 @@ function init(initData, hotloadData)
 	setDefaultUserConfs();
 	let ver = +Engine.ConfigDB_GetValue("user", "fgod.version") || 0;
 	let verNum = +g_FgodModVersion.replace(/\./g, "");
-	if (ver < verNum)
+	if (ver != verNum)
 	{
 		saveSettingAndWriteToUserConfig("fgod.version", verNum);
 
