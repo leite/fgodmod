@@ -1,4 +1,6 @@
-# fgod mod for 0 A. D. version A23 Update! Read features below
+New Version read features below.
+
+# fgod mod for 0 A. D. version A23
 
 If you like the work of fgod mod (and me fpre in general) and want further work on improvement
 or want support email me
@@ -83,6 +85,7 @@ Screenshots:
 
 
 Updates (Features)
+
  v1.6.14
      
     Replay Menu:
