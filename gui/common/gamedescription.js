@@ -88,7 +88,7 @@ function setMapPreviewImage(guiObject, filename)
  * @param {(string[]|false)} playerStates - One of "won", "defeated", "active" for each player.
  * @returns {string}
  */
-function formatPlayerInfo(playerDataArray, playerStates)
+function formatPlayerInfo(playerDataArray, playerStates, hostPlayer)
 {
 	let playerDescriptions = {};
 	let playerIdx = 0;
@@ -169,7 +169,8 @@ function formatPlayerInfo(playerDataArray, playerStates)
 				escapeText(playerData.Name),
 				(typeof getPlayerColor == 'function' ?
 					(isAI ? "white" : getPlayerColor(playerNick)) :
-					rgbToGuiColor(playerData.Color || g_Settings.PlayerDefaults[playerIdx].Color))),
+					rgbToGuiColor(playerData.Color || g_Settings.PlayerDefaults[playerIdx].Color))) + 
+					(playerNick == hostPlayer ? setStringTags(" (Host)", { "color": "188 188 188" }) : ""),
 
 			"civ":
 				!playerData.Civ ?

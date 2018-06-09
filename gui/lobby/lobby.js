@@ -1450,6 +1450,7 @@ function updateGameList(autoScroll = false)
 
 	g_GameList = Engine.GetGameList().map(game => {
 		game.hasBuddies = 0;
+		game.observeNum = 0;
 
 		// Compute average rating of participating players
 		let playerRatings = [];
@@ -1468,6 +1469,9 @@ function updateGameList(autoScroll = false)
 			// Sort games with playing buddies above games with spectating buddies
 			if (game.hasBuddies < 2 && g_Buddies.indexOf(playerNickRating.nick) != -1)
 				game.hasBuddies = player.Team == "observer" ? 1 : 2;
+			
+			if (player.Team == "observer")
+				++game.observeNum;
 		}
 
 		game.time = 0;
@@ -1539,7 +1543,9 @@ function updateGameList(autoScroll = false)
 		list_mapName.push(translateMapTitle(game.niceMapName));
 		list_mapSize.push(translateMapSize(game.mapSize));
 		list_mapType.push(g_MapTypes.Title[mapTypeIdx] || "");
-		list_nPlayers.push(game.nbp + "/" + game.maxnbp);
+		let ob = game.observeNum ? setStringTags(" +" + game.observeNum, { "color": "128 128 128" }) : "";
+			
+		list_nPlayers.push(game.nbp + "/" + game.maxnbp + ob);
 		list_gameRating.push(game.gameRating);
 		list.push(gameName);
 		list_data.push(i);
@@ -1605,7 +1611,7 @@ function updateGameSelection()
 			"total": game.maxnbp
 		});
 
-	sgPlayersNames.caption = formatPlayerInfo(stringifiedTeamListToPlayerData(game.players));
+	sgPlayersNames.caption = formatPlayerInfo(stringifiedTeamListToPlayerData(game.players), null, game.hostUsername);
 	Engine.GetGUIObjectByName("sgMapSize").caption = translateMapSize(game.mapSize);
 
 	let mapTypeIdx = g_MapTypes.Name.indexOf(game.mapType);

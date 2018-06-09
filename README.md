@@ -86,6 +86,26 @@ Screenshots:
 
 Updates (Features)
 
+ v1.6.16
+     
+    Lobby:
+    
+        Show observer number in game list under player numbers.
+        
+        Show host player in game description when game is selected in game list.
+
+
+ v1.6.15
+     
+    Lobby:
+    
+        Update auto scroll when marking player as buddy to player list and gamelist so on
+        buddy sorted lists the player and game will kept in view automatically.
+        
+        Always showing more buttons bar below chat text input working again (set it in lobby
+        options to always in visible).
+
+
  v1.6.15
      
     Lobby:
