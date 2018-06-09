@@ -94,7 +94,7 @@ function setDefaultUserConfs()
 
 }
 
-var g_FgodModVersion = "1.6.13"
+var g_FgodModVersion = "1.6.14"
 
 function init(initData, hotloadData)
 {

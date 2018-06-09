@@ -83,9 +83,14 @@ Screenshots:
 
 
 Updates (Features)
+ v1.6.14
+     
+    Replay Menu:
+    
+        Forum link button for upload and download zipped games replays.
 
-
-v1.6.13 - v1.6.13.1
+        
+v1.6.13
 
     Main Menu:
         
@@ -111,11 +116,6 @@ v1.6.13 - v1.6.13.1
     Lobby:
     
         Added game running time to game list.
-        
-
-    Replay Menu:
-    
-        Forum link button for upload and download zipped games replays.
 
 
 v1.6 - 1.6.12 BUGFIX
