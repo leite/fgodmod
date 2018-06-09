@@ -90,11 +90,11 @@ Updates (Features)
      
     Lobby:
     
-        Update auto scroll when marking player as buddy to player list and gamelist so on buddy sorted lists
+        Update auto scroll when marking player as buddy to player list and gamelist so on
+        buddy sorted lists the player and game will kept in view automatically.
         
-        the player and game will kept in view automatically.
-        
-        Always showing more buttons bar below chat text input working again (set it in lobby options to always in visible).
+        Always showing more buttons bar below chat text input working again (set it in lobby
+        options to always in visible).
         
 
  v1.6.14
