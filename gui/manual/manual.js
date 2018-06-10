@@ -29,10 +29,10 @@ function init(data)
 function showPage(page)
 {
 	g_OpenPage = page;
-	Engine.GetGUIObjectByName("mainText").caption = page == "fgod" ? Engine.TranslateLines(Engine.ReadFile("gui/manual/README.md")) :
+	Engine.GetGUIObjectByName("mainText").caption = page == "fgod" ? Engine.TranslateLines(Engine.ReadFile("FEATURES_UPDATES.md")) :
 		Engine.TranslateLines(Engine.ReadFile("gui/" + g_Page + ".txt"));
-	Engine.GetGUIObjectByName("title").caption = page == "fgod" ? "Fgod mod Readme" : g_Title;
-	Engine.GetGUIObjectByName("pageSwitchButton").caption = page == "fgod" ? g_Title : "Fgod mod Readme";
+	Engine.GetGUIObjectByName("title").caption = page == "fgod" ? "Fgod Mod Features" : g_Title;
+	Engine.GetGUIObjectByName("pageSwitchButton").caption = page == "fgod" ? g_Title : "FGod Mod Features";
 	Engine.GetGUIObjectByName("pageSwitchButton").onPress = () => showPage(page == "fgod" ? "manual" : "fgod");
 }
 

@@ -1300,14 +1300,14 @@ function updatePauseOverlay()
 
 var g_ManualPage = "manual";
 
-function openManual()
+function openManual(page = g_ManualPage)
 {
 	closeOpenDialogs();
 	pauseGame();
 
 	Engine.PushGuiPage("page_manual.xml", {
 		"page": "manual/intro",
-		"openPage": g_ManualPage,
+		"openPage": page,
 		"title": translate("Manual"),
 		"url": "http://trac.wildfiregames.com/wiki/0adManual",
 		"callback": "manualClosed"

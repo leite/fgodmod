@@ -956,6 +956,9 @@ function addChatMessage(msg)
 	if (!formatted)
 		return;
 
+	if(msg.type == "disconnect" || msg.type == "diplomacy")
+		updateViewedPlayerDropdown();
+
 	// Update chat overlay
 	g_ChatMessages.push(formatted);
 	g_ChatTimers.push(setTimeout(removeOldChatMessage, g_ChatTimeout * 1000));

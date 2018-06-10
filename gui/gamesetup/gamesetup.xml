@@ -21,6 +21,17 @@
 		<action on="Press">selectPanel(undefined);</action>
 	</object>
 
+	<object hotkey="fgodmanual">
+		<action on="Press">
+			Engine.PushGuiPage("page_manual.xml", {
+				"page": "manual/intro",
+				"openPage": "fgod",
+				"title": "Manual",
+				"url": "http://trac.wildfiregames.com/wiki/0adManual"
+			});
+		</action>
+	</object>
+
 	<!-- Add a translucent black background to fade out the menu page -->
 	<object type="image" style="ModernWindow" size="0 0 100% 100%">
 

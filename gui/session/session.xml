@@ -20,12 +20,54 @@
 	</action>
 
 	<action on="ReplayFinished">
-		onReplayFinished();
+		onReplayFinished(); 
 	</action>
 
 	<action on="ReplayOutOfSync">
 		onReplayOutOfSync();
 	</action>
+
+	<object hotkey="session.selectplayer.1">
+		<action on="Press">changeViewPlayer(1);</action>
+	</object>
+
+	<object hotkey="session.selectplayer.2">
+		<action on="Press">changeViewPlayer(2);</action>
+	</object>
+
+	<object hotkey="session.selectplayer.3">
+		<action on="Press">changeViewPlayer(3);</action>
+	</object>
+
+	<object hotkey="session.selectplayer.4">
+		<action on="Press">changeViewPlayer(4);</action>
+	</object>
+
+	<object hotkey="session.selectplayer.5">
+		<action on="Press">changeViewPlayer(5);</action>
+	</object>
+
+	<object hotkey="session.selectplayer.6">
+		<action on="Press">changeViewPlayer(6);</action>
+	</object>
+
+	<object hotkey="session.selectplayer.7">
+		<action on="Press">changeViewPlayer(7);</action>
+	</object>
+
+	<object hotkey="session.selectplayer.8">
+		<action on="Press">changeViewPlayer(8);</action>
+	</object>
+
+	<object hotkey="session.selectplayer.0">
+		<action on="Press">changeViewPlayer(0);</action>
+	</object>
+
+	<object hotkey="fgodmanual">
+		<action on="Press">
+			openManual("fgod");
+		</action>
+	</object>
 
 	<!-- Hotkeys won't work properly unless outside menu -->
 	<include directory="gui/session/hotkeys/"/>
@@ -151,6 +193,7 @@
 			<include directory="gui/session/selection_panels_right/"/>
 		</object>
 	</object><!-- END OF BOTTOM PANEL -->
+
 </object> <!-- END OF SESSION OBJECT -->
 
 <!-- Selection bandbox -->

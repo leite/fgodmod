@@ -4,6 +4,12 @@
 
 	<script directory="gui/common/"/>
 	<script directory="gui/manual/"/>
+	
+	<object hotkey="fgodmanual">
+		<action on="Press">
+			closeManual();
+		</action>
+	</object>
 
 	<!-- Add a translucent black background to fade out the menu page -->
 	<object type="image" z="0" sprite="BackgroundTranslucent"/>

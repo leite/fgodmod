@@ -47,6 +47,7 @@
 			>
 		</object>
 
+
 		<!--
 		==========================================
 		- MAIN MENU - USER REPORT
@@ -123,6 +124,17 @@
 				closeMenu();
 			</action>
 		</object>
+		<object hotkey="fgodmanual">
+			<action on="Press">
+				closeMenu();
+				Engine.PushGuiPage("page_manual.xml", {
+					"page": "manual/intro",
+					"openPage": "fgod",
+					"title": getManual(),
+					"url": "http://trac.wildfiregames.com/wiki/0adManual"
+				});
+			</action>
+		</object>
 
 		<!-- hide submenu when user clicks on the background -->
 		<object type="button">
@@ -151,6 +163,7 @@
 					style="StoneButtonFancy"
 					size="0 0 100% 28"
 					tooltip_style="pgToolTip"
+					name="manualPage"
 				>
 					<translatableAttribute id="caption">FGod / Manual</translatableAttribute>
 					<translatableAttribute id="tooltip">Open the 0 A.D. Game Manual or Fgod mod Readme file.</translatableAttribute>
@@ -461,7 +474,6 @@
 				<object type="button"
 					name="fgodforum"
 					style="StoneButton"
-					hotkey="fgodforum"
 					tooltip_style="pgToolTip"
 					size="0 192 100% 220"
 				>

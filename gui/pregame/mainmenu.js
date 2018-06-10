@@ -25,9 +25,18 @@ function setDefaultUserConfs()
 			close: "Shift+Escape",
 			fgodupdate: "Alt+U",
 			fgodwebsite: "Alt+W",
-			fgodforum: "Alt+F",
+			fgodmanual: "Alt+Shift+F",
 			options: "Alt+O",
-			focustextinput: "tab" },
+			focustextinput: "tab",
+			"session.selectplayer.1": "Alt+1",
+			"session.selectplayer.2": "Alt+2",
+			"session.selectplayer.3": "Alt+3",
+			"session.selectplayer.4": "Alt+4",
+			"session.selectplayer.5": "Alt+5",
+			"session.selectplayer.6": "Alt+6",
+			"session.selectplayer.7": "Alt+7",
+			"session.selectplayer.8": "Alt+8",
+			"session.selectplayer.0": "Alt+0" },
 		"gui": {
 		startintolobby: "false"
 
@@ -94,7 +103,21 @@ function setDefaultUserConfs()
 
 }
 
-var g_FgodModVersion = "1.6.16"
+var g_FgodModVersion = "1.6.17"
+
+/**
+ *  Reloag game to apply changed hotkeys in user conf from fgod
+ */
+function reloadGame()
+{
+	messageBox(
+		400, 200,
+		translate("Some fgod mod settings has been changed. Reload game to apply?"),
+		translate("Confirmation"),
+		[translate("No"), translate("Yes")],
+		[null, Engine.RestartEngine]
+	);
+}
 
 function init(initData, hotloadData)
 {
@@ -105,7 +128,7 @@ function init(initData, hotloadData)
 		warn("Wrong 0 A.D. Version. Fgod mod only made for 0 A.D. version 0.0.23. You may experience inappropriate behaviour.");
 	}
 
-	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("Fgod mod v" + g_FgodModVersion, { "font": "sans-bold-16" });
+	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-bold-16" });
 
 	setDefaultUserConfs();
 	let ver = +Engine.ConfigDB_GetValue("user", "fgod.version") || 0;
@@ -118,9 +141,12 @@ function init(initData, hotloadData)
 			"page": "manual/intro",
 			"openPage": "fgod",
 			"title": translate("Manual"),
-			"url": "http://trac.wildfiregames.com/wiki/0adManual"
+			"url": "http://trac.wildfiregames.com/wiki/0adManual",
+			"callback": "reloadGame"
 		});
 	}
+	else if (oneNotFound)
+		reloadGame();
 
 	// If no default settings setted assume we can once set secureauth to false
 	if (oneNotFound)
@@ -148,6 +174,9 @@ function init(initData, hotloadData)
 		guiObj.sprite = g_BackgroundLayerset[i].sprite;
 		guiObj.z = i;
 	}
+	Engine.GetGUIObjectByName("manualPage").tooltip = colorizeHotkey(
+		translate("Open the 0 A.D. Game Manual or %(hotkey)s Fgod mod Readme file."),
+		"fgodmanual");
 	Engine.GetGUIObjectByName("structreeButton").tooltip = colorizeHotkey(
 		translate("%(hotkey)s: View the structure tree of civilizations featured in 0 A.D."),
 		"structree");
@@ -166,9 +195,8 @@ function init(initData, hotloadData)
 	Engine.GetGUIObjectByName("fgodupdate").tooltip = colorizeHotkey(
 		translate("%(hotkey)s: Click to download or update fgod mod zip."),
 		"fgodupdate");
-	Engine.GetGUIObjectByName("fgodforum").tooltip = colorizeHotkey(
-		translate("%(hotkey)s: Give feed back to fgod mod in forum in your web browser."),
-		"fgodforum");
+	Engine.GetGUIObjectByName("fgodforum").tooltip = 
+		translate("Give feed back to fgod mod in forum in your web browser.");
 
 	if (initData && initData.isStartup && Engine.ConfigDB_GetValue("user", "gui.startintolobby") === "true")
 		Engine.PushGuiPage("page_prelobby.xml", { "connect" : true });

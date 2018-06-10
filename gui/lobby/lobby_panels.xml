@@ -34,6 +34,17 @@
 		</action>
 	</object>
 
+	<object hotkey="fgodmanual">
+		<action on="Press">
+			Engine.PushGuiPage("page_manual.xml", {
+				"page": "manual/intro",
+				"openPage": "fgod",
+				"title": "Manual",
+				"url": "http://trac.wildfiregames.com/wiki/0adManual"
+			});
+		</action>
+	</object>
+
 	<!-- Left panel: Player list. -->
 	<object name="leftPanel">
 		<object name="playerGamesNumber" size="0 0 100% 24" type="text" sprite="ModernDarkBoxGold" font="sans-bold-13" textcolor="255 255 255" text_valign="center" text_align="center"/>

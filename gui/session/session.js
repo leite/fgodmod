@@ -544,11 +544,37 @@ function initViewedPlayerDropdown()
 
 function updateViewedPlayerDropdown()
 {
+	// warn(g_ViewedPlayer)
 	let viewPlayer = Engine.GetGUIObjectByName("viewPlayer");
-	viewPlayer.list_data = [-1].concat(g_Players.map((player, i) => i));
-	viewPlayer.list = [translate("Observer")].concat(g_Players.map(
-		(player, i) => colorizePlayernameHelper("■", i) + " " + player.name
+	g_Players = g_Players.map((p, i) => { p.id = i; return p; }); //.map((p, i) => { if (id in p) p.id = i; })
+	let playerList = g_Players.slice().sort((a, b) => a.team - b.team);
+// for (let i in g_Players[0]) warn(uneval(i))
+// for (let i in g_Players[0]) warn(uneval(g_Players[4].id))
+	let viewedPlayer = g_Players[g_ViewedPlayer];
+	viewPlayer.list_data = [-1].concat(playerList.map(player => player.id));
+	viewPlayer.list = [translate("Observer")].concat(playerList.map(
+		(player, i) => (i>0 ? player.teamsLocked ? i + " - T" + (player.team+1)  +" " :
+			i +" " +
+			(g_ViewedPlayer > 0 ? 
+				( g_ViewedPlayer == player.id ? "~" : player.isEnemy[g_ViewedPlayer] ? "-" : player.isNeutral[g_ViewedPlayer] ? "=" : viewedPlayer.isAlly[player.id] ? "+" : "") + " " :
+				"") :
+			"") + 
+		(player.state == "defeated" ? 
+			setStringTags("■ " + player.name, { "color": "128 128 128"}) :
+			player.state == "Offline" || player.offline ? 
+			colorizePlayernameHelper("■", player.id) + " " + setStringTags(player.name, { "color": "255 0 0"}) :
+			colorizePlayernameHelper("■", player.id) + " " + player.name)
 	));
+}
+
+function changeViewPlayer(id)
+{
+	if (!g_IsObserver)
+		return;
+	let viewPlayer = Engine.GetGUIObjectByName("viewPlayer");
+	if (id >= viewPlayer.list.length - 1)
+		return;
+	viewPlayer.selected = id > 0 ? id + 1 : 0;
 }
 
 function toggleChangePerspective(enabled)
@@ -611,6 +637,7 @@ function selectViewPlayer(playerID)
 		openTrade();
 
 	showReplaceButton();
+	// updateViewedPlayerDropdown();
 }
 
 /**
@@ -659,6 +686,7 @@ function playersFinished(players, victoryString, won)
 	updatePlayerData();
 	updateChatAddressees();
 	updateGameSpeedControl();
+	updateViewedPlayerDropdown();
 
 	if (players.indexOf(g_ViewedPlayer) == -1)
 		return;
