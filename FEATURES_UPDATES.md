@@ -29,7 +29,7 @@ Your fpre!
 
 Updates (Features)
 
- v1.6.18
+ v1.6.18 - 1.6.19
  
     Lobby:
 
@@ -58,6 +58,8 @@ Updates (Features)
         On player replace action give a message into the public chat about the replace of the selected player action.
         
         Show won player with yellow/gold color in selection dropdown.
+        
+        Drop Player prevention when joining a multiplayer game. (https://trac.wildfiregames.com/changeset/21838, Author: temple!)
                 
 
  v1.6.17

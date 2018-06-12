@@ -71,7 +71,7 @@
 
 	<object hotkey="session.messagemenu">
 		<action on="Press">
-			openMessageMenu();
+			toggleMessageMenu();
 		</action>
 	</object>
 

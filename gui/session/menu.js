@@ -1356,6 +1356,7 @@ function closeOpenDialogs()
 	closeTrade();
 	closeObjectives();
 	showDarkenOverlay(false);
+	closeMessageMenu();
 }
 
 function formatTributeTooltip(playerID, resourceCode, amount)

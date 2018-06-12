@@ -344,12 +344,21 @@ const g_MessageMenus = {
 
 var g_OpenedMessageMenu = "";
 
-function openMessageMenu()
+function toggleMessageMenu()
 {
 	if (!g_OpenedMessageMenu)
+	{
+		closeOpenDialogs();
 		g_OpenedMessageMenu = "main";
+		showMessageMenu();
+	}
 	else
-		g_OpenedMessageMenu = "";
+		closeMessageMenu();
+}
+
+function closeMessageMenu()
+{
+	g_OpenedMessageMenu = "";
 	showMessageMenu();
 }
 
@@ -383,6 +392,8 @@ function switchMenuKey(keyGo)
 
 function showMessageMenu()
 {
+	if (g_IsObserver)
+		return;
 	let cap = "";
 	if (g_OpenedMessageMenu)
 	{
@@ -740,6 +751,7 @@ function showReplaceButton()
 	// so we can't show the replace button only for offline players. So for now just show replace button for any networked
 	// game player other than gaia.
 	Engine.GetGUIObjectByName("replaceButton").hidden =  !g_IsNetworked || g_ViewedPlayer < 1 || !g_IsObserver;
+	Engine.GetGUIObjectByName("replaceButton").tooltip = "Replace the selected player, if " + setStringTags("he is offline", { color: "yellow"}) + " and " + setStringTags("lobby authentication isn't enabled", { color: "yellow"}) + " in the host."
 }
 
 /**
