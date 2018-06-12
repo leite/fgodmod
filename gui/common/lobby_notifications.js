@@ -47,5 +47,5 @@ function handleNetLobbyMessagesInBackground()
 
 function setLobbyDialogClosed()
 {
-	g_LobbyDialogOpened = false;
+    g_LobbyDialogOpened = false;
 }

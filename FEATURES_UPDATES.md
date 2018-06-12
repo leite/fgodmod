@@ -1,6 +1,64 @@
 # fgod mod for 0 A. D. version A23
 
+This mod has proposal features for the 0 A. D. Project included, from which some already included in the main
+
+0 A. D. Project. Others shall be shown here for future integration.
+
+
+Please think about donating fgod as its free of charge and at the same time very time consuming and much of work to accomplish!
+
+But I'm doing it with pleasure!
+
+Also a donation would give me more time for the work of fgod and in general the coding contribution to the 0 A. D. Project!
+
+
+So we the players all profit from it!
+
+
+E-Mail me for Details: fraizy@gmx.de
+
+
+Or bring new ideas and work to the forum!
+
+
+Have Fun,
+
+Your fpre!
+
+
+
 Updates (Features)
+
+ v1.6.18
+ 
+    Lobby:
+
+        Connect/Auto-Connect at start into lobby detects if a running hosting game is in lobby and ask if continue
+        to relog into the lobby, because game gets vanished from gamelist when relog.
+        
+        If a running lobby connection is remembered, prevent auto connect into lobby when option is setted, so another
+        lobby instance won't be disconnected.
+        
+        In the lobby dialog the game in is automatically selected and scrolled into view in the game list.
+        
+        New "/showip" command in lobby, for getting the ip and port of the selected game in the gamelist.
+        
+    
+    In-Game:
+    
+        New Messages Menu! for several ally messages toggleable on hotkey Ctrl+Y and selection keys for the messages 0-9 as
+        a first approach for future expanding. 
+    
+        Toggle select player/general overview (on/off) on hotkeys Alt+1, Alt+2, ..., Alt+8.
+        
+        Fixing T0 shown in selection dropdown for players that have team none to not showing a team.
+        
+        Having chat history available to open again when host ends.
+        
+        On player replace action give a message into the public chat about the replace of the selected player action.
+        
+        Show won player with yellow/gold color in selection dropdown.
+                
 
  v1.6.17
  

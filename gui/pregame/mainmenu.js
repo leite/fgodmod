@@ -17,8 +17,11 @@ var g_LastTickTime = Date.now();
 const g_EngineInfo = Engine.GetEngineInfo();
 var oneNotFound = false;
 
-
-function setDefaultUserConfs()
+/**
+ * 
+ * @param {*} forceOverwrite - On version change overwrite fgod settings.
+ */
+function setDefaultUserConfs(forceOverwrite)
 {
 	let values = {
 		"hotkey": { 
@@ -28,6 +31,7 @@ function setDefaultUserConfs()
 			fgodmanual: "Alt+Shift+F",
 			options: "Alt+O",
 			focustextinput: "tab",
+			"session.messagemenu": "Ctrl+Y",
 			"session.selectplayer.1": "Alt+1",
 			"session.selectplayer.2": "Alt+2",
 			"session.selectplayer.3": "Alt+3",
@@ -41,7 +45,7 @@ function setDefaultUserConfs()
 		startintolobby: "false"
 
 		},"gui.lobby": {
-		morebuttonsbar: "hiding"
+		morebuttonsbar: "visible"
 			
 		},"load": {
 		gamessort: "date:-1,mapName:1,mapType:1,description:1"
@@ -92,7 +96,7 @@ function setDefaultUserConfs()
 	
 	Object.keys(values).forEach(key => {
 		Object.keys(values[key]).forEach(key2 => {
-			if (!Engine.ConfigDB_GetValue("user", key + "." + key2))
+			if (forceOverwrite || !Engine.ConfigDB_GetValue("user", key + "." + key2))
 			{
 				// warn("Setting default value for user config " + key + "." + key2 + " = " + uneval(values[key][key2]));
 				saveSettingAndWriteToUserConfig(key + "." + key2, values[key][key2]);
@@ -103,7 +107,7 @@ function setDefaultUserConfs()
 
 }
 
-var g_FgodModVersion = "1.6.17"
+var g_FgodModVersion = Engine.GetEngineInfo().mods.filter(mod => mod[0].startsWith("fgod"))[0][1];
 
 /**
  *  Reloag game to apply changed hotkeys in user conf from fgod
@@ -130,9 +134,10 @@ function init(initData, hotloadData)
 
 	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-bold-16" });
 
-	setDefaultUserConfs();
 	let ver = +Engine.ConfigDB_GetValue("user", "fgod.version") || 0;
 	let verNum = +g_FgodModVersion.replace(/\./g, "");
+
+	setDefaultUserConfs(ver != verNum);
 	if (ver != verNum)
 	{
 		saveSettingAndWriteToUserConfig("fgod.version", verNum);
@@ -198,7 +203,8 @@ function init(initData, hotloadData)
 	Engine.GetGUIObjectByName("fgodforum").tooltip = 
 		translate("Give feed back to fgod mod in forum in your web browser.");
 
-	if (initData && initData.isStartup && Engine.ConfigDB_GetValue("user", "gui.startintolobby") === "true")
+	if (initData && initData.isStartup && Engine.ConfigDB_GetValue("user", "gui.startintolobby") === "true" &&
+		Engine.ConfigDB_GetValue("user", "lobby.loggedin") != "true")
 		Engine.PushGuiPage("page_prelobby.xml", { "connect" : true });
 }
 

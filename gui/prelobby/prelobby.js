@@ -18,6 +18,7 @@ function init(initData)
 	if (Engine.ConfigDB_GetValue("user", "lobby.login") && g_EncryptedPassword)
 	{
 		switchPage("connect");
+
 		if (initData && initData.connect)
 			lobbyStartConnect();
 	}
@@ -36,6 +37,21 @@ function lobbyStop()
 
 function lobbyStartConnect()
 {
+	if (Engine.ConfigDB_GetValue("user", "multiplayerhosting.lobby") == "true")
+		messageBox(
+			400, 200,
+			translate("You seem to hosting a game in the lobby. If you go relog into the lobby it will vanish from the gamelist. Continue?"),
+			translate("Confirmation"),
+			[translate("No"), translate("Yes")],
+			[null, doConnect]
+		);
+	else
+		doConnect();
+}
+
+function doConnect()
+{
+	saveSettingAndWriteToUserConfig("multiplayerhosting.lobby", "false");
 	if (g_LobbyIsConnecting)
 		return;
 
@@ -205,6 +221,8 @@ function onTick()
 			if (!Engine.ConfigDB_GetValue("user", "playername.multiplayer"))
 				saveSettingAndWriteToUserConfig("playername.multiplayer", username);
 			saveSettingAndWriteToUserConfig("lobby.login", username);
+			saveSettingAndWriteToUserConfig("lobby.loggedin", "true");
+
 			// We only store the encrypted password, so make sure to re-encrypt it if changed before saving.
 			if (password != g_EncryptedPassword.substring(0, 10))
 				g_EncryptedPassword = Engine.EncryptPassword(password, username);
@@ -273,6 +291,7 @@ function cycleFocus()
 	Engine.GetGUIObjectByName(textInputFocus.list[textInputFocus.id]).focus();
 	textInputFocus.id = (textInputFocus.id + 1 + textInputFocus.list.length) % textInputFocus.list.length;
 }
+
 function openTermsOfService()
 {
 	g_TermsOfServiceRead = true;

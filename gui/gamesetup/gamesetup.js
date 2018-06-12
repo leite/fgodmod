@@ -1119,11 +1119,14 @@ function init(attribs)
 		cancelSetup();
 		return;
 	}
-
 	g_IsTutorial = !!attribs.tutorial;
 	g_ServerName = attribs.serverName;
 	g_ServerIP = attribs.serverIP;
 	g_ServerPort = attribs.serverPort;
+	// if (g_ServerIP)
+	// warn(g_ServerIP + ":" + g_ServerPort);
+	// if (g_ServerName)
+	// 	warn(g_ServerName + ":" + g_ServerPort);
 	g_StunEndpoint = attribs.stunEndpoint;
 	g_PlayerName = !!attribs.playerName ? attribs.playerName : "";
 	g_UseSTUN = attribs.useSTUN;

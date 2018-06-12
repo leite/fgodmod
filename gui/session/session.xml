@@ -69,6 +69,12 @@
 		</action>
 	</object>
 
+	<object hotkey="session.messagemenu">
+		<action on="Press">
+			openMessageMenu();
+		</action>
+	</object>
+
 	<!-- Hotkeys won't work properly unless outside menu -->
 	<include directory="gui/session/hotkeys/"/>
 
@@ -113,6 +119,30 @@
 			<action on="Press">leaveGame();</action>
 		</object>
 		<object name="loadingClientsText" size="30% 40%+50 70% 100%" type="text" ghost="true" style="netStatusPlayersText" hidden="true" z="2"/>
+	</object>
+
+	
+	<object
+		type="text"
+		name="fgodmod"
+		size="100%-180 100%-20 100% 100%+50"
+		text_align="right"
+		font="sans-bold-12"
+		textcolor="255 255 255 128"
+		>
+	</object>
+
+	<object type="image" name="messagesMenu" size="0 50%-100 300 50%+100" sprite="sessionOverlayBackground" hidden="true" z="0">
+		<object
+			type="text"
+			name="messagesMenuText"
+			size="10 10 100% 100%"
+			text_align="left"
+			ghost="true"
+			font="sans-bold-14"
+			textcolor="white"
+			>
+		</object>
 	</object>
 
 	<!-- Notification Area -->

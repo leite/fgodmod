@@ -393,7 +393,7 @@
 			{
 				"type": "boolean",
 				"label": "Start Into Lobby",
-				"tooltip": "Go into lobby at startup.",
+				"tooltip": "Go into lobby at startup, when not remembered to be already logged into lobby in another instance.",
 				"config": "gui.startintolobby"
 			},
 			{

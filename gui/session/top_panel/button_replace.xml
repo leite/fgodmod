@@ -5,7 +5,7 @@
 	style="iconButton"
 	tooltip_style="sessionToolTip"
 >
-		<translatableAttribute id="tooltip">Replace</translatableAttribute>
+		<translatableAttribute id="tooltip">Replace selected player, if he is offline and lobby authentication isn't enabled in the host.</translatableAttribute>
 	<!-- TODO make the button less ugly -->
 	<object size="75%-16 10% 75% 10%+16" name="replaceButtonImage" type="image"
 	sprite="iconResetGold" ghost="true"/>

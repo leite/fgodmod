@@ -414,7 +414,8 @@ var g_NetMessageTypes = {
 	},
 	"game": {
 		"gamelist": msg => {
-			updateGameList();
+			updateGameList(g_AutoScrollGameListFromSelection);
+			g_AutoScrollGameListFromSelection = false;
 			return false;
 		},
 		"profile": msg => {
@@ -495,6 +496,24 @@ var g_ChatCommands = {
 			return false;
 		}
 	},
+	"showip": {
+		"description": translate("Show ip and port of the selected game from the gamelist."),
+		"handler": args =>  { 
+
+			let gamesBox = Engine.GetGUIObjectByName("gameList");
+			if (gamesBox.selected > -1)
+			{
+				let game = g_GameList[gamesBox.selected];
+				let ip = game.stunIP ? game.stunIP : game.ip;
+				let port = game.stunPort ? game.stunPort : game.port;
+				addChatMessage({
+					"from": "system",
+					"text": "IP from " + escapeText(game.name) + ": " + ip + ":" + port
+				});
+			}
+			return false;
+		}
+	},
 	"me": {
 		"description": translate("Send a chat message about yourself. Example: /me goes swimming."),
 		"handler": args => true
@@ -533,6 +552,7 @@ function clearGameSelectionTooltip(show)
 		: "";
 }
 
+var g_AutoScrollGameListFromSelection = false;
 
 /**
  * Called after the XmppConnection succeeded and when returning from a game.
@@ -546,6 +566,7 @@ function init(attribs = {})
 	g_SelectedGameIP = !!attribs.game_ip ? attribs.game_ip : "";
 	g_SelectedGamePort = !!attribs.game_port ? attribs.game_port : "";
 	g_SelectedGameName = !!attribs.game_name ? attribs.game_name : "";
+	g_AutoScrollGameListFromSelection = !!attribs.game_ip || !!attribs.game_name;
 	if (g_SelectedGameIP || g_SelectedGameName)
 		g_CancelHotkey.splice(2, 0, setGameListBoxUnselected)
 
@@ -576,7 +597,8 @@ function init(attribs = {})
 	initUserConfigurables();
 
 	updateToggleBuddy();
-	Engine.GetGUIObjectByName("chatInput").tooltip = colorizeAutocompleteHotkey("Press %(hotkey)s to focus chat input and keep pressing %(hotkey)s to cycle through all autocompleting playernames.");
+	Engine.GetGUIObjectByName("chatInput").tooltip = 
+		colorizeAutocompleteHotkey("Press %(hotkey)s to focus chat input and keep pressing %(hotkey)s to cycle through all autocompleting playernames or commands.");
 
 	// Get all messages since the login
 	for (let msg of Engine.LobbyGuiPollHistoricMessages())
@@ -782,6 +804,7 @@ function leaveLobby()
 	else
 	{
 		Engine.StopXmppClient();
+		saveSettingAndWriteToUserConfig("lobby.loggedin", "false");
 		Engine.SwitchGuiPage("page_pregame.xml");
 	}
 }
@@ -1446,6 +1469,8 @@ function updateGameList(autoScroll = false)
 		let game = g_GameList[gamesBox.selected];
 		g_SelectedGameIP = game.stunIP ? game.stunIP : game.ip;
 		g_SelectedGamePort = game.stunPort ? game.stunPort : game.port;
+		// if (g_AutoScrollGameListFromSelection && g_GameList.length > 0)
+		// 	warn(g_SelectedGameIP + ":" + g_SelectedGamePort);
 	}
 
 	g_GameList = Engine.GetGameList().map(game => {

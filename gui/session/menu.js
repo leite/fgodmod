@@ -91,6 +91,7 @@ function initMenu()
 		Engine.GetGUIObjectByName(button).enabled = !Engine.IsAtlasRunning();
 
 	g_UpdateLobbyNotification = setLobbyButtonIcon;
+	g_UpdateLobbyNotification = setLobbyButtonIcon;
 }
 
 function setLobbyButtonIcon(notify)
@@ -99,6 +100,7 @@ function setLobbyButtonIcon(notify)
 	let lobbyButton = Engine.GetGUIObjectByName("lobbyButton");
 
 	menuButton.caption = translate("Menu");
+	menuButton.tooltip = "";
 	lobbyButton.caption = translate("Lobby Dialog");
 	if (notify)
 	{
@@ -305,8 +307,8 @@ function optionsPageClosed(data)
 
 function openChat(command = "")
 {
-	if (g_Disconnected)
-		return;
+	// if (g_Disconnected)
+	// 	return;
 
 	closeOpenDialogs();
 	showDarkenOverlay(true);

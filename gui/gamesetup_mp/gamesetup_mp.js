@@ -310,6 +310,9 @@ function startHost(playername, servername, port)
 
 	// saveSettingAndWriteToUserConfig("playername.multiplayer", playername);
 
+	if (Engine.HasXmppClient())
+		saveSettingAndWriteToUserConfig("multiplayerhosting.lobby", "true");
+
 	saveSettingAndWriteToUserConfig("multiplayerhosting.port", port);
 
 	if (servername)
