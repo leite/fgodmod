@@ -59,7 +59,7 @@ Updates (Features)
         
         Show won player with yellow/gold color in selection dropdown.
         
-        Drop Player prevention when joining a multiplayer game. (https://trac.wildfiregames.com/changeset/21838, Author: temple!)
+        Drop Player prevention when joining a multiplayer game. (https://trac.wildfiregames.com/changeset/21838, Author: temple)
                 
 
  v1.6.17
