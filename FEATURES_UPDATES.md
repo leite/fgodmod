@@ -1,5 +1,7 @@
 # fgod mod for 0 A. D. version A23 (Toggle this page with Hotkey Alt+Shift+F)
 
+New Version v1.6.20!
+
 This mod has proposal features for the 0 A. D.. Some already included.
 Think about donate me (fpre). It would give me more time to work for fgod and 0 A. D..
 We all profit.
@@ -12,8 +14,8 @@ Updates (Features)
 
 v1.6.20
     In-Game:
-        New Ally Messages Menu (Hotkey Ctrl+Y) Test!
-        Send remaining resources on resign via tribut to allied players (in options default on).
+        New Ally Messages Menu (Hotkey Ctrl+Y) Test + selection keys 0-9!
+        Send automatically remaining resources on resign via tribut to allied players (in options default on).
 
 v1.6.18 - 1.6.19
     Lobby:

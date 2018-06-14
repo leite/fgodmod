@@ -120,7 +120,7 @@ function reloadGame()
 {
 	messageBox(
 		400, 200,
-		translate("Some fgod mod settings has been changed. Reload game to apply?"),
+		translate("Some fgod mod settings has been changed. Reload the game to apply them?"),
 		translate("Confirmation"),
 		[translate("No"), translate("Yes")],
 		[null, Engine.RestartEngine]
