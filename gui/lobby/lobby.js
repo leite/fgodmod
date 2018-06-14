@@ -598,7 +598,7 @@ function init(attribs = {})
 
 	updateToggleBuddy();
 	Engine.GetGUIObjectByName("chatInput").tooltip = 
-		colorizeAutocompleteHotkey("Press %(hotkey)s to focus chat input and keep pressing %(hotkey)s to cycle through all autocompleting playernames or commands.");
+		colorizeAutocompleteHotkey("Press %(hotkey)s to focus chat input and keep pressing %(hotkey)s to cycle through all autocompleting playernames or /-commands.\nEnter " + setStringTags("/help", { "color": "yellow"}) + " for all /-commands.");
 
 	// Get all messages since the login
 	for (let msg of Engine.LobbyGuiPollHistoricMessages())

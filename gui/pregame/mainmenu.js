@@ -31,6 +31,7 @@ function setDefaultUserConfs(forceOverwrite)
 			fgodmanual: "Alt+Shift+F",
 			options: "Alt+O",
 			focustextinput: "tab",
+			"session.allyequalizeresources": "Alt+Shift+E",
 			"session.messagemenu": "Ctrl+Y",
 			"session.selectplayer.1": "Alt+1",
 			"session.selectplayer.2": "Alt+2",
@@ -41,6 +42,9 @@ function setDefaultUserConfs(forceOverwrite)
 			"session.selectplayer.7": "Alt+7",
 			"session.selectplayer.8": "Alt+8",
 			"session.selectplayer.0": "Alt+0" },
+		"session": {
+			sendresonresign: "true"
+		},
 		"gui": {
 		startintolobby: "false"
 
@@ -126,13 +130,13 @@ function reloadGame()
 function init(initData, hotloadData)
 {
 	initMusic();
-
+	// sprintf("ok %(s1)s %(s2)s", [ "ok", "ok2"]...);
 	if (!Engine.GetEngineInfo() || !("engine_version" in Engine.GetEngineInfo()) || Engine.GetEngineInfo().engine_version != "0.0.23")
 	{
 		warn("Wrong 0 A.D. Version. Fgod mod only made for 0 A.D. version 0.0.23. You may experience inappropriate behaviour.");
 	}
 
-	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-16" });
+	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-12" });
 
 	let ver = +Engine.ConfigDB_GetValue("user", "fgod.version") || 0;
 	let verNum = +g_FgodModVersion.replace(/\./g, "");

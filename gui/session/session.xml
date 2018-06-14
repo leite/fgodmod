@@ -69,6 +69,12 @@
 		</action>
 	</object>
 
+	<object hotkey="session.allyequalizeresources">
+		<action on="Press">
+			equalizeResourcesWithAllies();
+		</action>
+	</object>
+
 	<object hotkey="session.messagemenu">
 		<action on="Press">
 			toggleMessageMenu();
@@ -132,17 +138,18 @@
 		>
 	</object>
 
-	<object type="image" name="messagesMenu" size="0 50%-100 300 50%+100" sprite="sessionOverlayBackground" hidden="true" z="0">
+	<object type="image" name="messagesMenu" size="0 50%-130 300 50%+130" hidden="true" z="0"
+	sprite="genericPanel">
 		<object
 			type="text"
 			name="messagesMenuText"
-			size="10 10 100% 100%"
+			buffer_zone="12"
+			size="5 5 100%-5 100%-5"
 			text_align="left"
-			ghost="true"
+			style="ModernTextPanel"
 			font="sans-bold-14"
 			textcolor="white"
-			>
-		</object>
+			/>
 	</object>
 
 	<!-- Notification Area -->

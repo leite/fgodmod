@@ -552,6 +552,12 @@
 				"tooltip": "Color of enemies when diplomacy colors are enabled.",
 				"config": "gui.session.diplomacycolors.enemy",
 				"callback": "updateDisplayedPlayerColors"
+			},
+			{
+				"type": "boolean",
+				"label": "Send resources on resign to allies",
+				"tooltip": "Send resources on resign as tribut shared among allies.",
+				"config": "session.sendresonresign"
 			}
 		]
 	}

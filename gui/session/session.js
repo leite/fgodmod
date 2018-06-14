@@ -263,82 +263,210 @@ var g_HostJID;
 var g_PlayerName;
 var g_ServerName = "";
 
+var g_MessageMenusSave = [];
+var g_MessageMenusSavePerma = {};
 const g_MessageMenus = {
 	"main": {
-		"text": "Messages Menu [to Allies]",
+		"text": () => "Messages Menu [to Allies]",
 		keys: [
-			[ "1", "need_res" ],
-			[ "2", "pos1" ],
+			[ "1", "need_quick" ],
+			[ "2", "need_res" ],
 			[ "3", "help1" ],
-			[ "0", { text: "Exit", exit: true } ]
-		]
+			[ "4", "attack1" ],
+			[ "5", "attackColor" ],
+			[ "6", "trade" ],
+			[ "7", "pos1" ],
+			[ "8", "team" ],
+			[ "0", { text: "Exit" } ]
+		],
+		go: ""
+	},
+	"team": { 
+		"text": () => "Team Messages",
+		"msg": () => g_MessageMenusSave[0],
+		keys: [
+			[ "1", { text: "Yes.", save: true } ],
+			[ "2", { text: "No.", save: true } ],
+			[ "3", { text: "Sadly, I think we have lost.", save: true } ],
+			[ "4", { text: "Good work!", save: true } ],
+			[ "5", { text: "Someone go for a civic center in the middle?", save: true } ],
+			[ "6", { text: "Can you build a civic center near me?", save: true, loadPerma: () => g_MessageMenusSavePerma["pos"] || "", loadPermaMsg: () => g_MessageMenus.team.msg() + " (At clock position " + g_MessageMenusSave[1] + ")" } ],
+			[ "7", { text: "Build up defence, please.", save: true } ],
+			[ "0", "main" ]
+		],
+		go: "msg"
+	},
+	"trade": { 
+		"text": () => "Exchange Resources",
+		keys: [
+			[ "1", { text: "Food", save: "food"  } ],
+			[ "2", { text: "Wood", save: "wood" } ],
+			[ "3", { text: "Metal", save: "metal" } ],
+			[ "4", { text: "Stone", save: "stone" } ],
+			[ "0", "main" ]
+		],
+		go: "trade_for"
+	},
+	"trade_for": { 
+		"text": () => g_MessageMenus.trade.text() + " " + g_MessageMenusSave[0],
+		"msg": () => "I would exchange " + g_MessageMenusSave[0] + " for " + g_MessageMenusSave[1] + " if you like.",
+		keys: [
+			[ "1", { text: "For Food", save: "food"  } ],
+			[ "2", { text: "For Wood", save: "wood" } ],
+			[ "3", { text: "For Metal", save: "metal" } ],
+			[ "4", { text: "For Stone", save: "stone" } ],
+			[ "0", "main" ]
+		],
+		go: "msg"
+	},
+	"need_quick": {
+		"text": () => "Need Quick",
+		"msg": () => "I need " + g_MessageMenusSave[0] + " please.",
+		keys: [
+			[ "1", { text: "Help (with saved position)", save: "help", loadPerma: () => g_MessageMenusSavePerma["pos"] || "", loadPermaMsg: () => g_MessageMenus.need_quick.msg() + " (At clock position " + g_MessageMenusSave[1] + ")" } ],
+			[ "2", { text: "Help (quick)", save: "help quick" } ],
+			[ "3", { text: "Attack", save: "you to attack" } ],
+			[ "4", { text: "Food", save: "food" } ],
+			[ "5", { text: "Wood", save: "wood" } ],
+			[ "6", { text: "Stone", save: "stone" } ],
+			[ "7", { text: "Metal", save: "metal" } ],
+			[ "0", "main" ]
+		],
+		go: "msg"
 	},
 	"need_res": {
-		"text": "Need Resources",
-		"msg": "I need resource",
+		"text": () => "Need Resources Amount",
 		keys: [
-			[ "1", { text: "Food", msg: () => g_MessageMenus.need_res.msg + " food." } ],
-			[ "2", { text: "Wood", msg: () => g_MessageMenus.need_res.msg + " wood." } ],
-			[ "3", { text: "Stone", msg: () => g_MessageMenus.need_res.msg + " stone." } ],
-			[ "4", { text: "Metal", msg: () => g_MessageMenus.need_res.msg + " metal." } ],
+			[ "1", { text: "Food", save: "food" } ],
+			[ "2", { text: "Wood", save: "wood" } ],
+			[ "3", { text: "Stone", save: "stone" } ],
+			[ "4", { text: "Metal", save: "metal" } ],
 			[ "0", "main" ]
-		]
+		],
+		go: "need_res_amount"
 	},
-	"help1": { 
-		"text": "Need Help At Clock Position [1/2]",
-		"msg": "I need help at clock position",
+	"need_res_amount": {
+		"text": () => "Need Resource " + g_MessageMenusSave[0],
+		"msg": () => "I need " + g_MessageMenusSave[1] + " " + g_MessageMenusSave[0] + " please.",
 		keys: [
-			[ "1", { text: "1", msg: () => g_MessageMenus.help1.msg + " 1." } ],
-			[ "2", { text: "2", msg: () => g_MessageMenus.help1.msg + " 2." } ],
-			[ "3", { text: "3", msg: () => g_MessageMenus.help1.msg + " 3." } ],
-			[ "4", { text: "4", msg: () => g_MessageMenus.help1.msg + " 4." } ],
-			[ "5", { text: "5", msg: () => g_MessageMenus.help1.msg + " 5." } ],
-			[ "6", { text: "6", msg: () => g_MessageMenus.help1.msg + " 6." } ],
-			[ "7", { text: "7", msg: () => g_MessageMenus.help1.msg + " 7." } ],
-			[ "8", { text: "8", msg: () => g_MessageMenus.help1.msg + " 8." } ],
-			[ "9", "help2" ],
+			[ "1", { text: "100", save: true } ],
+			[ "2", { text: "200", save: true } ],
+			[ "3", { text: "300", save: true } ],
+			[ "4", { text: "400", save: true } ],
+			[ "5", { text: "500", save: true } ],
+			[ "6", { text: "1000", save: true } ],
+			[ "7", { text: "1500", save: true } ],
+			[ "8", { text: "2000", save: true } ],
+			[ "9", { text: "2500", save: true } ],
 			[ "0", "main" ]
-		]
+		],
+		go: "msg"
 	},
-	"help2": { 
-		"text": "Need Help At Clock Position [2/2]",
-		"msg": "I need help at clock position",
+	"attack1": { 
+		"text": () => "Please Attack At Clock Position [1/2]",
+		"msg": () => "Please attack at clock position " + g_MessageMenusSave[0] + ".",
 		keys: [
-			[ "1", { text: "9", msg: () => g_MessageMenus.help2.msg + " 9." } ],
-			[ "2", { text: "10", msg: () => g_MessageMenus.help2.msg + " 10." } ],
-			[ "3", { text: "11", msg: () => g_MessageMenus.help2.msg + " 11." } ],
-			[ "4", { text: "12", msg: () => g_MessageMenus.help2.msg + " 12." } ],
+			[ "1", { text: "1", save: "1" } ],
+			[ "2", { text: "2", save: "2" } ],
+			[ "3", { text: "3", save: "3" } ],
+			[ "4", { text: "4", save: "4" } ],
+			[ "5", { text: "5", save: "5" } ],
+			[ "6", { text: "6", save: "6" } ],
+			[ "7", { text: "7", save: "7" } ],
+			[ "8", { text: "8", save: "8" } ],
+			[ "9", "attack2" ],
+			[ "0", "main" ]
+		],
+		go: "msg"
+	},
+	"attack2": { 
+		"text": () => "Please Attack At Clock Position [2/2]",
+		"msg": () => g_MessageMenus.attack1.msg(),
+		keys: [
+			[ "1", { text: "9", save: "9" } ],
+			[ "2", { text: "10", save: "10" } ],
+			[ "3", { text: "11", save: "11" } ],
+			[ "4", { text: "12", save: "12" } ],
 			[ "9", "help1" ],
 			[ "0", "main" ]
-		]
+		],
+		go: "msg"
+	},
+	"attackColor": { 
+		"text": () => "Please Attack Color Player",
+		"msg": () => "Please attack " + g_MessageMenusSave[0] + " player.",
+		keys: [
+			[ "1", { text: "blue", save: true } ],
+			[ "2", { text: "red", save: true } ],
+			[ "3", { text: "green", save: true } ],
+			[ "4", { text: "yellow", save: true } ],
+			[ "5", { text: "cyan", save: true } ],
+			[ "6", { text: "purple", save: true } ],
+			[ "7", { text: "orange", save: true } ],
+			[ "8", { text: "black", save: true } ],
+			[ "0", "main" ]
+		],
+		go: "msg"
+	},
+	"help1": { 
+		"text": () => "Need Help At Clock Position [1/2]",
+		"msg": () => "I need help at clock position " + g_MessageMenusSave[0] + " please.",
+		keys: [
+			[ "1", { text: "1", save: "1" } ],
+			[ "2", { text: "2", save: "2" } ],
+			[ "3", { text: "3", save: "3" } ],
+			[ "4", { text: "4", save: "4" } ],
+			[ "5", { text: "5", save: "5" } ],
+			[ "6", { text: "6", save: "6" } ],
+			[ "7", { text: "7", save: "7" } ],
+			[ "8", { text: "8", save: "8" } ],
+			[ "9", "help2" ],
+			[ "0", "main" ]
+		],
+		go: "msg"
+	},
+	"help2": { 
+		"text": () => "Need Help At Clock Position [2/2]",
+		"msg": () => g_MessageMenus.help1.msg(),
+		keys: [
+			[ "1", { text: "9", save: "9" } ],
+			[ "2", { text: "10", save: "10" } ],
+			[ "3", { text: "11", save: "11" } ],
+			[ "4", { text: "12", save: "12" } ],
+			[ "9", "help1" ],
+			[ "0", "main" ]
+		],
+		go: "msg"
 	},
 	"pos1": {
-		"text": "My Clock Position [1/2]",
-		"msg": "My clock position is at",
+		"text": () => "My Clock Position (will be saved) [1/2]",
+		"msg": () => "My clock position is at " + g_MessageMenusSave[0] + ".",
 		keys: [
-			[ "1", { text: "1", msg: () => g_MessageMenus.pos1.msg + " 1." } ],
-			[ "2", { text: "2", msg: () => g_MessageMenus.pos1.msg + " 2." } ],
-			[ "3", { text: "3", msg: () => g_MessageMenus.pos1.msg + " 3." } ],
-			[ "4", { text: "4", msg: () => g_MessageMenus.pos1.msg + " 4." } ],
-			[ "5", { text: "5", msg: () => g_MessageMenus.pos1.msg + " 5." } ],
-			[ "6", { text: "6", msg: () => g_MessageMenus.pos1.msg + " 6." } ],
-			[ "7", { text: "7", msg: () => g_MessageMenus.pos1.msg + " 7." } ],
-			[ "8", { text: "8", msg: () => g_MessageMenus.pos1.msg + " 8." } ],
+			[ "1", { text: "1", save: true, savePerma: "pos" } ],
+			[ "2", { text: "2", save: true, savePerma: "pos" } ],
+			[ "3", { text: "3", save: true, savePerma: "pos" } ],
+			[ "4", { text: "4", save: true, savePerma: "pos" } ],
+			[ "5", { text: "5", save: true, savePerma: "pos" } ],
+			[ "6", { text: "6", save: true, savePerma: "pos" } ],
+			[ "7", { text: "7", save: true, savePerma: "pos" } ],
+			[ "8", { text: "8", save: true, savePerma: "pos" } ],
 			[ "9", "pos2" ],
 			[ "0", "main" ]
-		]
+		],
+		go: "msg"
 	},
 	"pos2": {
-		"text": "My Clock Position [2/2]",
-		"msg": "My clock position is at",
+		"text": () => "My Clock Position [2/2]",
+		"msg": () => g_MessageMenus.pos1.msg(),
 		keys: [
-			[ "1", { text: "9", msg: () => g_MessageMenus.pos2.msg + " 9." } ],
-			[ "2", { text: "10", msg: () => g_MessageMenus.pos2.msg + " 10." } ],
-			[ "3", { text: "11", msg: () => g_MessageMenus.pos2.msg + " 11." } ],
-			[ "4", { text: "12", msg: () => g_MessageMenus.pos2.msg + " 12." } ],
+			[ "1", { text: "9", save: true, savePerma: "pos" } ],
+			[ "2", { text: "10", save: true, savePerma: "pos" } ],
+			[ "3", { text: "11", save: true, savePerma: "pos" } ],
+			[ "4", { text: "12", save: true, savePerma: "pos" } ],
 			[ "9", "pos1" ],
 			[ "0", "main" ]
-		]
+		],
+		go: "msg"
 	}
 }
 
@@ -362,6 +490,9 @@ function closeMessageMenu()
 	showMessageMenu();
 }
 
+var g_MessageMenuSendMsgs = 0;
+var g_MessageMenuSendTimer = 0;
+
 function switchMenuKey(keyGo)
 {
 	// warn(keyGo)
@@ -376,19 +507,96 @@ function switchMenuKey(keyGo)
 				g_OpenedMessageMenu = obj;
 			else if (typeof obj === 'object')
 			{
-				if (!!obj.exit)
-					g_OpenedMessageMenu = "";
-				else if (!!obj.msg)
+				if (!!obj.save)
 				{
-					g_OpenedMessageMenu = "";
-					submitChatDirectly("/allies " + obj.msg());
+					let save = "";
+					if (typeof obj.save === 'boolean')
+						save = obj.text;
+					else
+						save = obj.save;
+					g_MessageMenusSave.push(save);
+					if (!!obj.savePerma)
+						g_MessageMenusSavePerma[obj.savePerma] = save;
+					if (!!obj.loadPerma && obj.loadPerma())
+						g_MessageMenusSave.push(obj.loadPerma());
 				}
+				if (menu.go == "msg")
+				{
+					if (g_MessageMenuSendMsgs < 3)
+					{
+						if (!!obj.loadPerma && obj.loadPerma())
+							submitChatDirectly("/allies " + obj.loadPermaMsg());
+						else
+							submitChatDirectly("/allies " + menu.msg());
+						++g_MessageMenuSendMsgs;
+					}
+					else
+					{
+						let clearSpamMessage = () => {
+							if (g_SpamMId > 0)
+							{
+								if (g_SpamTimer)
+									clearTimeout(g_SpamTimer);
+								g_SpamTimer = 0;
+								g_ChatHistory.splice(g_SpamHId, 1);
+								g_ChatMessages.splice(g_SpamMId, 1);
+								Engine.GetGUIObjectByName("chatText").caption = g_ChatMessages.join("\n");
+								updateChatHistory();
+							}
+						}
+						clearSpamMessage();
+						let msg = time =>
+						{ return {
+							"type": "system",
+							"guid": 0,
+							"text": "(Wait " + (time/1000).toFixed(1) + " seconds for next message.)"
+						}; };
+						addChatMessage(msg(3500));
+						g_SpamMId = g_ChatMessages.length - 1;
+						g_SpamHId = g_ChatHistory.length - 1;
+
+						let updateSecondsSpamMessage = time => {
+							g_ChatMessages[g_SpamMId] = g_FormatChatMessage["system"](msg(time));
+							Engine.GetGUIObjectByName("chatText").caption = g_ChatMessages.join("\n");
+							updateChatHistory();
+							if (time > 0)
+								g_SpamTimer = setTimeout(() => updateSecondsSpamMessage(time-100), 100);
+							else
+								clearSpamMessage();
+						}
+
+						updateSecondsSpamMessage(2000);
+					}
+
+					let reduceMsgCountPerTime = () => {
+						if (g_MessageMenuSendMsgs <= 0)
+						{
+							g_MessageMenuSendTimer = 0;
+							return;
+						}
+						--g_MessageMenuSendMsgs;
+						g_MessageMenuSendTimer = setTimeout(reduceMsgCountPerTime, 2000);
+					}
+						
+					if (g_MessageMenuSendTimer)
+						clearTimeout(g_MessageMenuSendTimer);
+					g_MessageMenuSendTimer = setTimeout(reduceMsgCountPerTime, 2000);
+
+					g_MessageMenusSave = [];
+					g_OpenedMessageMenu = "";
+				}
+				else
+					g_OpenedMessageMenu = g_MessageMenus[g_OpenedMessageMenu].go;
 			}
 			showMessageMenu();
 			break;
 		}
 	}
 }
+
+var g_SpamHId = -1;
+var g_SpamMId = -1;
+var g_SpamTimer = 0;
 
 function showMessageMenu()
 {
@@ -398,7 +606,7 @@ function showMessageMenu()
 	if (g_OpenedMessageMenu)
 	{
 		let menu = g_MessageMenus[g_OpenedMessageMenu];
-		cap = g_MessageMenus[g_OpenedMessageMenu].text;
+		cap = escapeText(g_MessageMenus[g_OpenedMessageMenu].text())+"\n";
 		for (let e of menu.keys)
 		{
 			let [key, obj] = e;
@@ -406,15 +614,16 @@ function showMessageMenu()
 			if (typeof obj === 'object')
 				textAdd = key + ". " + obj.text;
 			else if (typeof obj === 'string')
-				textAdd = key + ". " + g_MessageMenus[obj].text;
+				textAdd = key + ". " + g_MessageMenus[obj].text();
 			else
 				continue;
-
-			cap += "\n" + textAdd;
+			if (key == "0")
+				cap += "\n";
+			cap += "\n" + escapeText(textAdd);
 		}
 	}
 
-	Engine.GetGUIObjectByName("messagesMenuText").caption = escapeText(cap);
+	Engine.GetGUIObjectByName("messagesMenuText").caption = cap;
 	Engine.GetGUIObjectByName("messagesMenu").hidden = !cap;
 }
 
@@ -429,8 +638,12 @@ function init(initData, hotloadData)
 
 	Engine.GetGUIObjectByName("fgodmod").caption = "FGod Mod v" + Engine.GetEngineInfo().mods.filter(mod => mod[0].startsWith("fgod"))[0][1];
 	
+	Engine.GetGUIObjectByName("pauseButton").tooltip = colorizeHotkey("Press %(hotkey)s to pause the game.", "pause");
+	Engine.GetGUIObjectByName("summaryButton").tooltip = colorizeHotkey("Press %(hotkey)s to open game summary.", "summary");
+	Engine.GetGUIObjectByName("manualButton").tooltip = colorizeHotkey("Press %(hotkey)s to fgod features.", "fgodmanual");
 	Engine.GetGUIObjectByName("optionsButton").tooltip = colorizeHotkey("Press %(hotkey)s to open options.", "options");
 	Engine.GetGUIObjectByName("lobbyButton").tooltip = colorizeHotkey("Press %(hotkey)s to open lobby.", "lobby");
+	Engine.GetGUIObjectByName("menuExitButton").tooltip = colorizeHotkey("Press %(hotkey)s to quit the game.", "close");
 
 	g_ServerIP = initData.serverIP;
 	g_ServerPort = initData.serverPort;
@@ -951,6 +1164,40 @@ function reportPerformance(time)
 	}));
 }
 
+function equalizeResourcesWithAllies()
+{
+	return;
+	let playerStates = GetSimState().players;
+	let viewedPlayerStates = playerStates[g_ViewedPlayer];
+	let player = g_Players[g_ViewedPlayer];
+	let players = g_Players.map((pl,i) => { pl.id = i; return pl; }).filter((pl, i) => {
+		return i != g_ViewedPlayer && pl.state != "defeated" && (pl.team == player.team || player.isMutualAlly[i]);
+	});
+	playerStates = g_Players.map(pl => playerStates[pl.id]);
+
+	if (players.length)
+	{
+		let amounts = {};
+		let resCodes = g_ResourceData.GetCodes();
+		let playersPerRes = [];
+		for (let res of resCodes)
+		{
+			playersPerRes[res] = playerStates.filter(pl => playerStates[pl.id].resourceCounts[res] < viewedPlayerStates.resourceCounts[res]);
+			playersPerRes[res].forEach(pl => amounts[res] += playerStates[pl.id].resourceCounts[res]);
+			amounts[res] += viewedPlayerStates.resourceCounts[res];
+		}
+		for (let res of resCodes)
+			amounts[res] = Math.floor(amounts[res]/(playersPerRes[res].length + 1));
+
+		for (let res of resCodes)
+			playersPerRes[res].forEach(pl => { 
+				let amountsSend = [];
+				amountsSend[res] = amounts[res] - playerStates[pl.id].resourceCounts[res];
+				Engine.PostNetworkCommand({ "type": "tribute", "player": pl.id, "amounts": amountsSend });
+			});
+	}
+}
+
 /**
  * Resign a player.
  * @param leaveGameAfterResign If player is quitting after resignation.
@@ -959,6 +1206,25 @@ function resignGame(leaveGameAfterResign)
 {
 	if (g_IsObserver || g_Disconnected)
 		return;
+
+	if (Engine.ConfigDB_GetValue("user", "session.sendresonresign") == "true")
+	{
+		let player = g_Players[g_ViewedPlayer];
+		let players = g_Players.map((pl,i) => { pl.id = i; return pl; }).filter((pl, i) => {
+			return i != g_ViewedPlayer && pl.state != "defeated" && (pl.team == player.team || player.isMutualAlly[i]);
+		})
+
+		if (players.length)
+		{
+			let viewedPlayerStates = GetSimState().players[g_ViewedPlayer];
+			let amounts = {};
+			let resCodes = g_ResourceData.GetCodes();
+			for (let res of resCodes)
+				amounts[res] = Math.floor(viewedPlayerStates.resourceCounts[res] / players.length);
+
+			players.forEach(pl => { Engine.PostNetworkCommand({ "type": "tribute", "player": pl.id, "amounts": amounts }); });
+		}
+	}
 
 	Engine.PostNetworkCommand({
 		"type": "resign"
