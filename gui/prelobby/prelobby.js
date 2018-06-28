@@ -4,6 +4,7 @@ var g_PasswordInputIsHidden = false;
 var g_TermsOfServiceRead = false;
 var g_TermsOfUseRead = false;
 var g_DisplayingSystemMessage = false;
+var g_InGame = false;
 
 var textInputFocus = {
 	id: 0,
@@ -15,6 +16,7 @@ function init(initData)
 	Engine.GetGUIObjectByName("rememberPassword").checked =
 		Engine.ConfigDB_GetValue("user", "lobby.rememberpassword") == "true";
 	g_EncryptedPassword = Engine.ConfigDB_GetValue("user", "lobby.password");
+	g_InGame = initData && !!initData.ingame;
 	if (Engine.ConfigDB_GetValue("user", "lobby.login") && g_EncryptedPassword)
 	{
 		switchPage("connect");
@@ -217,7 +219,10 @@ function onTick()
 		case "connected":
 		{
 			Engine.PopGuiPage();
-			Engine.SwitchGuiPage("page_lobby.xml", { "dialog": false });
+			if (g_InGame)
+				Engine.PushGuiPage("page_lobby.xml", { "ingame": true, "dialog": true, "callback": "lobbyDialogClosed" });				
+			else
+				Engine.SwitchGuiPage("page_lobby.xml", { "dialog": false });
 			if (!Engine.ConfigDB_GetValue("user", "playername.multiplayer"))
 				saveSettingAndWriteToUserConfig("playername.multiplayer", username);
 			saveSettingAndWriteToUserConfig("lobby.login", username);

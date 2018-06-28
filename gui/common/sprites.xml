@@ -228,6 +228,14 @@
 	==========================================
 	-->
 
+	<sprite name="StoneButtonUnsGlow">
+		<effect	add_color="60 42 42 0" />
+		<image texture="global/button/button_stone_unselected.png"
+			real_texture_placement="0 0 256 28"
+			size="0 0 100% 100%"
+		/>
+	</sprite>
+
 	<sprite name="StoneButton">
 		<image texture="global/button/button_stone_unselected.png"
 			real_texture_placement="0 0 256 28"

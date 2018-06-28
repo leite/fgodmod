@@ -96,6 +96,13 @@
 		text_valign="center"
 	/>
 
+	<style name="iconButtonProgress2"
+		textcolor="255 255 255 255"
+		font="sans-stroke-14"
+		text_align="right"
+		text_valign="center"
+	/>
+
 	<style name="groupIconsText"
 		font="sans-bold-stroke-14"
 		textcolor="white"

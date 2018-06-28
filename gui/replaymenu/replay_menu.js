@@ -85,9 +85,13 @@ function init(data)
 	}
 
 	initGUIWindow();
+	Engine.GetGUIObjectByName("summaryButton").tooltip =
+	colorizeHotkey("Hit %(hotkey)s for toggle summary", "summary");
 
 	initHotkeyTooltips();
 	displayReplayList();
+	// forumButtonGlow(false);
+	g_Glow = setTimeout(() => forumButtonGlow(true), 1000);
 
 	if (data && data.summarySelectedData)
 		g_SummarySelectedData = data.summarySelectedData;
@@ -96,6 +100,25 @@ function init(data)
 		showSummary(data.showNextSummary);
 	
 	forumButton();
+}
+
+function updateSelectionTooltip(selected)
+{
+	Engine.GetGUIObjectByName("replaySelection").tooltip = selected >= 0 ?
+	colorizeHotkey("Hit %(hotkey)s for toggle summary", "summary") : "";
+}
+
+var g_Glow = 0;
+function forumButtonGlow(glow)
+{
+	// Engine.GetGUIObjectByName("forumButton").caption = setStringTags("Forum's Replays", { "color": glow ? "yellow" : "white" });
+	Engine.GetGUIObjectByName("forumButton").sprite = glow ? "StoneButtonUnsGlow" : "StoneButton";
+	let s = Engine.GetGUIObjectByName("replaySelection");
+	//  warn(uneval(g_Timers.length))
+	if (g_Glow)
+		clearTimeout(g_Glow);
+	g_Glow = setTimeout(() => forumButtonGlow(!glow), glow ? 1 : s.selected > -1 ? 1000 : 8000);
+	setNewTimerFunction
 }
 
 function forumButton()

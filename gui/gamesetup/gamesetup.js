@@ -155,10 +155,21 @@ var g_NetMessageTypes = {
 	"chat": msg => addChatMessage({ "type": "chat", "guid": msg.guid, "text": msg.text }),
 };
 
+var g_FgodPromo = false;
+var g_IsAfk = true;
+
 var g_FormatChatMessage = {
 	"system": (msg, user) => systemMessage(msg.text),
 	"settings": (msg, user) => systemMessage(translate('Game settings have been changed')),
-	"connect": (msg, user) => systemMessage(sprintf(translate("%(username)s has joined"), { "username": user })),
+	"connect": (msg, user) => { 
+		let m = 'You know fgod mod from forum (wildfiregames.com/forum)?\nNice faster lobby and much features added to in-game.\nScreenshots in forum. Fully compatible with normal 0ad and easy install. Try it out. :)\n';
+		let afk = "I'm shortly afk. Coming back soon!"
+
+		// warn()
+		if (g_FgodPromo && !!msg.username && splitRatingFromNick(msg.username).nick == g_PlayerName)
+			Engine.SendNetworkChat("Promo:\nHi " + msg.username + "! " + m + (g_IsAfk ? afk : ""));
+		return systemMessage(sprintf(translate("%(username)s has joined"), { "username": user }));
+	},
 	"disconnect": (msg, user) => systemMessage(sprintf(translate("%(username)s has left"), { "username": user })),
 	"kicked": (msg, user) => systemMessage(sprintf(translate("%(username)s has been kicked"), { "username": user })),
 	"banned": (msg, user) => systemMessage(sprintf(translate("%(username)s has been banned"), { "username": user })),
@@ -1188,6 +1199,8 @@ function setLobbyButtonIcon(notify)
 
 		g_LobbyNotifyTimer = setTimeout(() => blinkLobbyIcon(false), 1000);
 	}
+	else
+		Engine.GetGUIObjectByName("onscreenToolTip").hidden = true;
 }
 
 function blinkLobbyIcon(on)
@@ -2085,7 +2098,11 @@ function cancelSetup(data)
 		Engine.LobbySetPlayerPresence("available");
 
 		if (g_IsController)
+		{
 			Engine.SendUnregisterGame();
+
+			saveSettingAndWriteToUserConfig("multiplayerhosting.lobby", "false");
+		}
 
 		if (!(typeof data === "Object" || typeof data === "object"))
 			data = {};
@@ -2640,6 +2657,28 @@ function swapPlayers(guidToSwap, newSlot)
 	g_GameAttributes.settings.PlayerData[newSlot].AI = "";
 }
 
+function setFGodPromo(input)
+{
+	if (input.indexOf("/") != 0)
+		return false;
+
+	let command = input.split(" ", 1)[0];
+	let argument = input.substr(command.length + 1);
+
+	if (command == "/promo")
+		g_FgodPromo = true;
+	else if (command == "/nopromo")
+		g_FgodPromo = false;
+	else if (command == "/away")
+		g_IsAfk = true;
+	else if (command == "/back")
+		g_IsAfk = false;
+	else
+		return false;
+
+	return true;
+}
+
 function submitChatInput()
 {
 	let chatInput = Engine.GetGUIObjectByName("chatInput");
@@ -2649,7 +2688,7 @@ function submitChatInput()
 
 	chatInput.caption = "";
 
-	if (!executeNetworkCommand(text))
+	if (!setFGodPromo(text) && !executeNetworkCommand(text))
 		Engine.SendNetworkChat(text);
 
 	chatInput.focus();

@@ -555,8 +555,8 @@
 			},
 			{
 				"type": "boolean",
-				"label": "Send resources on resign to allies",
-				"tooltip": "Send resources on resign as tribut shared among allies.",
+				"label": "Share Resources Among Allies on Resign",
+				"tooltip": "Share own remaining resources among allies on resign. (Little Bug, Default Off, Can be tested though.)",
 				"config": "session.sendresonresign"
 			}
 		]

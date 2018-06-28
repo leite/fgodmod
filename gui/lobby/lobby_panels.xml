@@ -25,7 +25,8 @@
 	</object>
 
 	<object hotkey="focustextinput">
-		<action on="Press">Engine.GetGUIObjectByName("chatInput").focus();</action>
+		<!-- <action on="Press">focusSwitch();</action> -->
+		<action>Engine.GetGUIObjectByName("chatInput").focus();</action>
 	</object>
 	
 	<object hotkey="cancel">
@@ -85,13 +86,14 @@
 			type="dropdown"
 			style="ModernDropDown"
 			dropdown_size="80"
+			z="100"
 			size="0 100%-25 100% 100%"
 			font="sans-bold-stroke-12">
 			<action on="SelectionChange">g_AutoAwayStates[this.selected].func();</action>
 		</object>
 	</object>
 
-	<object name="profilePanel" size="20 100%-310 20% 100%-104">
+	<object name="profilePanel" size="20 100%-311 20% 100%-104">
 		<object name="profileBox" type="image" sprite="ModernDarkBoxGold" size="0 0 100% 100%">
 			<object name="profileArea" size="0 0 100% 100%">
 				<object name="usernameText" size="0 0 100% 45" type="text" style="ModernLabelText" font="sans-bold-16" />
@@ -236,8 +238,8 @@
 				applyFilters();
 			</action>
 			<action on="mouseleftdoubleclickitem">joinButton();</action>
-			<column id="buddy" width="12"/>
-			<column id="name" color="0 60 0" width="33%-12">
+			<column id="buddy" width="26"/>
+			<column id="name" color="0 60 0" width="33%-26">
 				<translatableAttribute id="heading">Name</translatableAttribute>
 			</column>
 			<column id="mapName" color="128 128 128" width="21%">
@@ -314,6 +316,9 @@
 			<object name="chatInput" size="0 100%-26 100%-72 100%-4" type="input" style="ModernInput" font="sans-13">
 				<action on="Press">submitChatInput();</action>
 				<action on="Tab">
+				<!-- if (!this.caption.length)
+					focusSwitch();
+				else -->
 					autoCompleteNick(this, g_PlayerList.map(player => player.name).concat(
 						Object.keys(g_ChatCommands).sort().map(com => { return "/" + com; })));
 				</action>

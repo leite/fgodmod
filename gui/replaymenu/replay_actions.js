@@ -259,8 +259,9 @@ function reallyDeleteReplay(replayDirectory)
 	if (!Engine.DeleteReplay(replayDirectory))
 		error("Could not delete replay!");
 
-	// Refresh replay list
-	init();
+	let data = { "ingame": g_InGame, "dialog": g_Dialog };
 
+	// Refresh replay list
+	init(data);
 	replaySelection.selected = Math.min(selectedIndex, g_ReplaysFiltered.length - 1);
 }

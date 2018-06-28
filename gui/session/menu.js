@@ -101,7 +101,7 @@ function setLobbyButtonIcon(notify)
 
 	menuButton.caption = translate("Menu");
 	menuButton.tooltip = "";
-	lobbyButton.caption = translate("Lobby Dialog");
+	lobbyButton.caption = translate("Lobby");
 	if (notify)
 	{
 		menuButton.caption = setStringTags(sprintf(translate("%(menuButtonCaption)s%(notificationSign)s"), { "menuButtonCaption": menuButton.caption, "notificationSign": g_NofiticationSign }), { "color": "255 255 60" });
@@ -154,18 +154,22 @@ function optionsMenuButton()
 
 function lobbyDialogButton()
 {
-	if (!Engine.HasXmppClient())
-		return;
-
 	closeOpenDialogs();
 	setLobbyButtonIcon(false);
 	g_LobbyDialogOpened = true;
-	Engine.PushGuiPage("page_lobby.xml", { "game_ip": g_ServerIP, "game_port": g_ServerPort, "game_name": g_ServerName, "ingame": true, "dialog": true, "callback": "lobbyDialogClosed" });
+	if (!g_IsNetworked)
+		pauseGame();
+	if (!Engine.HasXmppClient())
+		Engine.PushGuiPage("page_prelobby.xml", { "ingame": true });
+	else
+		Engine.PushGuiPage("page_lobby.xml", { "game_ip": g_ServerIP, "game_port": g_ServerPort, "game_name": g_ServerName, "ingame": true, "dialog": true, "callback": "lobbyDialogClosed" });
 }
 
 function lobbyDialogClosed(data)
 {
 	setLobbyDialogClosed();
+	if (!g_IsNetworked)
+		resumeGame();
 
 	if (data && !!data.goGUI)
 	{
@@ -419,10 +423,10 @@ function onToggleChatWindowExtended()
 function openDiplomacy()
 {
 	closeOpenDialogs();
-	showDarkenOverlay(true);
 
 	if (g_ViewedPlayer < 1)
 		return;
+	showDarkenOverlay(true);
 
 	g_IsDiplomacyOpen = true;
 
@@ -1101,7 +1105,7 @@ function updateGameSpeedControl()
 	Engine.GetGUIObjectByName("gameSpeedButton").hidden = g_IsNetworked;
 
 	let player = g_Players[Engine.GetPlayerID()];
-	g_GameSpeeds = getGameSpeedChoices(!player || player.state != "active");
+	g_GameSpeeds = getGameSpeedChoices(true); //(!player || player.state != "active");
 
 	let gameSpeed = Engine.GetGUIObjectByName("gameSpeed");
 	gameSpeed.list = g_GameSpeeds.Title;
@@ -1362,6 +1366,34 @@ function closeOpenDialogs()
 function formatTributeTooltip(playerID, resourceCode, amount)
 {
 	let playerStates = GetSimState().players;
+	let yourStock = Math.round(playerStates[g_ViewedPlayer].resourceCounts[resourceCode]);
+	let hisStock = Math.round(playerStates[playerID].resourceCounts[resourceCode]);
+	
+	let diff = yourStock - hisStock;
+	let changeablePercent = stock => (diff / stock) * 100 > 20;
+	let yourStockTagged = yourStock;
+	let hisStockTagged = hisStock; 
+	let changeColor = "orange";
+	let changeColor2 = "orange";
+	let diffS = "=";
+	
+	if (g_IsObserver || (playerStates[g_ViewedPlayer].hasSharedLos &&
+		g_Players[playerID].isMutualAlly[g_ViewedPlayer]))
+		if (yourStock > hisStock && changeablePercent(hisStock))
+		{
+			changeColor = "green";
+			changeColor2 = changeablePercent(yourStock) ? "orange" : "green";
+			diffS = ">";
+		}
+		else
+		{
+			changeColor = "orange";
+			changeColor2 = "green";
+			diffS = "<";
+		}
+	else
+		changeColor = yourStockTagged > 99 ? "green" : "red";
+
 	return sprintf(translate("Tribute %(resourceAmount)s %(resourceType)s to %(playerName)s. Shift-click to tribute %(greaterAmount)s.%(stock)s"), {
 		"resourceAmount": amount,
 		"resourceType": resourceNameWithinSentence(resourceCode),
@@ -1371,11 +1403,16 @@ function formatTributeTooltip(playerID, resourceCode, amount)
 		"stock": g_IsObserver || (playerStates[g_ViewedPlayer].hasSharedLos &&
 				g_Players[playerID].isMutualAlly[g_ViewedPlayer])
 			 ? sprintf(
-			translate("\nYour/His Stock: %(stock1)s/%(stock2)s"), {
-				"stock1": Math.round(playerStates[g_ViewedPlayer].resourceCounts[resourceCode]),
-				"stock2": Math.round(playerStates[playerID].resourceCounts[resourceCode])})
+			translate("\nYour Stock: %(stock1)s, His: %(stock2)s%(amountMinus)s"), {
+				"stock1": setStringTags(yourStockTagged, { "color": changeColor }),
+				"diffS": diffS,
+				"amountPlus": setStringTags("(-,+" + amount + ")", { "color": "yellow" }),
+				"amountMinus": " ("+setStringTags("-" + amount, { "color": "yellow" }) + ")",
+				"stock2": setStringTags(hisStockTagged, { "color": changeColor2 })  })
 			: sprintf(
-			translate("\nYour Stock: %(stock)s"), {
-				"stock": Math.round(playerStates[g_ViewedPlayer].resourceCounts[resourceCode])})
+			translate("\nYour Stock: %(stock)s %(amountMinus)s"), {
+				"stock": setStringTags(yourStockTagged, { "color": changeColor }),
+				"amountMinus": "("+setStringTags("-" + amount, { "color": "yellow" }) + ")"
+			})
 	});
 }

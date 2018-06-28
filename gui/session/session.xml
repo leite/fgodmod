@@ -27,6 +27,13 @@
 		onReplayOutOfSync();
 	</action>
 
+	<object hotkey="session.selectplayer.prev">
+		<action on="Press">
+			<!-- let prev = g_LastViewPlayer; -->
+
+			changeViewPlayer(g_LastViewPlayer);</action>
+	</object>
+
 	<object hotkey="session.selectplayer.1">
 		<action on="Press">changeViewPlayer(1);</action>
 	</object>
@@ -61,6 +68,18 @@
 
 	<object hotkey="session.selectplayer.0">
 		<action on="Press">changeViewPlayer(0);</action>
+	</object>
+
+	<object hotkey="session.gui.diplomacy.toggle">
+		<action on="Press">toggleDiplomacy();</action>
+	</object>
+
+	<object hotkey="session.gui.objectives.toggle">
+		<action on="Press">toggleObjectives();</action>
+	</object>
+
+	<object hotkey="session.gui.gamespeed.toggle">
+		<action on="Press">toggleGameSpeed();</action>
 	</object>
 
 	<object hotkey="fgodmanual">
@@ -99,10 +118,10 @@
 	</object>
 
 	<object size="0 0 100% 100%" name="sessionOverlayBackground" type="image" sprite="sessionOverlayBackground" ghost="true" hidden="true" z="0"/>
-	<object size="0 0 100% 25%" name="pauseOverlayBackground" type="image" sprite="sessionOverlayBackground" ghost="true" hidden="true" z="0"/>
+	<object size="0 0 100% 30%" name="pauseOverlayBackground" type="image" sprite="sessionOverlayBackground" ghost="true" hidden="true" z="0"/>
 	
 	<!-- Pause Overlay -->
-	<object type="button" name="pauseOverlay" size="0 0 100% 25%" tooltip_style="sessionToolTip" hidden="true" z="0">
+	<object type="button" name="pauseOverlay" size="0 0 100% 30%" tooltip_style="sessionToolTip" hidden="true" z="0">
 		<object size="50%-128 40%-20 50%+128 40%+20" type="text" style="PauseText" ghost="true" z="0">
 			<translatableAttribute id="caption">Game Paused</translatableAttribute>
 		</object>
@@ -114,7 +133,7 @@
 	</object>
 
 	<!-- Network status -->
-	<object name="netStatus" type="text" size="0 0 100% 25%" style="netStatus" hidden="true">
+	<object name="netStatus" type="text" size="0 0 100% 30%" style="netStatus" hidden="true">
 		<object type="button"
 			name="disconnectedExitButton"
 			style="StoneButton"
@@ -134,19 +153,18 @@
 		size="100%-180 100%-20 100% 100%+50"
 		text_align="right"
 		font="sans-bold-12"
-		textcolor="255 255 255 128"
+		textcolor="white"
 		>
 	</object>
 
-	<object type="image" name="messagesMenu" size="0 50%-130 300 50%+130" hidden="true" z="0"
+	<object type="image" name="messagesMenu" size="0 50%-115 300 50%+115" hidden="true" z="0"
 	sprite="genericPanel">
 		<object
 			type="text"
 			name="messagesMenuText"
 			buffer_zone="12"
-			size="5 5 100%-5 100%-5"
+			size="0 0 100% 100%"
 			text_align="left"
-			style="ModernTextPanel"
 			font="sans-bold-14"
 			textcolor="white"
 			/>

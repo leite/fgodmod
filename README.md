@@ -1,9 +1,8 @@
 # fgod mod for 0 A. D. version A23
 
-If you like the work of fgod mod (and me fpre in general) and want further work on improvement
-or want support email me
-    
-    fraizy@gmx.de.
+If you like the work of fgod mod you can donate in PayPal to fraizy@gmx.de (Euro fees free).
+
+Ever donation welcome. Makes me proud :).
 
 
 Report Feedback/Bugs:

@@ -32,7 +32,13 @@ function setDefaultUserConfs(forceOverwrite)
 			options: "Alt+O",
 			focustextinput: "tab",
 			"session.allyequalizeresources": "Alt+Shift+E",
+			"session.devcommands.toggle": "Alt+Shift+D",
+			"session.gui.diplomacy.toggle": "Alt+D",
+			"session.gui.objectives.toggle": "Alt+Shift+O",
+			"session.gui.barter.toggle": "Alt+B",
+			"session.gui.gamespeed.toggle": "Alt+Shift+G",
 			"session.messagemenu": "Ctrl+Y",
+			"session.selectplayer.prev": "Alt+Q",
 			"session.selectplayer.1": "Alt+1",
 			"session.selectplayer.2": "Alt+2",
 			"session.selectplayer.3": "Alt+3",
@@ -43,7 +49,7 @@ function setDefaultUserConfs(forceOverwrite)
 			"session.selectplayer.8": "Alt+8",
 			"session.selectplayer.0": "Alt+0" },
 		"session": {
-			sendresonresign: "true"
+			sendresonresign: "false"
 		},
 		"gui": {
 		startintolobby: "false"
@@ -136,7 +142,7 @@ function init(initData, hotloadData)
 		warn("Wrong 0 A.D. Version. Fgod mod only made for 0 A.D. version 0.0.23. You may experience inappropriate behaviour.");
 	}
 
-	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-12" });
+	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-bold-12" });
 
 	let ver = +Engine.ConfigDB_GetValue("user", "fgod.version") || 0;
 	let verNum = +g_FgodModVersion.replace(/\./g, "");
@@ -207,8 +213,7 @@ function init(initData, hotloadData)
 	Engine.GetGUIObjectByName("fgodforum").tooltip = 
 		translate("Give feed back to fgod mod in forum in your web browser.");
 
-	if (initData && initData.isStartup && Engine.ConfigDB_GetValue("user", "gui.startintolobby") === "true" &&
-		Engine.ConfigDB_GetValue("user", "lobby.loggedin") != "true")
+	if (initData && initData.isStartup && Engine.ConfigDB_GetValue("user", "gui.startintolobby") === "true")
 		Engine.PushGuiPage("page_prelobby.xml", { "connect" : true });
 }
 

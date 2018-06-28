@@ -565,7 +565,7 @@ function initGUIButtons()
 
 	let lobbyButton = Engine.GetGUIObjectByName("lobbyButton");
 	lobbyButton.tooltip = colorizeHotkey(translate("%(hotkey)s: Toggle the multiplayer lobby in a dialog window."), "lobby");
-	lobbyButton.hidden = g_GameData.gui.isInGame || !Engine.HasXmppClient();
+	lobbyButton.hidden = g_GameData.gui.isInLobby || g_GameData.gui.isInGame || !Engine.HasXmppClient();
 
 	// Right-align lobby button
 	let lobbyButtonSize = lobbyButton.size;

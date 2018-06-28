@@ -221,7 +221,7 @@ var g_OptionsPage = "Lobby";
  */
 var g_CivInfo = {
 	"code": "",
-	"page": "page_civinfo.xml"
+	"page": "page_structree.xml"
 };
 
 /**
@@ -278,7 +278,7 @@ var g_NetMessageTypes = {
 				reconnectMessageBox();
 			}
 
-			return true;
+			return !msg.historic;
 		},
 		"error": msg => {
 			addChatMessage({
@@ -300,7 +300,8 @@ var g_NetMessageTypes = {
 						"subject": msg.subject
 					}),
 					"time": msg.time,
-					"isSpecial": true
+					"isSpecial": true,
+					"historic": msg.historic
 				});
 			return false;
 		},
@@ -310,9 +311,10 @@ var g_NetMessageTypes = {
 					"nick": msg.nick
 				}),
 				"time": msg.time,
-				"isSpecial": true
+				"isSpecial": true,
+				"historic": msg.historic
 			});
-			return true;
+			return !msg.historic;
 		},
 		"leave": msg => {
 			addChatMessage({
@@ -320,15 +322,16 @@ var g_NetMessageTypes = {
 					"nick": msg.nick
 				}),
 				"time": msg.time,
-				"isSpecial": true
+				"isSpecial": true,
+				"historic": msg.historic
 			});
 
 			if (msg.nick == g_Username)
 				Engine.DisconnectXmppClient();
 
-			return true;
+			return !msg.historic;
 		},
-		"presence": msg => true,
+		"presence": msg => !msg.historic,
 		"role": msg => {
 			Engine.GetGUIObjectByName("chatInput").hidden = Engine.LobbyGetPlayerRole(g_Username) == "visitor";
 
@@ -354,7 +357,8 @@ var g_NetMessageTypes = {
 			addChatMessage({
 				"text": "/special " + sprintf(txt, { "nick": msg.nick }),
 				"time": msg.time,
-				"isSpecial": true
+				"isSpecial": true,
+				"historic": msg.historic
 			});
 
 			if (g_SelectedPlayer == msg.nick)
@@ -369,17 +373,18 @@ var g_NetMessageTypes = {
 					"newnick": msg.newnick
 				}),
 				"time": msg.time,
-				"isSpecial": true
+				"isSpecial": true,
+				"historic": msg.historic
 			});
-			return true;
+			return !msg.historic;
 		},
 		"kicked": msg => {
 			handleKick(false, msg.nick, msg.reason, msg.time, msg.historic);
-			return true;
+			return !msg.historic;
 		},
 		"banned": msg => {
 			handleKick(true, msg.nick, msg.reason, msg.time, msg.historic);
-			return true;
+			return !msg.historic;
 		},
 		"room-message": msg => {
 			addChatMessage({
@@ -427,7 +432,7 @@ var g_NetMessageTypes = {
 			return false;
 		},
 		"ratinglist": msg => {
-			return true;
+			return !msg.historic;
 		}
 	}
 };
@@ -541,18 +546,59 @@ var g_ChatCommands = {
 function clearPlayerSelectionTooltip(show)
 {
 	Engine.GetGUIObjectByName("playerList").tooltip =
-		show ? 'Hit ' + setStringTags(escapeText("[Escape]"), { "color": "yellow" }) + " to clear player/game selection."
+		show ? '' + setStringTags(escapeText("[Escape]"), { "color": "yellow" }) + " clear selection"
 		: "";
 }
 
 function clearGameSelectionTooltip(show)
 {
 	Engine.GetGUIObjectByName("gameList").tooltip =
-		show ? 'Hit ' + setStringTags(escapeText("[Escape]"), { "color": "yellow" }) + " to clear player/game selection."
+	show ? '' + setStringTags(escapeText("[Escape]"), { "color": "yellow" }) + " clear selection"
 		: "";
 }
 
 var g_AutoScrollGameListFromSelection = false;
+
+var g_FocusObj = {
+	list: [],
+	switchCheck: [],
+	localTabHotkey: [],
+	ptr: -1
+}
+
+function focusSwitch()
+{
+	// warn(g_FocusObj.list.length)
+	// warn(g_FocusObj.ptr);
+	if (g_FocusObj.ptr >= 0)
+	{
+		if (!g_FocusObj.switchCheck[g_FocusObj.ptr](g_FocusObj.list[g_FocusObj.ptr]))
+		{
+		g_FocusObj.localTabHotkey[g_FocusObj.ptr]();
+		return;
+		}
+	}
+	
+	++g_FocusObj.ptr;
+	// warn(g_FocusObj.ptr);
+	g_FocusObj.ptr = g_FocusObj.ptr >= g_FocusObj.list.length ? 0 : g_FocusObj.ptr;
+	g_FocusObj.list[g_FocusObj.ptr].focus();
+}
+
+function initFocusSwitcher()
+{
+	for (let i in [ "chatInput", "playerList", "gameList" ])
+	{
+		// warn(i)
+		g_FocusObj.list.push(Engine.GetGUIObjectByName(i));
+	}
+	g_FocusObj.switchCheck.push(obj => { warn("K"); return !obj.caption.length; });
+	g_FocusObj.localTabHotkey.push(obj => { warn("j"); autoCompleteNick(this, g_PlayerList.map(player => player.name).concat(
+		Object.keys(g_ChatCommands).sort().map(com => { return "/" + com; })))}); 
+	g_FocusObj.switchCheck.push(() => true);
+	g_FocusObj.switchCheck.push(() => true);
+	// warn(g_FocusObj.list.length)
+}
 
 /**
  * Called after the XmppConnection succeeded and when returning from a game.
@@ -611,6 +657,7 @@ function init(attribs = {})
 		Engine.PushGuiPage("page_gamesetup_mp.xml", attribs.joinGame);
 	else if (attribs && attribs.startReplay)
 		startReplay(attribs.startReplay);
+	initFocusSwitcher();
 }
 
 function startReplay(data)
@@ -1476,6 +1523,7 @@ function updateGameList(autoScroll = false)
 	g_GameList = Engine.GetGameList().map(game => {
 		game.hasBuddies = 0;
 		game.observeNum = 0;
+		game.buddies = 0;
 
 		// Compute average rating of participating players
 		let playerRatings = [];
@@ -1494,6 +1542,9 @@ function updateGameList(autoScroll = false)
 			// Sort games with playing buddies above games with spectating buddies
 			if (game.hasBuddies < 2 && g_Buddies.indexOf(playerNickRating.nick) != -1)
 				game.hasBuddies = player.Team == "observer" ? 1 : 2;
+
+			if (g_Buddies.indexOf(playerNickRating.nick) != -1)
+				++game.buddies;
 			
 			if (player.Team == "observer")
 				++game.observeNum;
@@ -1519,7 +1570,7 @@ function updateGameList(autoScroll = false)
 				continue;
 				// (obj.hasBuddies || obj.hasUser == g_Username ? 1 : 2),
 			let ret = cmpObjs(a, b, sort.name, {
-				'buddy': obj => obj.hasBuddies,
+				'buddy': obj => obj.buddies,
 				'name': obj => g_GameStatusOrder.indexOf(obj.state) + obj.name.toLowerCase(),
 				'mapName': obj => translate(obj.niceMapName),
 				'nPlayers':	obj => obj.maxnbp
@@ -1532,6 +1583,7 @@ function updateGameList(autoScroll = false)
 	});
 
 	let list_buddy = [];
+	let list_buddies = [];
 	let list_name = [];
 	let list_mapName = [];
 	let list_mapSize = [];
@@ -1555,12 +1607,12 @@ function updateGameList(autoScroll = false)
 			g_SelectedGameName = "";
 		}
 
-		list_buddy.push(game.hasBuddies || game.hasUser ? setStringTags(
+		list_buddy.push((game.hasBuddies || game.hasUser ? setStringTags(
 			game.hasUser ? g_UserSymbol : g_BuddySymbol,
 			highlightedBuddy && game.hasUser ? g_UserStyle :
 			highlightedBuddy && game.hasBuddies ? g_GameColors[game.state].buddyStyle :
 			g_GameColors[game.state].style)
-			: "");
+			: "")+setStringTags(game.buddies ? " " + game.buddies : "", { "color": "255 215 0" }));
 
 		let fgod = JSON.parse(game.mods).some(mod => mod[0].startsWith("fgod"));
 		list_name.push(setStringTags(gameName, fgod ? { "color": "yellow" } : highlightedBuddy && game.hasUser ? g_UserStyle :
@@ -1568,7 +1620,7 @@ function updateGameList(autoScroll = false)
 		list_mapName.push(translateMapTitle(game.niceMapName));
 		list_mapSize.push(translateMapSize(game.mapSize));
 		list_mapType.push(g_MapTypes.Title[mapTypeIdx] || "");
-		let ob = game.observeNum ? setStringTags(" +" + game.observeNum, { "color": "128 128 128" }) : "";
+		let ob = game.observeNum ? setStringTags(" +" + game.observeNum + "", { "color": "255 215 0" }) : "";
 			
 		list_nPlayers.push(game.nbp + "/" + game.maxnbp + ob);
 		list_gameRating.push(game.gameRating);
@@ -1578,6 +1630,7 @@ function updateGameList(autoScroll = false)
 	}
 
 	gamesBox.list_buddy = list_buddy;
+	// gamesBox.list_buddies = list_buddies;
 	gamesBox.list_name = list_name;
 	gamesBox.list_mapName = list_mapName;
 	gamesBox.list_mapSize = list_mapSize;
@@ -1913,6 +1966,8 @@ function handleChatCommand(text)
  */
 function addChatMessage(msg)
 {
+	// if (!!msg.historic)
+		// return;
 	if (msg.from)
 	{
 		if (Engine.LobbyGetPlayerRole(msg.from) == "moderator")

@@ -956,7 +956,7 @@ function addChatMessage(msg)
 	if (!formatted)
 		return;
 
-	if(msg.type == "disconnect" || msg.type == "diplomacy")
+	if(msg.type == "disconnect" || msg.type == "diplomacy" || msg.type == "defeat-victory")
 		updateViewedPlayerDropdown();
 
 	// Update chat overlay

@@ -1,7 +1,7 @@
 {
 	"name": "fgod",
-	"version": "1.6.20",
-	"label": "GUI/Features for 0 A. D.",
+	"version": "1.6.21",
+	"label": "Awesome Additions, Features, Bugfixes for 0 A. D.",
 	"url": "github.com/fraizy22/fgodmod",
 	"description": "fgod",
 	"dependencies": ["0ad=0.0.23"]

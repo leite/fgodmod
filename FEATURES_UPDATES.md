@@ -1,16 +1,108 @@
-# fgod mod for 0 A. D. version A23 (Toggle this page with Hotkey Alt+Shift+F)
+# FGod Mod for 0 A. D. version A23 (Features Page Alt+Shift+F)
 
-New Version v1.6.20!
+Awesome features and additions for 0 A. D.. (Some going into Main Game).
 
-This mod has proposal features for the 0 A. D.. Some already included.
-Think about donate me (fpre). It would give me more time to work for fgod and 0 A. D..
-We all profit.
-Donate me per paypal to fraizy@gmx.de.
-For feedback go forum search "fgod mod" thread.
+As This Is A Very Big Mod And It's Free For You, Think About Donating A Coffee For Me, Thanks!
+PayPal Or Donation Information To fraizy@gmx.de (Or If You Need Help. Euros Fees Free). Have Fun!
 
-Your fpre!
+Talk To Me: fpre in lobby / ffffffff in forum (wildfiregames.com/forum)
 
-Updates (Features)
+Newest Updates:
+
+    v1.6.21
+        In-Game:
+            Better Tribut View Tooltip For Easy Seeing Stocks Of Yourself and Others.
+            Single Player Now Also Lobby Dialog Login Possible.
+            See Previous Player/View In Observer With Alt+Q (Besides Alt+0, 2, 8 For Direct Player View).
+            More Hotkeys And Tooltips (Diplomacy, Trade, Objectives, Menu).
+            Better Resources And Population Tooltip.
+            Better Tech Time Text Embedded On Icon (smaller, behind progress sprite).
+        
+        Replay Menu:
+            When Deleting Replays In Replays Dialog Stay In Dialog (Fixed).
+            
+        Lobby:
+            Show Buddies Amount In Game's List Buddy Column In Yellow Color.
+            Show Observer Amount In Player's Count In Yellow Color.
+            
+Fixes For Main Game (Alpha 23):
+    - Mac Crash In Lobby Gamesetup
+    - Performance Lobby (Kills Lag)
+    - Awesome
+    
+Bugs
+    - Share Resources Among Allies On Resign (Not correctly working)
+            
+All Features
+    Overall:
+        - More darkend background in overlapping dialog windows
+        - Fgod features page (hotkey Alt+Shift+F)
+        - continue autocomplete names when keep hitting Tab
+        - autocomplete /-commands (/help, etc.)
+        - gui go back Alt+Escape
+        - more better leaving dialogs generally with escape key
+
+    Ingame:
+        - Different multiplayer ingame name (in general options playername)
+        - Player replace Ingame (if a player is offline and host has no lobby authentication enabled)
+          (select player in player dropdown selection and hit replace button)
+        - Ally message menu (hotkey Ctrl+y, 1-0 for action messages)
+        - Ingame lobby ping (when people call you in lobby)
+        - Player color in messages texts
+        - Start different replays from within lobby dialog
+        - Join direct into other game in lobby dialog
+        - Ask to reconnect on disconnect (multiplayer network)
+        - Ask to reconnect on kick (multiplayer network)
+        - Pause/end-game overlay small top, units/entities still clickable and actionable
+        - Observer player selection toggle hotkeys Alt+1-8
+        - Observer overview resources/population summed
+        - Teams and diplomacy status (+/-/=/~, ally/enemy/neutral/current player) in player selection dropdown
+          Also sort by teams if teams locked
+        - More tooltip hotkeys on main menu
+        - Send remaining resources to allies on resign
+        - Observer show offline (0ad buggy), defeated and won player in dropdown selection in red, grey and yellow
+        - Send tribut resource stock hint in tooltip from urself and player
+        
+    Summary (Ctrl+Tab):
+        - Fight activity ratio (military/economic score ratio)
+        - Better scroll of tabs with mouse scroll over buttons
+        - Civilizations icons clickable for civilizations tree
+        
+    Lobby (Alt+L):
+        - Auto-away after time and presences dropdown selection
+        - More buttons (auto- and hideable: last game summary, replays dialog (start replays also),
+          civilizations page, options page
+        - Longer player list -> profile hideable / deselection (Escape) also of game
+        - Buddy colors players/games
+        - Start 0ad into lobby
+        - Double lobby login prevention or relog while hosting game (game vanish from lobby gamelist)
+        - Host game name remember
+        - /showip command from selected game
+        - Much better ping recognition when name in messages (name must be standalone not in any word contained,
+          like short names bb f.e.).
+        - Sort player/gamelist by multiple columns (like playerlist, status, buddy, rating, name f.e., click them in order
+          one after another)
+          Default by buddy, status, name, rating in playerlist
+          buddy, name, ... in gamelist
+        - Show hosting player in game player list
+        - Show game duration time since start in gamelist
+        - Observer number in game list player's number column
+        
+    Gamesetup/Ingame:
+        - Ingame lobby ping (when people call you in lobby)
+        - Lobby dialog scroll and select game-in in view, to see players in.
+        
+    Gamesetup:
+        - Teams config setter (at top, 1v1, 2v2, etc.)
+    
+    Options (Alt+O):
+        - Features configurable
+    
+    Replays Menu:
+        - Forum link to replay upload/download
+        - Next-, previous- replays-button in replay menu summaries.
+
+more Updates (Features)
 
 v1.6.20
     In-Game:

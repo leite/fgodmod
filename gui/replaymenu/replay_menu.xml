@@ -16,6 +16,10 @@
 	<!-- Everything displayed in the replay menu. -->
 	<object type="image" style="ModernWindow" name="replayWindow">
 
+		<action on="Tick">
+			updateTimers();
+		</action>
+
 		<!-- Title -->
 		<object style="ModernLabelText" type="text" name="replayWindowTitle">
 			<translatableAttribute id="caption">Watch Replay Games</translatableAttribute>
@@ -68,7 +72,13 @@
 				auto_scroll="true"
 			>
 
-				<action on="SelectionChange">displayReplayDetails();</action>
+				<action on="SelectionChange">
+					displayReplayDetails();
+					updateSelectionTooltip(this.selected);
+					if (g_Glow)
+						clearTimeout(g_Glow);
+					<!-- forumButtonGlow(true); -->
+				</action>
 				<action on="SelectionColumnChange">
 					changeGUIListSort(this, g_ColumnOrder, "replay.sort");
 					displayReplayList();
@@ -244,7 +254,7 @@
 
 			<!-- Forum Button -->
 			<object name="forumButton" type="button" style="StoneButton" size="30%+30 0 51%-30 100%">
-				<translatableAttribute id="caption">Forum</translatableAttribute>
+				<translatableAttribute id="caption">Forum's Replays</translatableAttribute>
 				<translatableAttribute id="tooltip">Download and Upload Game Replays on Wildfire Games Replays Forum.</translatableAttribute>
 				<action on="Press">
 					openURL("https://wildfiregames.com/forum/index.php?/forum/468-alpha-23/");
