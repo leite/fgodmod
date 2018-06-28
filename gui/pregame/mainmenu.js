@@ -38,6 +38,7 @@ function setDefaultUserConfs(forceOverwrite)
 			"session.gui.barter.toggle": "Alt+B",
 			"session.gui.gamespeed.toggle": "Alt+Shift+G",
 			"session.messagemenu": "Ctrl+Y",
+			"session.messagemenu_en": "Ctrl+Z",
 			"session.selectplayer.prev": "Alt+Q",
 			"session.selectplayer.1": "Alt+1",
 			"session.selectplayer.2": "Alt+2",
@@ -142,7 +143,7 @@ function init(initData, hotloadData)
 		warn("Wrong 0 A.D. Version. Fgod mod only made for 0 A.D. version 0.0.23. You may experience inappropriate behaviour.");
 	}
 
-	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-bold-12" });
+	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-bold-16" });
 
 	let ver = +Engine.ConfigDB_GetValue("user", "fgod.version") || 0;
 	let verNum = +g_FgodModVersion.replace(/\./g, "");
@@ -192,6 +193,7 @@ function init(initData, hotloadData)
 	Engine.GetGUIObjectByName("manualPage").tooltip = colorizeHotkey(
 		translate("Open the 0 A.D. Game Manual or %(hotkey)s Fgod mod Readme file."),
 		"fgodmanual");
+	Engine.GetGUIObjectByName("manualPage").caption = setStringTags("FGod", { "color": "yellow"}) + " / " + translate("Manual");
 	Engine.GetGUIObjectByName("structreeButton").tooltip = colorizeHotkey(
 		translate("%(hotkey)s: View the structure tree of civilizations featured in 0 A.D."),
 		"structree");

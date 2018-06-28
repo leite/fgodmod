@@ -1,29 +1,31 @@
-# FGod Mod for 0 A. D. version A23 (Features Page Alt+Shift+F)
+# FGod Mod for 0 A. D. version A23 (Features Page Alt+Shift+F, or Main Menu -> Learn To Play -> FGod / Manual)
 
-Awesome features and additions for 0 A. D.. (Some going into Main Game).
+Awesome features and additions for 0 A. D.. (Some going and already gone into Main Game (Like Lobby Dialog and In-Game UI Changes) !).
 
-As This Is A Very Big Mod And It's Free For You, Think About Donating A Coffee For Me, Thanks!
+As This Is A Very Big Mod And It's Free To You, So Think About Donating Me A Coffee. Thanks!
+
 PayPal Or Donation Information To fraizy@gmx.de (Or If You Need Help. Euros Fees Free). Have Fun!
 
 Talk To Me: fpre in lobby / ffffffff in forum (wildfiregames.com/forum)
 
 Newest Updates:
 
-    v1.6.21
-        In-Game:
-            Better Tribut View Tooltip For Easy Seeing Stocks Of Yourself and Others.
-            Single Player Now Also Lobby Dialog Login Possible.
-            See Previous Player/View In Observer With Alt+Q (Besides Alt+0, 2, 8 For Direct Player View).
-            More Hotkeys And Tooltips (Diplomacy, Trade, Objectives, Menu).
-            Better Resources And Population Tooltip.
-            Better Tech Time Text Embedded On Icon (smaller, behind progress sprite).
+v1.6.21
+    In-Game:
+        Better Tribut View Tooltip For Easy Seeing Stocks Of Yourself and Others.
+        Single Player Now Also Lobby Dialog Login Possible.
+        See Previous Player/View In Observer With Alt+Q (Besides Alt+0, 2, 8 For Direct Player View).
+        More Hotkeys And Tooltips (Diplomacy, Trade, Objectives, Menu).
+        Better Resources And Population Tooltip.
+        Better Tech Time Text Embedded On Icon (smaller, behind progress sprite).
+        Ctrl+Z For Message Menu English Keyboard Support As Its On German Keyboard Ctrl+Y!
+    
+    Replay Menu:
+        When Deleting Replays In Replays Dialog Stay In Dialog (Fixed).
         
-        Replay Menu:
-            When Deleting Replays In Replays Dialog Stay In Dialog (Fixed).
-            
-        Lobby:
-            Show Buddies Amount In Game's List Buddy Column In Yellow Color.
-            Show Observer Amount In Player's Count In Yellow Color.
+    Lobby:
+        Show Buddies Amount In Game's List Buddy Column In Yellow Color.
+        Show Observer Amount In Player's Count In Yellow Color.
             
 Fixes For Main Game (Alpha 23):
     - Mac Crash In Lobby Gamesetup

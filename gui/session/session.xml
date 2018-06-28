@@ -99,6 +99,11 @@
 			toggleMessageMenu();
 		</action>
 	</object>
+	<object hotkey="session.messagemenu_en">
+		<action on="Press">
+			toggleMessageMenu();
+		</action>
+	</object>
 
 	<!-- Hotkeys won't work properly unless outside menu -->
 	<include directory="gui/session/hotkeys/"/>

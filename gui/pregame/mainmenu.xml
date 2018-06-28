@@ -41,8 +41,8 @@
 		<object
 			type="text"
 			name="fgodmod"
-			font="sans-16"
-			textcolor="255 255 255 128"
+			font="sans-bold-16"
+			textcolor="255 255 0 255"
 			size="50%-100 100%-50 50%+100 100%"
 			text_align="center"
 			>
@@ -125,6 +125,11 @@
 				closeMenu();
 			</action>
 		</object>
+		<!-- <object hotkey="session.messagemenu_en">
+			<action on="Press">
+				warn("ok");
+			</action>
+		</object> -->
 		<object hotkey="fgodmanual">
 			<action on="Press">
 				closeMenu();
