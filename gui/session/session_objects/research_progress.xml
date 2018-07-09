@@ -5,7 +5,7 @@
 			<object name="researchStartedIcon[n]" ghost="true" type="image" size="3 3 37 37"/>
 			<object name="researchStartedTimeRemaining[n]" ghost="true" style="iconButtonProgress2" type="text" size="-37 10 -4 27"
 		/>
-			<object name="researchStartedProgressSlider[n]" type="image" sprite="queueProgressSlider" ghost="true" size="3 3 37 37" z="100"/>
+			<object name="researchStartedProgressSlider[n]" type="image" sprite="queueProgressSlider" ghost="true" size="3 3 37 37"/>
 		</object>
 	</repeat>
 </object>

@@ -38,16 +38,26 @@
 			ghost="true"
 		/>
 
+			<!-- size="50%-100 100%-20 50%+100 100%" -->
+		<!-- <object
+			type="text"
+			name="fgodmod"
+			font="sans-bold-16"
+			textcolor="255 255 0 255"
+			size="100%-200 0 100%-7 20"
+			text_align="right"
+			>
+		</object> -->
 		<object
 			type="text"
 			name="fgodmod"
 			font="sans-bold-16"
 			textcolor="255 255 0 255"
-			size="50%-100 100%-50 50%+100 100%"
+			size="50%-100 0 50%+100 20"
 			text_align="center"
 			>
 		</object>
-
+ 
 
 		<!--
 		==========================================
@@ -171,7 +181,7 @@
 					tooltip_style="pgToolTip"
 					name="manualPage"
 				>
-					<translatableAttribute id="caption">FGod / Manual</translatableAttribute>
+					<translatableAttribute id="caption">FGod-Mod / Manual</translatableAttribute>
 					<translatableAttribute id="tooltip">Open the 0 A.D. Game Manual or Fgod mod Readme file.</translatableAttribute>
 					<action on="Press">
 						closeMenu();
@@ -243,6 +253,8 @@
 					style="StoneButtonFancy"
 					size="0 0 100% 28"
 					tooltip_style="pgToolTip"
+					hotkey="lobby.newgame"
+					name="newSinglePlayerMatch"
 				>
 					<translatableAttribute id="caption">Matches</translatableAttribute>
 					<translatableAttribute id="tooltip">Click here to start a new single player game.</translatableAttribute>
@@ -348,7 +360,7 @@
 						if (!Engine.StartXmppClient)
 							return;
 						closeMenu();
-						Engine.PushGuiPage("page_prelobby.xml");
+						Engine.PushGuiPage("page_prelobby.xml", { "autoLogin" : true });
 					</action>
 					<action on="load">
 						if (!Engine.StartXmppClient)

@@ -31,6 +31,8 @@ function setDefaultUserConfs(forceOverwrite)
 			fgodmanual: "Alt+Shift+F",
 			options: "Alt+O",
 			focustextinput: "tab",
+			"lobby.newgame": "Alt+N",
+			"restartGame": "Alt+Shift+E",
 			"session.allyequalizeresources": "Alt+Shift+E",
 			"session.devcommands.toggle": "Alt+Shift+D",
 			"session.gui.diplomacy.toggle": "Alt+D",
@@ -50,7 +52,9 @@ function setDefaultUserConfs(forceOverwrite)
 			"session.selectplayer.8": "Alt+8",
 			"session.selectplayer.0": "Alt+0" },
 		"session": {
-			sendresonresign: "false"
+			sendresonresign: "true",
+			showstats: "true",
+			showobservers: "true"
 		},
 		"gui": {
 		startintolobby: "false"
@@ -61,7 +65,8 @@ function setDefaultUserConfs(forceOverwrite)
 		},"load": {
 		gamessort: "date:-1,mapName:1,mapType:1,description:1"
 
-			},"lobby": {
+		},"lobby": {
+		autologin: "true",
 		highlightbuddies: "true",       
 		autoawaytime: "5"               ,   
 		presenceselection: "available_awaytime" ,
@@ -134,6 +139,17 @@ function reloadGame()
 	);
 }
 
+function showUpdatedFGodVersion()
+{
+	messageBox(
+		400, 200,
+		translate("FGod has been updated. Overwrite new default fgod mod settings, if they got changed (optimal for proposing)?"),
+		translate("Confirmation"),
+		[translate("No"), translate("Yes")],
+		[() => { setDefaultUserConfs(false); if (oneNotFound) reloadGame(); }, () => { setDefaultUserConfs(true); if (oneNotFound) reloadGame(); }]
+	);
+}
+
 function init(initData, hotloadData)
 {
 	initMusic();
@@ -143,12 +159,11 @@ function init(initData, hotloadData)
 		warn("Wrong 0 A.D. Version. Fgod mod only made for 0 A.D. version 0.0.23. You may experience inappropriate behaviour.");
 	}
 
-	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGod Mod v" + g_FgodModVersion, { "font": "sans-bold-16" });
+	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGodMod v" + g_FgodModVersion, { "font": "mono-10", "color": "255 255 0 210" });
 
 	let ver = +Engine.ConfigDB_GetValue("user", "fgod.version") || 0;
 	let verNum = +g_FgodModVersion.replace(/\./g, "");
 
-	setDefaultUserConfs(ver != verNum);
 	if (ver != verNum)
 	{
 		saveSettingAndWriteToUserConfig("fgod.version", verNum);
@@ -158,10 +173,13 @@ function init(initData, hotloadData)
 			"openPage": "fgod",
 			"title": translate("Manual"),
 			"url": "http://trac.wildfiregames.com/wiki/0adManual",
-			"callback": "reloadGame"
+			"callback": "showUpdatedFGodVersion"
 		});
 	}
-	else if (oneNotFound)
+	else
+		setDefaultUserConfs(false);
+
+	if (oneNotFound)
 		reloadGame();
 
 	// If no default settings setted assume we can once set secureauth to false
@@ -193,7 +211,7 @@ function init(initData, hotloadData)
 	Engine.GetGUIObjectByName("manualPage").tooltip = colorizeHotkey(
 		translate("Open the 0 A.D. Game Manual or %(hotkey)s Fgod mod Readme file."),
 		"fgodmanual");
-	Engine.GetGUIObjectByName("manualPage").caption = setStringTags("FGod", { "color": "yellow"}) + " / " + translate("Manual");
+	Engine.GetGUIObjectByName("manualPage").caption = setStringTags("FGod-Mod", { "color": "255 255 255"}) + " / " + translate("Manual");
 	Engine.GetGUIObjectByName("structreeButton").tooltip = colorizeHotkey(
 		translate("%(hotkey)s: View the structure tree of civilizations featured in 0 A.D."),
 		"structree");
@@ -214,9 +232,14 @@ function init(initData, hotloadData)
 		"fgodupdate");
 	Engine.GetGUIObjectByName("fgodforum").tooltip = 
 		translate("Give feed back to fgod mod in forum in your web browser.");
+	Engine.GetGUIObjectByName("newSinglePlayerMatch").tooltip = colorizeHotkey(
+		"%(hotkey)s: "+ translate("Click here to start a new single player game."),
+		"lobby.newgame");
 
 	if (initData && initData.isStartup && Engine.ConfigDB_GetValue("user", "gui.startintolobby") === "true")
 		Engine.PushGuiPage("page_prelobby.xml", { "connect" : true });
+	else if (initData && initData.showPreLobby)
+		Engine.PushGuiPage("page_prelobby.xml");
 }
 
 function getHotloadData()

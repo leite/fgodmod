@@ -42,7 +42,29 @@ var g_NetworkCommands = {
 	"/kickspecs": argument => kickObservers(false),
 	"/banspecs": argument => kickObservers(true),
 	"/list": argument => addChatMessage({ "type": "clientlist" }),
-	"/clear": argument => clearChatMessages()
+	"/clear": argument => clearChatMessages(),
+	"/showip":  argument =>  { 
+
+			if (g_ServerIP && g_ServerPort)
+			{
+	// 			let game = g_GameList[gamesBox.selected];
+	// 			let ip = game.stunIP ? game.stunIP : game.ip;
+	// 			let port = game.stunPort ? game.stunPort : game.port;
+
+	// g_ServerIP = initData.serverIP;
+	// g_ServerPort = initData.serverPort;
+	// g_UseSTUN = initData.useSTUN;
+	// g_HostJID = initData.hostJID;
+	// g_ServerName = !!initData.attribs && !!initData.attribs.gameName && initData.attribs.gameName;
+	// g_PlayerName = !!initData.playerName ? initData.playerName : "";
+				addChatMessage({
+					"from": "system",
+					"text": (g_ServerName ? "IP from \"" + escapeText(g_ServerName) + "\"" : "IP") + ": " + g_ServerIP + ":" + g_ServerPort + "(stunned: " + (!!g_UseSTUN ? "true" : "false") + ")"
+				});
+				return true;
+			}
+			return false;
+	}
 };
 
 var g_ValidPorts = { "min": 1, "max": 65535 };

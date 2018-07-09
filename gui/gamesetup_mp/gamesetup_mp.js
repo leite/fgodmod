@@ -438,7 +438,7 @@ function reconnectWithAccountName(message)
 
 		messageBox(
 			400, 200,
-			translate("Secure lobby authentication failed, do you want to join with your real account name \""+ g_PlayerName+"\"?"),
+			translate("Secure lobby authentication failed, do you want to join with your real account name \""+ g_PlayerName + "\"?\n\nInfo: No player replace possible (as observer)."),
 			translate("Confirmation"),
 			[translate("No"), translate("Yes")],
 			[disconnect, join]

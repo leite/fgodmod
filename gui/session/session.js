@@ -291,10 +291,10 @@ const g_MessageMenus = {
 			[ "3", { text: "Back.", save: true } ],
 			[ "4", { text: "Come help.", save: true } ],
 			[ "5", { text: "Okay?", save: true } ],
-			[ "6", { text: "Thanks, Mate.", save: true } ],
-			[ "7", { text: "I'm coming.", save: true } ],
-			[ "8", { text: "One moment please.", save: true } ],
-			[ "9", { text: ":)", save: true } ],
+			[ "6", { text: "Okay.", save: true } ],
+			[ "7", { text: "Thanks, Mate.", save: true } ],
+			[ "8", { text: "I'm coming.", save: true } ],
+			[ "9", { text: "One moment please.", save: true } ],
 			[ "0", "main" ]
 		],
 		go: "msg"
@@ -642,6 +642,37 @@ function showMessageMenu()
 	Engine.GetGUIObjectByName("messagesMenu").hidden = !cap;
 }
 
+function updateObserver()
+{
+	if (Engine.ConfigDB_GetValue("user", "session.showobservers") != "true")
+	{
+		Engine.GetGUIObjectByName("observersList").hidden = true;
+		return;
+	}
+
+	let obs = [];
+	let off = []
+	for (let player in g_Players)
+		if (!!g_Players[player].offline)
+			off.push(setStringTags(g_Players[player].name, { "color": "red"}));
+
+	for (let player in g_PlayerAssignments)
+		if (g_PlayerAssignments[player].player == -1)
+			obs.push(setStringTags(g_PlayerAssignments[player].name, { "color": "white"}));
+	if (obs.length<=0 && off.length<=0)
+	{
+		Engine.GetGUIObjectByName("observersList").hidden = true;
+		return;
+	}
+
+	Engine.GetGUIObjectByName("observersList").hidden = false;
+	Engine.GetGUIObjectByName("observersList").caption = (obs.length > 0 ? setStringTags("Observers:\n" + obs.join(", ") + "\n" ,
+		{ "color": "255 255 255 255", "font": "mono-10" }) : "") + 
+		(off.length > 0 ? setStringTags("Offlines:\n" + off.join(", ") ,
+		{ "color": "255 255 255 255", "font": "mono-10" }) : "");
+}
+
+
 function init(initData, hotloadData)
 {
 	if (!g_Settings)
@@ -651,11 +682,12 @@ function init(initData, hotloadData)
 		return;
 	}
 
-	Engine.GetGUIObjectByName("fgodmod").caption = "FGod Mod v" + Engine.GetEngineInfo().mods.filter(mod => mod[0].startsWith("fgod"))[0][1];
+	Engine.GetGUIObjectByName("fgodmod").caption = setStringTags("FGodMod v" + Engine.GetEngineInfo().mods.filter(mod => mod[0].startsWith("fgod"))[0][1],
+		{ "color": "255 255 255 255", "font": "mono-10" });
 	
-	Engine.GetGUIObjectByName("manualButton").caption = setStringTags("FGod", { "color": "yellow" }) + " / " + translate("Manual");
+	Engine.GetGUIObjectByName("manualButton").caption = translate("Manual") + " / " + setStringTags("FGod", { "color": "white" });
 	Engine.GetGUIObjectByName("pauseButton").tooltip = colorizeHotkey("%(hotkey)s", "pause");
-	Engine.GetGUIObjectByName("chatButton").tooltip = [colorizeHotkey("%(hotkey)s", "chat"), colorizeHotkey("%(hotkey)s", "chat"), colorizeHotkey("%(hotkey)s", "chat")].join(", ");
+	Engine.GetGUIObjectByName("chatButton").tooltip = [colorizeHotkey("%(hotkey)s", "chat"), colorizeHotkey("%(hotkey)s", "teamchat"), colorizeHotkey("%(hotkey)s", "privatechat")].join(", ");
 	Engine.GetGUIObjectByName("summaryButton").tooltip = colorizeHotkey("%(hotkey)s", "summary");
 	Engine.GetGUIObjectByName("manualButton").tooltip = colorizeHotkey("%(hotkey)s", "fgodmanual");
 	Engine.GetGUIObjectByName("optionsButton").tooltip = colorizeHotkey("%(hotkey)s", "options");
@@ -665,7 +697,7 @@ function init(initData, hotloadData)
 	Engine.GetGUIObjectByName("tradeButton").tooltip = colorizeHotkey(translate("Barter & Trade") + " %(hotkey)s", "session.gui.barter.toggle");
 	Engine.GetGUIObjectByName("objectivesButton").tooltip = colorizeHotkey(translate("Objectives") + " %(hotkey)s", "session.gui.objectives.toggle");
 	Engine.GetGUIObjectByName("gameSpeedButton").tooltip = colorizeHotkey(translate("Choose game speed") + " %(hotkey)s", "session.gui.gamespeed.toggle");
-	Engine.GetGUIObjectByName("viewPlayer").tooltip = sprintf(translate("Choose player to view") + " toggle %(hotkey1)s, ... %(hotkey2)s previous %(hotkeyPrev)s", 
+	Engine.GetGUIObjectByName("viewPlayer").tooltip = sprintf(translate("Player View") + " %(hotkey1)s, ... %(hotkey2)s (On/Off), Previous View %(hotkeyPrev)s", 
 		{
 			"hotkey1": colorizeHotkey("%(hotkey)s", "session.selectplayer.0"),
 			"hotkey2": colorizeHotkey("%(hotkey)s", "session.selectplayer.8"),
@@ -717,6 +749,37 @@ function init(initData, hotloadData)
 	// and it generates a massive amount of data to transmit and store
 	// setTimeout(function() { reportPerformance(5); }, 5000);
 	// setTimeout(function() { reportPerformance(60); }, 60000);
+	// Engine.GetGUIObjectByName("teamInfo").onPress = () => { warn("ok")};
+	Engine.GetGUIObjectByName("teamInfo").onmouseenter = () => { 
+		Engine.GetGUIObjectByName("teamInfo").sprite = "BackgroundTranslucent";
+		Engine.GetGUIObjectByName("teamInfoHide").hidden = false;
+		Engine.GetGUIObjectByName("teamInfoHide").onmouseenter = () => { 
+			Engine.GetGUIObjectByName("teamInfo").sprite = "BackgroundTranslucent2";
+			Engine.GetGUIObjectByName("observersList").sprite = "";
+			Engine.GetGUIObjectByName("teamInfoHide").hidden = true;
+		};
+	};
+	Engine.GetGUIObjectByName("observersList").onmouseenter = () => { 
+		Engine.GetGUIObjectByName("observersList").sprite = "BackgroundTranslucent2";
+		Engine.GetGUIObjectByName("teamInfoHide").hidden = false;
+		Engine.GetGUIObjectByName("teamInfoHide").onmouseenter = () => { 
+			Engine.GetGUIObjectByName("observersList").sprite = "";
+			Engine.GetGUIObjectByName("teamInfo").sprite = "BackgroundTranslucent2";
+			Engine.GetGUIObjectByName("teamInfoHide").hidden = true;
+		};
+	};
+
+	
+	// let playerStates =  Engine.GuiInterfaceCall("GetExtendedSimulationState").players;
+	// warn(playerStates[2].phase)
+	// let kill = playerStates[1];
+	// for (let o in kill)
+	// warn(o)
+	// let ok = 0;
+	// for (let o in kill)
+	// 	warn(kill.total[kill.total.length-1]); //uneval(kill[o]));
+	// 	ok += kill[o].reduce((a, b) => a + b, 0);
+	// warn(ok);
 }
 
 function initGUIObjects()
@@ -952,9 +1015,9 @@ function updateViewedPlayerDropdown()
 	let viewedPlayer = g_Players[g_ViewedPlayer];
 	viewPlayer.list_data = [-1].concat(playerList.map(player => player.id));
 	viewPlayer.list = [translate("Observer")].concat(playerList.map(
-		(player, i) => (i>=0 ? player.teamsLocked ? setStringTags(i, { "color": "white" }) + ":" + (player.team > -1 ? setStringTags(" T." + (player.team+1), { "color": "white" })
+		(player, i) => (i>=0 ? player.teamsLocked ? setStringTags(i, { "color": "white" }) + "." + (player.team > -1 ? setStringTags(" T." + (player.team+1), { "color": "white" })
 		 : "") + " " :
-			i + " " +
+			i + ". " +
 			(g_ViewedPlayer >= 0 ? 
 				( g_ViewedPlayer == player.id ? "~" : player.isEnemy[g_ViewedPlayer] ? "-" : player.isNeutral[g_ViewedPlayer] ? "=" : viewedPlayer.isAlly[player.id] ? "+" : "") + " " :
 				"") :
@@ -1248,7 +1311,7 @@ function resignGame(leaveGameAfterResign)
 	{
 		let player = g_Players[g_ViewedPlayer];
 		let players = g_Players.map((pl,i) => { pl.id = i; return pl; }).filter((pl, i) => {
-			return i != g_ViewedPlayer && pl.state != "defeated" && (pl.team == player.team || player.isMutualAlly[i]);
+			return i != g_ViewedPlayer && pl.state != "defeated" && (player.isMutualAlly[i]);
 		})
 
 		if (players.length)
@@ -1388,6 +1451,10 @@ function onTick()
 	Engine.GetGUIObjectByName("resourcePop").textcolor = g_IsTrainingBlocked && now % 1000 < 500 ? g_PopulationAlertColor : g_DefaultPopulationColor;
 
 	Engine.GuiInterfaceCall("ClearRenamedEntities");
+
+	updateObserver();
+
+	teamInfo();
 }
 
 function onWindowResized()
@@ -1753,6 +1820,111 @@ function updateDebug()
 	debug.caption = text.replace(/\[/g, "\\[");
 }
 
+function teamInfo()
+{
+	// if (!g_IsObserver)
+
+	// for (let player in playerStates)
+	// {
+	// 	let team = playerStates[player].teamsLocked ? g_Players[player].team + 1 : 0;
+
+	if (Engine.ConfigDB_GetValue("user", "session.showstats") != "true")
+	{
+		Engine.GetGUIObjectByName("teamInfo").hidden = true;
+		return;
+	}
+
+	// let playerStates = GetSimState().players;
+	let playerStates =  Engine.GuiInterfaceCall("GetExtendedSimulationState").players;
+	if (!playerStates)
+		return;
+		
+	if (!g_IsObserver && (!playerStates[g_ViewedPlayer].hasSharedLos || g_Players[g_ViewedPlayer].isMutualAlly.reduce((a, b) => a + b, 0) <= 1))
+	{
+		Engine.GetGUIObjectByName("teamInfo").hidden = true;
+		return;
+	}
+	Engine.GetGUIObjectByName("teamInfo").hidden = false;
+	let tool = "";
+	// let viewedPlayerStates = g_ViewedPlayer > 0 ? [allPlayerStates[g_ViewedPlayer]];
+		// g_ViewedPlayer == -1 ? allPlayerStates.filter((stat, playerId) => playerId != 0) : [];
+	let highest, resAm = 0;
+	const resses = [ "phase", "pop", "food", "wood", "stone", "metal", "uk"];
+	let plHighest = {};
+	let uk = {};
+	let phase = { "city": 3, "village": 1, "town": 2};
+
+	for (let res of resses)
+	{
+		plHighest[res] = {};
+		highest = 0;
+		playerStates.forEach((stat, pl) => {
+			
+			if (!g_IsObserver && !g_Players[g_ViewedPlayer].isMutualAlly[pl] && g_Players[pl].state == "defeated") // || pl == g_ViewedPlayer)
+				return;
+			
+			uk[pl] = 0;
+			if (pl > 0)
+			{
+				// let kill = stat.sequences.enemyUnitsKilled.total;
+				// for (let o in kill)
+					uk[pl] = stat.sequences.enemyUnitsKilled.total[stat.sequences.enemyUnitsKilled.total.length-1]; //.reduce((a, b) => a + b, 0);
+			}
+			resAm = (res == "pop") ? stat.popCount : (res == "uk") ? uk[pl] : (res == "phase") ? (!!stat.phase ? phase[stat.phase] : 0) : Math.round(stat.resourceCounts[res]);
+			if (resAm > highest)
+			{ 
+				plHighest[res] = {};
+				plHighest[res][pl] = resAm;
+				highest = resAm;
+			}
+			else if (resAm == highest)
+			{
+				plHighest[res][pl] = true;
+			}
+			stat.id = pl;
+		});
+	} 
+
+	// "values": resource == "pop" ? [ playerStates[player].popCount, playerStates[player].popLimit, playerStates[player].popMax ] :
+	// [ Math.round(playerStates[player].resourceCounts[resource]) ]
+
+	let f = (s,l) => { let a = l - s.length; for (let i=0; i < a; i++) s = " " + s; return s; };
+	let f2 = s => f(s,6);
+
+	tool += playerStates.filter((stat,pl) => g_IsObserver || 
+		g_Players[g_ViewedPlayer].isMutualAlly[pl] ).map((stat) => {
+		let pl = stat.id;
+	
+		let playerColor = pl > -1 ? rgbToGuiColor(g_DisplayedPlayerColors[pl]) : "white";
+		let add = setStringTags(pl + ".", { "color": playerColor }) + " " + 
+		setStringTags(g_Players[pl].name.substring(0,20), { "color": g_Players[pl].state == "defeated" ? "255 255 255 128" : "white" });
+		for (let res of resses)
+		{
+			resAm = (res == "pop") ? stat.popCount : (res == "uk") ? uk[pl] : (res == "phase") ? (!!stat.phase ? phase[stat.phase] : 0) : Math.round(stat.resourceCounts[res]);
+			add += setStringTags(res == "phase" ? " "+resAm : f2(""+resAm), { "color": plHighest[res][pl] ? "255 255 0 255" : "255 255 210 180" })
+		}
+		return add + " ";
+		// + setStringTags("   520", { "color": "255 250 40 255" })
+		// + setStringTags("   230", { "color": "255 255 180 255" })
+		// + setStringTags("   100", { "color": "255 255 180 255" })
+		// + setStringTags("   120", { "color": "255 255 180 255" })
+		// + setStringTags("  2300\n", { "color": "255 255 180 255" });
+	}).join("\n");
+
+	// playerStates.map((pl) => {
+	// 	tool += setStringTags("1.", { "color": "0 0 255 255" }) + " fpre"
+	// 	+ setStringTags("  100", { "color": "255 255 180 255" })
+	// 	+ setStringTags("   520", { "color": "255 250 40 255" })
+	// 	+ setStringTags("   230", { "color": "255 255 180 255" })
+	// 	+ setStringTags("   100", { "color": "255 255 180 255" })
+	// 	+ setStringTags("   120", { "color": "255 255 180 255" })
+	// 	+ setStringTags("  2300\n", { "color": "255 255 180 255" });
+	
+	Engine.GetGUIObjectByName("teamInfo").caption = setStringTags("P   Pop  Food  Wood Stone Metal    UK \n" + tool, { "color": "255 255 255 255", "font": "mono-10" });
+
+}
+
+
 /**
  * Create ally player stat tooltip.
  * @param {string} resource - Resource type, on which values will be sorted.
@@ -1787,17 +1959,17 @@ function getAllyStatTooltip(resource, playerStates, sort)
 	return "\n" + Object.keys(teamStats).map(team => { return teamStats[team]; }).sort((a, b) => sort * (b.sum[0] - a.sum[0])).map(team =>
 		(team.locked && (g_IsObserver || playerStates[g_ViewedPlayer].hasSharedLos) ?
 			(team.number != 0 ?
-				sprintf(translate("%(teamSum)s - T.%(team)s\n"), {
-					"team": team.number, "teamSum": team.sum.map((o,i) => i==0 ? setStringTags(o, { "font": "sans-bold-14", "color": "255 255 0" }) : o).join(translateWithContext("seperator", " / "))
+				sprintf(translate("-------------------------------\nT.%(team)s %(teamSum)s\n"), {
+					"team": team.number, "teamSum": team.sum.map((o,i) => i==0 ? setStringTags(o, { "font": "sans-bold-14", "color": "255 255 128" }) : o).join(translateWithContext("seperator", "/"))
 				}) :
-				translate("No Team:\n"))
+				translate("No Team\n"))
 			: "") +
 		team.players.sort((a, b) => sort * (b.values[0] - a.values[0])).map(player => {
 				// let playerValuesDesigned = player.values.slice().map((o,i) => i>0 ? setStringTags(o, { "font": "sans-12" }) : o);
-				return sprintf(translate("%(playercolor)s %(values)s : %(playername)s"), {
+				return sprintf(translate("%(playercolor)s %(values)s: %(playername)s"), {
 					"playername": setStringTags(player.playername, { "font": "sans-bold-14" }),
 					"playercolor": player.playercolor,
-					"values": player.values.map((o,i) => i==0 ? setStringTags(o, { "font": "sans-bold-14", "color": "yellow" }) : o).join(translateWithContext("seperator", " /" ))
+					"values": player.values.map((o,i) => i==0 ? setStringTags(o, { "font": "sans-bold-14", "color": "255 255 128" }) : o).join(translateWithContext("seperator", "/" ))
 				}); }
 		).join("\n")
 	).join("\n");
@@ -1839,7 +2011,7 @@ function updatePlayerDisplay()
 		let res = resCodes[r];
 
 		let tooltip = setStringTags('[font="' + g_ResourceTitleFont + '"]' +
-			resourceNameFirstWord(res) + '[/font]', { "color": "yellow" });
+			resourceNameFirstWord(res) + '[/font]', { "color": "255 255 128" });
 
 		let descr = g_ResourceData.GetResource(res).description;
 		if (descr)
@@ -1864,7 +2036,8 @@ function updatePlayerDisplay()
 			},
 			{ "popCount": 0, "popLimit": 0 }
 	));
-	Engine.GetGUIObjectByName("population").tooltip = translate("Population (current / limit)") + "\n" +
+	let tooltip = setStringTags('[font="' + g_ResourceTitleFont + '"]'+ translate("Population") + '[/font]', { "color": "255 255 128" }) + " (current/limit)" + "\n";
+	Engine.GetGUIObjectByName("population").tooltip = tooltip +
 		sprintf(translate("Maximum population: %(popCap)s"), {
 			"popCap": viewedPlayerStates.map(playerState => playerState.popMax).reduce((totalPopMax, popMax) => totalPopMax + popMax, 0)
 		}) +
@@ -2095,7 +2268,7 @@ function toggleReplaceReally(playerName)
 {
 	if (playerName)
 	{
-		submitChatDirectly("/me am going to replace " + escapeText(playerName) + ".\nThanks to fgod mod. Search forums for fgod mod (wildfiregames.com/forum)\nIf replace is working fine think about donate. Alt+Shift+F for details.");
+		submitChatDirectly("/me am going to replace " + escapeText(playerName) + ".\nThanks to fgod-mod. Search forums for fgod-mod (wildfiregames.com/forum)\nIf replace is working fine think about donate. Alt+Shift+F for details.");
 		g_PageOnLeaveSettings = [ "page_lobby.xml", {
 			"joinGame": {
 				"multiplayerGameType": "join",
@@ -2105,7 +2278,8 @@ function toggleReplaceReally(playerName)
 				"useSTUN": g_UseSTUN,
 				"hostJID": g_HostJID}
 			} ];
-		exitMenuButton();
+		// exitMenuButton();
+		leaveGame();
 	}
 }
 

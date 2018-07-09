@@ -143,6 +143,7 @@ function init(data)
 {
 	// Fill globals
 	g_GameData = data;
+	// warn(g_GameData.sim.playerStates[0].sequences.length)
 	g_ScorePanelsData = getScorePanelsData();
 	g_PanelButtons = Object.keys(g_ScorePanelsData).concat(["charts"]).map(panel => panel + "PanelButton");
 

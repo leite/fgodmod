@@ -658,6 +658,7 @@ function init(attribs = {})
 	else if (attribs && attribs.startReplay)
 		startReplay(attribs.startReplay);
 	initFocusSwitcher();
+	Engine.GetGUIObjectByName("hostButton").tooltip = colorizeHotkey("%(hotkey)s for new Game", "lobby.newgame");
 }
 
 function startReplay(data)
@@ -852,7 +853,7 @@ function leaveLobby()
 	{
 		Engine.StopXmppClient();
 		saveSettingAndWriteToUserConfig("lobby.loggedin", "false");
-		Engine.SwitchGuiPage("page_pregame.xml");
+		Engine.SwitchGuiPage("page_pregame.xml"); //, { showPreLobby: Engine.ConfigDB_GetValue("user", "lobby.autologin") == "true" });
 	}
 }
 
@@ -1543,8 +1544,10 @@ function updateGameList(autoScroll = false)
 			if (game.hasBuddies < 2 && g_Buddies.indexOf(playerNickRating.nick) != -1)
 				game.hasBuddies = player.Team == "observer" ? 1 : 2;
 
-			if (g_Buddies.indexOf(playerNickRating.nick) != -1)
+			if (!player.Offline && g_Buddies.indexOf(playerNickRating.nick) != -1)
+			{
 				++game.buddies;
+			}
 			
 			if (player.Team == "observer")
 				++game.observeNum;

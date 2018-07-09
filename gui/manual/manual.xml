@@ -27,6 +27,10 @@
 			<translatableAttribute id="caption">Fgod Readme</translatableAttribute>
 			<action on="Press"><![CDATA[showPage("fgod");]]></action>
 		</object>
+		<object type="button" name="updateButton" style="ModernButtonRed" tooltip_style="snToolTip" size="214+24+4 100%-52 214+24+4+214 100%-24">
+			<translatableAttribute id="caption">Re-Download for Update</translatableAttribute>
+			<action on="Press">openURL("https://github.com/fraizy22/fgodmod/archive/master.zip");</action>
+		</object>
 
 		<object type="button" style="ModernButtonRed" tooltip_style="snToolTip" size="100%-408 100%-52 100%-218 100%-24" hotkey="cancel">
 			<translatableAttribute id="caption">Close</translatableAttribute>

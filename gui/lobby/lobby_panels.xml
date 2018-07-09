@@ -209,7 +209,7 @@
 				joinButton();
 			</action>
 		</object>
-		<object name="hostButton" type="button" style="ModernButtonRed" size="0 100%-52 100% 100%-27">
+		<object name="hostButton" type="button" style="ModernButtonRed" hotkey="lobby.newgame" size="0 100%-52 100% 100%-27">
 			<translatableAttribute id="caption">Host Game</translatableAttribute>
 			<action on="Press">
 				hostGame();

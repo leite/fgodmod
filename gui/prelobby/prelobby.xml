@@ -19,7 +19,7 @@
 	<!-- Add a translucent black background to fade out the menu page -->
 	<object type="image" z="0" sprite="BackgroundTranslucent"/>
 
-	<object name="dialog" type="image" style="ModernDialog" size="50%-230 50%-130 50%+230 50%+130">
+	<object name="dialog" type="image" style="ModernDialog" size="50%-230 50%-144 50%+230 50%+145">
 
 		<action on="Tick">
 			onTick();
@@ -79,6 +79,16 @@
 			</object>
 			<object type="text" size="50%+10 115 100%-20 135" style="ModernLeftLabelText">
 				<translatableAttribute id="caption">Remember Password</translatableAttribute>
+			</object>
+			<object name="rememberAutoConnect" type="checkbox" size="50%-19 144 50% 164" style="ModernTickBox">
+			<translatableAttribute id="tooltip">Auto login on prelobby page open.</translatableAttribute>
+				<action on="Press">
+					saveSettingAndWriteToUserConfig("lobby.autologin", String(this.checked));
+				</action>
+			</object>
+			<object type="text" size="50%+10 144 100%-20 164" style="ModernLeftLabelText">
+				<translatableAttribute id="caption">Auto Login</translatableAttribute>
+				<translatableAttribute id="tooltip">Auto login on prelobby page open.</translatableAttribute>
 			</object>
 		</object>
 		<object name="pageRegister" size="0 32 100% 100%" hidden="true">

@@ -160,7 +160,7 @@ function lobbyDialogButton()
 	if (!g_IsNetworked)
 		pauseGame();
 	if (!Engine.HasXmppClient())
-		Engine.PushGuiPage("page_prelobby.xml", { "ingame": true });
+		Engine.PushGuiPage("page_prelobby.xml", { "ingame": true, "autoLogin" : true });
 	else
 		Engine.PushGuiPage("page_lobby.xml", { "game_ip": g_ServerIP, "game_port": g_ServerPort, "game_name": g_ServerName, "ingame": true, "dialog": true, "callback": "lobbyDialogClosed" });
 }

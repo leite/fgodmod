@@ -120,7 +120,7 @@
 					<action on="Press">saveSettingAndWriteToUserConfig("lobby.secureauth", String(this.checked));</action>
 				</object>
 				<object type="text" size="26 0 100% 100%" style="ModernLeftLabelText">
-					<translatableAttribute id="caption">Require Lobby Authentication\n(Disable for player replace, player\njoin by ip and ingame name change)</translatableAttribute>
+					<translatableAttribute id="caption">Require Lobby Authentication\n(Disable for Player Replace/Player\nJoin By Ip/InGame Name-Change)</translatableAttribute>
 					<translatableAttribute id="tooltip">If enable, this prevents the impersonation of other players, so no name change possible.\n\nThe lobby server confirms the identity of the player before they join.\n\nBut also no replace player functionality in game.</translatableAttribute>
 				</object>
 			</object>

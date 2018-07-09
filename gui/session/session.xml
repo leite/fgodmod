@@ -151,14 +151,49 @@
 		<object name="loadingClientsText" size="30% 40%+50 70% 100%" type="text" ghost="true" style="netStatusPlayersText" hidden="true" z="2"/>
 	</object>
 
-	
 	<object
 		type="text"
 		name="fgodmod"
-		size="100%-180 100%-20 100% 100%+50"
+		size="100%-180 100%-20 100% 100%"
 		text_align="right"
+		text_valign="bottom"
 		font="sans-bold-12"
 		textcolor="white"
+		>
+	</object>
+
+	<object
+		type="text"
+		name="observersList"
+		size="100%-260 100%-160 100% 100%-20"
+		text_align="right"
+		text_valign="bottom"
+		font="sans-bold-12"
+		textcolor="white"
+		hidden="true"
+		>
+	</object>
+
+	<object
+		type="text"
+		name="teamInfo"
+		size="100%-398 100%-352 100% 100%-222"
+		sprite="BackgroundTranslucent2"
+		text_align="right"
+		text_valign="bottom"
+		font="sans-bold-12"
+		textcolor="white"
+		hidden="true"
+		z="1"
+		>
+	</object>
+
+	<object
+		type="text"
+		name="teamInfoHide"
+		size="0 0 100% 100%"
+		z="0"
+		hidden="true"
 		>
 	</object>
 

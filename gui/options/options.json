@@ -393,8 +393,14 @@
 			{
 				"type": "boolean",
 				"label": "Start Into Lobby",
-				"tooltip": "Go into lobby at startup, when not remembered to be already logged into lobby in another instance.",
+				"tooltip": "Go into lobby at startup.",
 				"config": "gui.startintolobby"
+			},
+			{
+				"type": "boolean",
+				"label": "Auto Login",
+				"tooltip": "On prelobby page opening auto-login user. Press escape for abort.",
+				"config": "lobby.autologin"
 			},
 			{
 				"type": "boolean",
@@ -558,6 +564,18 @@
 				"label": "Share Resources Among Allies on Resign",
 				"tooltip": "Share own remaining resources among allies on resign. (Little Bug, Default Off, Can be tested though.)",
 				"config": "session.sendresonresign"
+			},
+			{
+				"type": "boolean",
+				"label": "Show Vision Allies Stats",
+				"tooltip": "New window for quick showing team stats to phase, population, resources and killed units.",
+				"config": "session.showstats"
+			},
+			{
+				"type": "boolean",
+				"label": "Show Observers and Offlines Players",
+				"tooltip": "New window for quick showing Observers and Offlines Players.",
+				"config": "session.showobservers"
 			}
 		]
 	}

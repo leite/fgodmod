@@ -721,7 +721,7 @@ function handleNetStatusMessage(message)
 
 		g_Disconnected = true;
 		updateCinemaPath();
-		closeOpenDialogs();
+		// closeOpenDialogs();
 	}
 }
 

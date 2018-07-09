@@ -11,17 +11,23 @@ var textInputFocus = {
 	list: ["connectUsername", "connectPassword"]
 }
 
+var g_DemandedAutoLogin = false;
+
 function init(initData)
 {
 	Engine.GetGUIObjectByName("rememberPassword").checked =
 		Engine.ConfigDB_GetValue("user", "lobby.rememberpassword") == "true";
+	let autoLogin = Engine.ConfigDB_GetValue("user", "lobby.autologin") == "true";
+	Engine.GetGUIObjectByName("rememberAutoConnect").checked = autoLogin;
+	g_DemandedAutoLogin = initData && initData.autoLogin;
+
 	g_EncryptedPassword = Engine.ConfigDB_GetValue("user", "lobby.password");
 	g_InGame = initData && !!initData.ingame;
 	if (Engine.ConfigDB_GetValue("user", "lobby.login") && g_EncryptedPassword)
 	{
 		switchPage("connect");
 
-		if (initData && initData.connect)
+		if (initData && (initData.connect || (initData.autoLogin && autoLogin)))
 			lobbyStartConnect();
 	}
 }
@@ -321,7 +327,7 @@ function prelobbyCancel()
 
 	Engine.GetGUIObjectByName("feedback").caption = "";
 
-	if (Engine.GetGUIObjectByName("pageWelcome").hidden)
+	if (Engine.GetGUIObjectByName("pageWelcome").hidden && g_DemandedAutoLogin)
 		switchPage("welcome");
 	else
 		Engine.PopGuiPage();
